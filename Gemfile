@@ -35,7 +35,7 @@ gem "image_processing", "~> 1.2"
 
 gem 'hirb'
 
-# gem "active_model_serializers", "~> 0.10.12"
+gem "active_model_serializers", "~> 0.10.12"
 
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
