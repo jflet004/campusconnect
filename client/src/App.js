@@ -5,6 +5,7 @@ import { UserProvider } from "./context/user"
 import Home from './components/Home';
 import StudentList from './components/StudentList';
 import NavBar from './components/NavBar';
+import RegisterStudent from './components/RegisterStudent';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
     .finally(() => setLoading(false))
   }, [])
 
+  const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
 
   return (
     <UserProvider>
@@ -27,6 +29,7 @@ function App() {
         <Routes>
           <Route path = "/" element={<Home />} />
           <Route path = "/current-students" element={<StudentList students={students} />} />
+          <Route path = "/register-students" element={<RegisterStudent addStudent={addStudent} />} />
         </Routes>
       </div>
     </UserProvider>
