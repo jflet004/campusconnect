@@ -1,10 +1,23 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user'
 
 const NavBar = () => {
 
   const { currentUser, setCurrentUser } = useContext(UserContext)
+
+  const [dailyQuote, setDailyQuote] = useState([])
+
+  useEffect(() => {
+    fetch("https://type.fit/api/quotes")
+      .then(r => r.json())
+      .then(quotes => {
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        setDailyQuote(randomQuote);
+      })
+      .catch(error => alert(error))
+  }, []);
+
   const navigate = useNavigate()
 
   const handleLogoutClick = () => {
@@ -23,7 +36,11 @@ const NavBar = () => {
       <NavLink to="/programs">Programs</NavLink>
       <NavLink to="/events">Events</NavLink>
       {currentUser && currentUser.admin && (
-        <NavLink to="/admin">Admin Page</NavLink>
+        <>
+          <NavLink to="/admin">Admin Page</NavLink>
+          <h3>Welcome {currentUser.first_name}</h3>
+          <p><em>{dailyQuote.text}</em></p>
+        </>
       )}
       {currentUser && !currentUser.error && !currentUser.admin && (
         <NavLink to="/register-students">Register Students</NavLink>
