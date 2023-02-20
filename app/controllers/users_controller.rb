@@ -30,6 +30,11 @@ class UsersController < ApplicationController
   def admin_users
     render json: User.admins, status: :ok
   end
+
+  def user_info
+    user = User.find(params[:id])
+    render json: user, status: :ok
+  end
   
   
 

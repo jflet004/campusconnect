@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const StudentList = ({ students }) => {
+
+  const navigate = useNavigate()
+  const params = useParams()
 
   const [filters, setFilters] = useState({
     name: '',
@@ -32,6 +36,7 @@ const StudentList = ({ students }) => {
       [key]: value
     });
   };
+
 
   return (
     <div>
@@ -107,11 +112,11 @@ const StudentList = ({ students }) => {
         <tbody>
           {filteredStudents.map(student => (
             <tr key={student.id}>
-              <td>{student.first_name} {student.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-students/${student.id}`)}}>*</button>{student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
               <td>{student.student_since}</td>
-              <td>{student.user.first_name} {student.user.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-user/${student.user.id}`)}}>*</button>{student.user.first_name} {student.user.last_name}</td>
               <td>{student.user.email}</td>
               <td>{student.user.phone_number}</td>
             </tr>

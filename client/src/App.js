@@ -11,6 +11,8 @@ import AdminPage from './components/AdminPage';
 import About from './components/About';
 import Programs from './components/Programs';
 import Events from './components/Events';
+import StudentInfo from './components/StudentInfo';
+import UserInfo from './components/UserInfo';
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
           <Route path="/programs" element={<Programs />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
+          <Route path="/current-students/:id" element={<StudentInfo />} />
+          <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
