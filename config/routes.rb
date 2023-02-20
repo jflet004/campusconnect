@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
+  get "/users-with-no-students", to: "users#users_with_no_students"
+  get "/admin-users", to: "users#admin_users"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 end

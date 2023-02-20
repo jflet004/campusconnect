@@ -6,8 +6,11 @@ import Home from './components/Home';
 import StudentList from './components/StudentList';
 import NavBar from './components/NavBar';
 import RegisterStudent from './components/RegisterStudent';
-import Login from './components/Login';
 import Signup from './components/Signup';
+import AdminPage from './components/AdminPage';
+import About from './components/About';
+import Programs from './components/Programs';
+import Events from './components/Events';
 
 function App() {
 
@@ -30,10 +33,13 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/about" element={<About />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </UserProvider>

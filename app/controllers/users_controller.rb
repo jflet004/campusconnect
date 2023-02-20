@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users, status: :ok
+    render json: users, include: [:students], status: :ok
   end
   
   def show
@@ -22,6 +22,16 @@ class UsersController < ApplicationController
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
+
+  def users_with_no_students
+    render json: User.with_no_students, status: :ok
+  end
+
+  def admin_users
+    render json: User.admins, status: :ok
+  end
+  
+  
 
 
   

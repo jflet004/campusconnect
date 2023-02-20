@@ -18,19 +18,21 @@ const NavBar = () => {
 
   return (
     <div>
-      {!currentUser || currentUser.error ?
-        <>
-          <NavLink to="/">Home</NavLink>
-          {/* <NavLink to="/login">Login</NavLink> */}
-          <NavLink to="/signup">Create Account</NavLink>
-        </> :
-        <>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/current-students">Current Students</NavLink>
-          <NavLink to="/register-students">Register Students</NavLink>
-          <button onClick={handleLogoutClick}>Logout</button>
-        </>
-      }
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/about">About</NavLink>
+      <NavLink to="/programs">Programs</NavLink>
+      <NavLink to="/events">Events</NavLink>
+      {currentUser && currentUser.admin && (
+        <NavLink to="/admin">Admin Page</NavLink>
+      )}
+      {currentUser && !currentUser.error && !currentUser.admin && (
+        <NavLink to="/register-students">Register Students</NavLink>
+      )}
+      {currentUser && !currentUser.error ? (
+        <button onClick={handleLogoutClick}>Logout</button>
+      ) : (
+        <NavLink to="/signup">Create Account</NavLink>
+      )}
     </div>
   )
 }
