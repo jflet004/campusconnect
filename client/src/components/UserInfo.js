@@ -30,7 +30,7 @@ const UserInfo = () => {
       <h5>Zip Code: {currentUser.zip_code}</h5>
       <h5>Phone #: {currentUser.phone_number}</h5>
       <h5>Students Registered/Enrolled: {currentUser.students.map(student => (<li key={student.id}>{student.first_name} {student.last_name}</li>))}</h5>
-      <h5>Notes: COMMING SOON</h5>
+      <h5>Notes: <em>{currentUser.notes}</em></h5>
       <Link to="/current-students">Back</Link>
     </div>
   )

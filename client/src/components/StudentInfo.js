@@ -28,7 +28,7 @@ const StudentInfo = () => {
       <h5>Gender: {currentStudent.gender}:</h5>
       <h5>Student Since:{currentStudent.student_since}</h5>
       <h5>Courses: COMING SOON</h5>
-      <h5>Notes: COMMING SOON</h5>
+      <h5>Notes: <em>{currentStudent.notes}</em></h5>
       
       <Link to="/current-students">Back</Link>
     </div>
