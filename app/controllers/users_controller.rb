@@ -33,11 +33,9 @@ class UsersController < ApplicationController
 
   def user_info
     user = User.find(params[:id])
-    render json: user, status: :ok
+    render json: user, include: [:students], status: :ok
   end
   
-  
-
 
   
   private
