@@ -30,7 +30,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/signup" element={<Signup />} />
