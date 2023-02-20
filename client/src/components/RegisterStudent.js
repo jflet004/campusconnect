@@ -110,13 +110,14 @@ const RegisterStudent = ({ addStudent }) => {
         <br />
         <label>Interest</label>
         <br />
-        <select>
+        <select
           name="interest"
           value={formData.interest}
           onChange={handleChange}
+          >
           <option value="">Select one</option>
           {interest.map((option, index) => (
-            <option key={index} value={index}>{option}</option>
+            <option key={index} value={option}>{option}</option>
           ))}
         </select>
         <br />
