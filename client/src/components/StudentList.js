@@ -2,9 +2,6 @@ import React from 'react'
 
 const StudentList = ({ students }) => {
 
-  console.log(students.map(student => student.user.first_name))
-
-  
 
   return (
     <div>
@@ -15,9 +12,10 @@ const StudentList = ({ students }) => {
             <th>Name</th>
             <th>Age</th>
             <th>Interest</th>
+            <th>Student Since</th>
             <th>Parent/Guardian</th>
-            <th>Contact Email</th>
-            <th>Contact Phone #</th>
+            <th>Email</th>
+            <th>Phone #</th>
           </tr>
         </thead>
         <tbody>
@@ -26,6 +24,7 @@ const StudentList = ({ students }) => {
               <td>{student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
+              <td>{student.student_since}</td>
               <td>{student.user.first_name} {student.user.last_name}</td>
               <td>{student.user.email}</td>
               <td>{student.user.phone_number}</td>
