@@ -39,7 +39,7 @@ const StudentList = ({ students }) => {
 
 
   return (
-    <div>
+    <div >
       <h1>Student List</h1>
       <table>
         <thead>
@@ -112,11 +112,11 @@ const StudentList = ({ students }) => {
         <tbody>
           {filteredStudents.map(student => (
             <tr key={student.id}>
-              <td><button onClick={() => {navigate(`/current-students/${student.id}`)}}>*</button>{student.first_name} {student.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-students/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
               <td>{student.student_since}</td>
-              <td><button onClick={() => {navigate(`/current-user/${student.user.id}`)}}>*</button>{student.user.first_name} {student.user.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-user/${student.user.id}`)}}>🔎</button> {student.user.first_name} {student.user.last_name}</td>
               <td>{student.user.email}</td>
               <td>{student.user.phone_number}</td>
             </tr>
