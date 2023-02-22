@@ -96,6 +96,7 @@ const UpdateStudent = ({ updateStudent }) => {
           type="radio"
           name="gender"
           value="Male"
+          checked={formData.gender === "Male"}
           onChange={handleChange}
         />
         <label>Male</label>
@@ -104,6 +105,7 @@ const UpdateStudent = ({ updateStudent }) => {
           type="radio"
           name="gender"
           value="Female"
+          checked={formData.gender === "Female"}
           onChange={handleChange}
         />
         <label>Female</label>
@@ -112,6 +114,7 @@ const UpdateStudent = ({ updateStudent }) => {
           type="radio"
           name="gender"
           value="Non-binary/non-conforming"
+          checked={formData.gender === "Non-binary/non-conforming"}
           onChange={handleChange}
         />
         <label>Non-binary/non-conforming</label>
@@ -120,6 +123,7 @@ const UpdateStudent = ({ updateStudent }) => {
           type="radio"
           name="gender"
           value="Prefer not to respond"
+          checked={formData.gender === "Prefer not to respond"}
           onChange={handleChange}
         />
         <label>Prefer not to respond</label>

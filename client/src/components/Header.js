@@ -23,14 +23,19 @@ if (loading) return <h1>Loading</h1>
 
 return (
   <div>
-    {currentUser ? (
-      <h3>Welcome {currentUser.first_name}</h3>
+    {!currentUser || currentUser.error ? (
+      <h3>Welcome. Please login or create an account</h3>
     ) : (
-      <h3>Welcome</h3>
+      <div>
+        <h3>Welcome {currentUser.first_name}</h3>
+        {currentUser.admin && (
+          <p><em>{dailyQuote.text}</em></p>
+        )}
+      </div>
     )}
-    <p><em>{dailyQuote.text}</em></p>
   </div>
 );
-};
+
+}
 
 export default Header
