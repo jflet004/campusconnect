@@ -13,6 +13,8 @@ import Programs from './components/Programs';
 import Events from './components/Events';
 import StudentInfo from './components/StudentInfo';
 import UserInfo from './components/UserInfo';
+import UpdateStudent from './components/UpdateStudent';
+import Header from './components/Header';
 
 function App() {
 
@@ -28,18 +30,31 @@ function App() {
   }, [])
 
   const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
+  const updateStudent = (updatedStudent) => {
+    setStudents((prevStudents) => {
+      return prevStudents.map((student) => {
+        if (student.id === updatedStudent.id) {
+          return updatedStudent;
+        } else {
+          return student;
+        }
+      });
+    });
+  };
 
   return (
     <UserProvider>
       <div className="App">
         <NavBar />
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
-          <Route path="/current-students/:id" element={<StudentInfo />} />
+          <Route path="/current-student/:id" element={<StudentInfo />} />
+          <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/signup" element={<Signup />} />

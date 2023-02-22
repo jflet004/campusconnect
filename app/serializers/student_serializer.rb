@@ -11,8 +11,7 @@ class StudentSerializer < ActiveModel::Serializer
   end
 
   def student_since
-    date = object.created_at.to_date
-    date.strftime("%m/%d/%Y")
+    object.created_at.to_date.strftime("%Y-%m-%d")
   end
 
 end

@@ -19,14 +19,16 @@ const StudentInfo = () => {
   if(loading) return <h2>Loading</h2>
 
   return (
-    <div>
-      <h2>{currentStudent.first_name}'s Info (Student)</h2>
-      <h5>First Name:{currentStudent.first_name}</h5>
-      <h5>Last Name:{currentStudent.last_name}</h5>
-      <h5>Age:{currentStudent.age}</h5>
-      <h5>Birthday:{currentStudent.birthday}</h5>
-      <h5>Gender: {currentStudent.gender}:</h5>
-      <h5>Student Since:{currentStudent.student_since}</h5>
+    <div className='info-card'>
+      <h2>{currentStudent.first_name}'s Profile (Student)</h2>
+
+      <Link to={`/update-student/${params.id}`}>Edit</Link>
+      <h5>First Name: {currentStudent.first_name}</h5>
+      <h5>Last Name: {currentStudent.last_name}</h5>
+      <h5>Age: {currentStudent.age}</h5>
+      <h5>Birthday: {currentStudent.birthday}</h5>
+      <h5>Gender: {currentStudent.gender}</h5>
+      <h5>Student Since: {currentStudent.student_since}</h5>
       <h5>Courses: COMING SOON</h5>
       <h5>Notes: <em>{currentStudent.notes}</em></h5>
       

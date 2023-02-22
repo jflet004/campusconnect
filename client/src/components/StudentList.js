@@ -112,7 +112,7 @@ const StudentList = ({ students }) => {
         <tbody>
           {filteredStudents.map(student => (
             <tr key={student.id}>
-              <td><button onClick={() => {navigate(`/current-students/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-student/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
               <td>{student.student_since}</td>

@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
 
   def index
-    students = Student.all
+    students = Student.all.order(:last_name)
     render json: students, status: :ok
   end
 
@@ -13,6 +13,12 @@ class StudentsController < ApplicationController
   def create
     new_student = Student.create!(student_params)
     render json: new_student, status: :created
+  end
+
+  def update
+    student = Student.find(params[:id])
+    student.update(student_params)
+    render json: student, status: :accepted
   end
 
   private

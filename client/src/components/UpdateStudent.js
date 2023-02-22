@@ -1,22 +1,34 @@
-import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/user'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+const UpdateStudent = ({ updateStudent }) => {
 
-const RegisterStudent = ({ addStudent }) => {
+  const params = useParams()
+  const navigate = useNavigate()
 
-  const { currentUser } = useContext(UserContext)
+  const [errors, setErrors] = useState(false)
 
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
     birthday: "",
     gender: "",
-    interest: "",
-    user_id: currentUser.id
+    student_since: "",
+    notes: ""
   })
-  const [errors, setErrors] = useState(false)
-  const navigate = useNavigate()
-  const interest = ["Art", "Music", "Drama", "Dance"]
+
+  useEffect(() => {
+    fetch(`/students/${params.id}`)
+      .then(r => r.json())
+      .then(student => setFormData({
+        first_name: student.first_name,
+        last_name: student.last_name,
+        birthday: student.birthday,
+        gender: student.gender,
+        student_since: student.student_since,
+        notes: student.notes
+      }))
+  }, [])
+
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -28,8 +40,8 @@ const RegisterStudent = ({ addStudent }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch("/students/", {
-      method: "POST",
+    fetch(`/students/${params.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
@@ -37,17 +49,18 @@ const RegisterStudent = ({ addStudent }) => {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(addStudent)
-          navigate('/current-students')
+          r.json().then(updateStudent)
+          navigate(`/current-student/${params.id}`)
         } else {
           r.json().then(data => setErrors(data.errors))
         }
       })
   }
 
+
   return (
     <div>
-      <h1>Register Student Page</h1>
+      <h1>UpdatePage</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
         <br />
@@ -76,6 +89,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>Gender</label>
         <br />
         <input
@@ -85,6 +99,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <label>Male</label>
+        <br />
         <input
           type="radio"
           name="gender"
@@ -92,6 +107,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <label>Female</label>
+        <br />
         <input
           type="radio"
           name="gender"
@@ -99,6 +115,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <label>Non-binary/non-conforming</label>
+        <br />
         <input
           type="radio"
           name="gender"
@@ -107,26 +124,24 @@ const RegisterStudent = ({ addStudent }) => {
         />
         <label>Prefer not to respond</label>
         <br />
-        <label>Interest</label>
         <br />
-        <select
-          name="interest"
-          value={formData.interest}
+        <label>Notes</label>
+        <br />
+        <textarea
+          name="notes"
+          value={formData.notes}
           onChange={handleChange}
-          >
-          <option value="">Select one</option>
-          {interest.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
-          ))}
-        </select>
+          rows="4"
+          cols="50"
+        />
         <br />
         <br />
+        <input type="submit" value="Update Student" />
         <br />
-        <br />
-        <input type="submit" value="Send Registration Form" />
+        <Link to={`/current-student/${params.id}`}>Back</Link>
       </form>
     </div>
   )
 }
 
-export default RegisterStudent
+export default UpdateStudent

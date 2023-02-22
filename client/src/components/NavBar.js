@@ -6,18 +6,6 @@ const NavBar = () => {
 
   const { currentUser, setCurrentUser } = useContext(UserContext)
 
-  const [dailyQuote, setDailyQuote] = useState([])
-
-  useEffect(() => {
-    fetch("https://type.fit/api/quotes")
-      .then(r => r.json())
-      .then(quotes => {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        setDailyQuote(randomQuote);
-      })
-      .catch(error => alert(error))
-  }, []);
-
   const navigate = useNavigate()
 
   const handleLogoutClick = () => {
@@ -30,7 +18,7 @@ const NavBar = () => {
 
 
   return (
-    <div>
+    <div className='nav-bar'>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/programs">Programs</NavLink>
@@ -38,8 +26,6 @@ const NavBar = () => {
       {currentUser && currentUser.admin && (
         <>
           <NavLink to="/admin">Admin Page</NavLink>
-          <h3>Welcome {currentUser.first_name}</h3>
-          <p><em>{dailyQuote.text}</em></p>
         </>
       )}
       {currentUser && !currentUser.error && !currentUser.admin && (
