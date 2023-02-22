@@ -19,6 +19,7 @@ import Header from './components/Header';
 function App() {
 
   const [students, setStudents] = useState([])
+  const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -37,6 +38,17 @@ function App() {
           return updatedStudent;
         } else {
           return student;
+        }
+      });
+    });
+  };
+  const updateUser = (updatedUser) => {
+    setUsers((prevUsers) => {
+      return prevUsers.map((user) => {
+        if (user.id === updatedUser.id) {
+          return updatedUser;
+        } else {
+          return user;
         }
       });
     });
