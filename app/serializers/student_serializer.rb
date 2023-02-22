@@ -14,8 +14,4 @@ class StudentSerializer < ActiveModel::Serializer
     object.created_at.to_date.strftime("%Y-%m-%d")
   end
 
-  def birthday
-    object.birthday.strftime('%m/%d/%Y')
-  end
-
 end
