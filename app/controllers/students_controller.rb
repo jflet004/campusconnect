@@ -7,7 +7,7 @@ class StudentsController < ApplicationController
 
   def show
     student = Student.find(params[:id])
-    render json: student, status: :ok
+    render json: student, include: [:courses], status: :ok
   end
 
   def create
