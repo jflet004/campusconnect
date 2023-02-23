@@ -7,30 +7,35 @@ const UserInfo = () => {
   const [loading, setLoading] = useState(true)
 
   const params = useParams()
-  
+
   useEffect(() => {
     fetch(`/user-info/${params.id}`)
-    .then(r => r.json())
-    .then(user => setCurrentUser(user))
-    .catch(error => alert(error))
-    .finally(() => setLoading(false))
+      .then(r => r.json())
+      .then(user => setCurrentUser(user))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
   }, [])
 
-  if(loading) return <h2>Loading</h2>
+  if (loading) return <h2>Loading</h2>
 
   return (
     <div>
       <h1>{currentUser.first_name} {currentUser.last_name} (Parent/Guardian)</h1>
-      <h5>First Name: {currentUser.first_name}</h5>
-      <h5>Last Name: {currentUser.last_name}</h5>
-      <h5>Email: {currentUser.email}</h5>
-      <h5>Address: {currentUser.address}</h5>
-      <h5>City: {currentUser.city}</h5>
-      <h5>State: {currentUser.state}</h5>
-      <h5>Zip Code: {currentUser.zip_code}</h5>
-      <h5>Phone #: {currentUser.phone_number}</h5>
-      <h5>Students Registered/Enrolled: {currentUser.students.map(student => (<li key={student.id}>{student.first_name} {student.last_name}</li>))}</h5>
-      <h5>Notes: <em>{currentUser.notes}</em></h5>
+      <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentUser.first_name}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentUser.last_name}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Email:</span> {currentUser.email}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Address:</span> {currentUser.address}</p>
+      <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentUser.city}</p>
+      <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentUser.state}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentUser.zip_code}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Phone #:</span> {currentUser.phone_number}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Students Registered/Enrolled:</span></p>
+      <ul>
+        {currentUser.students.map(student => (
+          <li key={student.id}>{student.first_name} {student.last_name}</li>
+        ))}
+      </ul>
+      <p><span style={{ fontWeight: 'bold' }}>Notes:</span> <em>{currentUser.notes}</em></p>
       <Link to="/current-students">Back</Link>
     </div>
   )
