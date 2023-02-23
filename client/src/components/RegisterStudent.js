@@ -38,7 +38,7 @@ const RegisterStudent = ({ addStudent }) => {
       .then(r => {
         if (r.ok) {
           r.json().then(addStudent)
-          navigate('/current-students')
+          navigate('/successful-registration')
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -83,15 +83,17 @@ const RegisterStudent = ({ addStudent }) => {
           name="gender"
           value="Male"
           onChange={handleChange}
-        />
+          />
         <label>Male</label>
+          <br/>
         <input
           type="radio"
           name="gender"
           value="Female"
           onChange={handleChange}
-        />
+          />
         <label>Female</label>
+          <br/>
         <input
           type="radio"
           name="gender"
@@ -99,6 +101,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <label>Non-binary/non-conforming</label>
+        <br/>
         <input
           type="radio"
           name="gender"
@@ -121,10 +124,10 @@ const RegisterStudent = ({ addStudent }) => {
         </select>
         <br />
         <br />
-        <br />
-        <br />
-        <input type="submit" value="Send Registration Form" />
+        <input type="submit" value="Submit Registration Form" />
       </form>
+        <br />
+      {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
     </div>
   )
 }

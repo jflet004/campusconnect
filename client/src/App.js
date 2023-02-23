@@ -15,6 +15,7 @@ import StudentInfo from './components/StudentInfo';
 import UserInfo from './components/UserInfo';
 import UpdateStudent from './components/UpdateStudent';
 import Header from './components/Header';
+import RegistrationSuccess from './components/RegistrationSuccess';
 
 function App() {
 
@@ -54,6 +55,8 @@ function App() {
     });
   };
 
+  if (loading) return <h2>Loading</h2>
+
   return (
     <UserProvider>
       <div className="App">
@@ -69,6 +72,7 @@ function App() {
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
+          <Route path="/successful-registration" element={<RegistrationSuccess />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
