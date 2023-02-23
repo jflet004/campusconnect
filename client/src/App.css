@@ -1,5 +1,6 @@
 .App {
   padding-left: 1em;
+  font-size: 20px;
   text-align: left;
 }
 
@@ -7,6 +8,10 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+.error-msg {
+  color: red;
 }
 
 table {

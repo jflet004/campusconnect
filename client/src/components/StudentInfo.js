@@ -29,7 +29,7 @@ const StudentInfo = () => {
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.student_since}</p>
       <p><span style={{ fontWeight: 'bold' }}>Courses:</span> COMING SOON</p>
-      <p><span style={{ fontWeight: 'bold', whiteSpace: 'pre-wrap' }}>Notes:</span> <em>{currentStudent.notes}</em></p>
+      <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:</span> <em>{currentStudent.notes}</em></p>
       <Link to="/current-students">Back</Link>
     </div>
   )

@@ -70,7 +70,7 @@ const Home = () => {
               value={password}
               onChange={handleChange} />
             <br />
-            <input type='submit' value='Login' />
+            <input className="login-btn" type='submit' value='Login' />
             <br />
           </form>
         </> :
