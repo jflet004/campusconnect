@@ -63,7 +63,7 @@ const StudentInfo = ({ enrollStudent }) => {
 
   return (
     <div className='info-card'>
-      <h2>{currentStudent.first_name}'s Profile (Student)</h2>
+      <h2>{currentStudent.first_name}'s Profile <span style={{fontSize: "15px"}}>(Student)</span></h2>
       <Link to={`/update-student/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentStudent.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentStudent.last_name}</p>

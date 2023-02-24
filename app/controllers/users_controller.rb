@@ -2,12 +2,12 @@ class UsersController < ApplicationController
 
   def index
     users = User.all
-    render json: users, include: {students: {except: [:updated_at]}}, except: [:updated_at, :created_at], status: :ok
+    render json: users, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
   end
   
   def show
     if current_user
-      render json: current_user, status: :ok
+      render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
     else
       render json: {error: "User not found"}, status: :not_found
     end

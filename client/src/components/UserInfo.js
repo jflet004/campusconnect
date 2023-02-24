@@ -20,7 +20,7 @@ const UserInfo = () => {
 
   return (
     <div>
-      <h1>{currentUser.first_name} {currentUser.last_name} (Parent/Guardian)</h1>
+      <h1>{currentUser.first_name} {currentUser.last_name} <span style={{fontSize:"15px"}}>(Parent/Guardian)</span></h1>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentUser.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentUser.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Email:</span> {currentUser.email}</p>

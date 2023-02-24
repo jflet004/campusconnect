@@ -23,4 +23,10 @@ class User < ApplicationRecord
     where(admin: true)    
   end
 
+  def balance
+    students.map do |student|
+      student.courses.sum(:price)
+    end.sum
+  end
+
 end

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user'
 
 const Home = () => {
@@ -8,6 +8,7 @@ const Home = () => {
   const navigate = useNavigate()
 
   const [errors, setErrors] = useState([])
+  // const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -38,6 +39,7 @@ const Home = () => {
               email: "",
               password: ""
             })
+            // setLoading(false)
           })
         } else {
           r.json().then(data => setErrors(data.errors))
@@ -49,6 +51,20 @@ const Home = () => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
+
+  const studentList = currentUser.students ? 
+  currentUser.students.map(student => (
+    <li key={student.id}>
+      {student.first_name} {student.last_name}
+    </li>
+  )) : (
+    <span>
+      <Link to="/register-students">Click here</Link> to register a student
+    </span>
+  )
+
+const balanceSection = <h4>Balance: ${currentUser.balance}</h4>
+
 
   return (
     <div className='form'>
@@ -74,7 +90,13 @@ const Home = () => {
             <br />
           </form>
         </> :
-        <h1>Logged In</h1>
+        <>
+          <h4>Students Enrolled</h4>
+          {studentList}
+          {balanceSection}
+
+        </>
+
       }
       {errors ? errors : null}
     </div>
