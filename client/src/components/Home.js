@@ -6,9 +6,7 @@ const Home = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext)
 
   const navigate = useNavigate()
-
   const [errors, setErrors] = useState([])
-  // const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -22,7 +20,6 @@ const Home = () => {
       email,
       password
     }
-
     fetch('/login', {
       method: "POST",
       headers: {
@@ -39,32 +36,35 @@ const Home = () => {
               email: "",
               password: ""
             })
-            // setLoading(false)
           })
         } else {
-          r.json().then(data => setErrors(data.errors))
+          r.json().then(data => {
+            setErrors(data.errors)
+          })
         }
       })
   }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
 
-  const studentList = currentUser.students ? 
-  currentUser.students.map(student => (
-    <li key={student.id}>
-      {student.first_name} {student.last_name}
-    </li>
-  )) : (
+  const studentList = currentUser && currentUser.students ? (
+    <>
+      {currentUser.students.map(student => (
+        <li key={student.id}>
+          {student.first_name} {student.last_name}
+        </li>
+      ))}
+      <h4>Balance: ${currentUser.balance}</h4>
+    </>
+  ) : (
     <span>
       <Link to="/register-students">Click here</Link> to register a student
     </span>
   )
 
-const balanceSection = <h4>Balance: ${currentUser.balance}</h4>
-
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   return (
     <div className='form'>
@@ -93,10 +93,7 @@ const balanceSection = <h4>Balance: ${currentUser.balance}</h4>
         <>
           <h4>Students Enrolled</h4>
           {studentList}
-          {balanceSection}
-
         </>
-
       }
       {errors ? errors : null}
     </div>

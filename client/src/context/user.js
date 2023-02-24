@@ -13,7 +13,7 @@ function UserProvider({ children }) {
       .then(r => r.json())
       .then(user => {
         setCurrentUser(user)
-        console.log("Current User:", user)
+        console.log("User in useContext:", user)
       })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
