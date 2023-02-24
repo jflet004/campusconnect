@@ -133,7 +133,7 @@ const UpdateStudent = ({ updateStudent }) => {
         <br />
         <textarea
           name="notes"
-          value={formData.notes}
+          value={formData.notes === null ? "" : formData.notes}
           onChange={handleChange}
           rows="4"
           cols="50"

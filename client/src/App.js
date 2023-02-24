@@ -21,6 +21,7 @@ function App() {
 
   const [students, setStudents] = useState([])
   const [users, setUsers] = useState([])
+  // const [enrollments, setEnrollment] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -31,7 +32,16 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
+  // useEffect(() => {
+  //   fetch("/enrollments")
+  //     .then(r => r.json())
+  //     .then(enrollments => setEnrollment(enrollments))
+  //     .catch(error => alert(error))
+  //     .finally(() => setLoading(false))
+  // }, [])
+
   const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
+  // const enrollStudent = courseEnrollment => setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
   const updateStudent = (updatedStudent) => {
     setStudents((prevStudents) => {
       return prevStudents.map((student) => {

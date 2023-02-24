@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :courses
+  resources :enrollments
   resources :students
   resources :users, only: [:index, :show, :create]
 
@@ -10,4 +11,5 @@ Rails.application.routes.draw do
   get "/admin-users", to: "users#admin_users"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+  
 end

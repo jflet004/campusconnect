@@ -1,11 +1,16 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user'
 
 const RegisterStudent = ({ addStudent }) => {
 
   const { currentUser } = useContext(UserContext)
-
+  
+  const navigate = useNavigate()
+  
+  const [courses, setCourses] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -14,9 +19,21 @@ const RegisterStudent = ({ addStudent }) => {
     interest: "",
     user_id: currentUser.id
   })
-  const [errors, setErrors] = useState(false)
-  const navigate = useNavigate()
-  const interest = ["Art", "Music", "Drama", "Dance"]
+
+  useEffect(() => {
+    fetch('/courses')
+      .then(r => r.json())
+      .then(course => {
+        setCourses(course)
+        console.log("Current course:", course)
+      })
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }, [])
+
+  const courseOptions = courses.map((course) => (
+    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
+  ))
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -118,9 +135,7 @@ const RegisterStudent = ({ addStudent }) => {
           onChange={handleChange}
           >
           <option value="">Select one</option>
-          {interest.map((option, index) => (
-            <option key={index} value={option}>{option}</option>
-          ))}
+          {courseOptions}
         </select>
         <br />
         <br />
