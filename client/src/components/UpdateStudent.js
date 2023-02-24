@@ -12,7 +12,7 @@ const UpdateStudent = ({ updateStudent }) => {
     last_name: "",
     birthday: "",
     gender: "",
-    student_since: "",
+    created_at: "",
     notes: ""
   })
 
@@ -24,7 +24,7 @@ const UpdateStudent = ({ updateStudent }) => {
         last_name: student.last_name,
         birthday: student.birthday,
         gender: student.gender,
-        student_since: student.student_since,
+        created_at: student.created_at,
         notes: student.notes
       }))
   }, [params.id])
@@ -86,6 +86,15 @@ const UpdateStudent = ({ updateStudent }) => {
           type="date"
           name="birthday"
           value={formData.birthday}
+          onChange={handleChange}
+        />
+        <br />
+        <label>Student Since</label>
+        <br />
+        <input
+          type="date"
+          name="created_at"
+          value={formData.created_at}
           onChange={handleChange}
         />
         <br />

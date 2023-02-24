@@ -1,5 +1,5 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :birthday, :age, :gender, :interest, :user_id, :student_since, :notes
+  attributes :id, :first_name, :last_name, :birthday, :age, :gender, :interest, :user_id, :notes, :created_at
   has_one :user
   has_many :courses
 
@@ -12,7 +12,7 @@ class StudentSerializer < ActiveModel::Serializer
     age
   end
 
-  def student_since
+  def created_at
     object.created_at.to_date.strftime("%Y-%m-%d")
   end
 
