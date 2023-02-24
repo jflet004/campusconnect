@@ -3,11 +3,11 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :students
 
   def start_time
-    object.start_time.in_time_zone("US/Pacific").strftime('%H:%M')
+    object.start_time.strftime('%I:%M %p')
   end
 
   def end_time
-    object.end_time.in_time_zone("US/Pacific").strftime('%H:%M')
+    object.end_time.strftime('%I:%M %p')
   end
 
 end
