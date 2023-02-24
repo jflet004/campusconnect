@@ -21,6 +21,7 @@ import EnrollmentSuccess from './components/EnrollmentSuccess';
 function App() {
 
   const [students, setStudents] = useState([])
+  const [courses, setCourses] = useState([])
   // const [users, setUsers] = useState([])
   const [enrollments, setEnrollment] = useState([])
   const [loading, setLoading] = useState(true)
@@ -29,6 +30,14 @@ function App() {
     fetch("/students")
       .then(r => r.json())
       .then(students => setStudents(students))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    fetch("/courses")
+      .then(r => r.json())
+      .then(courses => setCourses(courses))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
@@ -78,7 +87,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<Programs />} />
+          <Route path="/programs" element={<Programs courses={courses}/>} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} />} />

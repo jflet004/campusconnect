@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StudentList = ({ students }) => {
 
   const navigate = useNavigate()
-  const params = useParams()
 
   const [filters, setFilters] = useState({
     name: '',
     age: '',
     interest: '',
-    student_since: '',
+    created_at: '',
     parent_guardian: '',
     email: '',
     phone: ''
@@ -22,7 +21,7 @@ const StudentList = ({ students }) => {
         student.last_name.toLowerCase().includes(filters.name.toLowerCase())) &&
       String(student.age).toLowerCase().includes(filters.age.toLowerCase()) &&
       student.interest.toLowerCase().includes(filters.interest.toLowerCase()) &&
-      student.student_since.toLowerCase().includes(filters.student_since.toLowerCase()) &&
+      student.created_at.toLowerCase().includes(filters.created_at.toLowerCase()) &&
       (student.user.first_name.toLowerCase().includes(filters.parent_guardian.toLowerCase()) ||
         student.user.last_name.toLowerCase().includes(filters.parent_guardian.toLowerCase())) &&
       student.user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
@@ -30,13 +29,15 @@ const StudentList = ({ students }) => {
     );
   });
 
+  
   const handleFilterChange = (key, value) => {
     setFilters({
       ...filters,
       [key]: value
     });
   };
-
+  
+  console.log("filtered students: ",filteredStudents)
 
   return (
     <div >
@@ -76,8 +77,8 @@ const StudentList = ({ students }) => {
               <br />
               <input
                 type="text"
-                value={filters.student_since}
-                onChange={e => handleFilterChange('student_since', e.target.value)}
+                value={filters.created_at}
+                onChange={e => handleFilterChange('created_at', e.target.value)}
               />
             </th>
             <th>
@@ -110,12 +111,13 @@ const StudentList = ({ students }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredStudents.map(student => (
+          {
+          filteredStudents.map(student => (
             <tr key={student.id}>
               <td><button onClick={() => {navigate(`/current-student/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
-              <td>{student.student_since}</td>
+              <td>{student.created_at}</td>
               <td><button onClick={() => {navigate(`/current-user/${student.user.id}`)}}>🔎</button> {student.user.first_name} {student.user.last_name}</td>
               <td>{student.user.email}</td>
               <td>{student.user.phone_number}</td>
