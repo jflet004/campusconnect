@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 import { UserProvider } from "./context/user"
 import Home from './components/Home';
@@ -16,12 +16,13 @@ import UserInfo from './components/UserInfo';
 import UpdateStudent from './components/UpdateStudent';
 import Header from './components/Header';
 import RegistrationSuccess from './components/RegistrationSuccess';
+import EnrollmentSuccess from './components/EnrollmentSuccess';
 
 function App() {
 
   const [students, setStudents] = useState([])
-  const [users, setUsers] = useState([])
-  // const [enrollments, setEnrollment] = useState([])
+  // const [users, setUsers] = useState([])
+  const [enrollments, setEnrollment] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -32,16 +33,16 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  // useEffect(() => {
-  //   fetch("/enrollments")
-  //     .then(r => r.json())
-  //     .then(enrollments => setEnrollment(enrollments))
-  //     .catch(error => alert(error))
-  //     .finally(() => setLoading(false))
-  // }, [])
+  useEffect(() => {
+    fetch("/enrollments")
+      .then(r => r.json())
+      .then(enrollments => setEnrollment(enrollments))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }, [])
 
   const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
-  // const enrollStudent = courseEnrollment => setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
+  const enrollStudent = courseEnrollment => setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
   const updateStudent = (updatedStudent) => {
     setStudents((prevStudents) => {
       return prevStudents.map((student) => {
@@ -53,19 +54,21 @@ function App() {
       });
     });
   };
-  const updateUser = (updatedUser) => {
-    setUsers((prevUsers) => {
-      return prevUsers.map((user) => {
-        if (user.id === updatedUser.id) {
-          return updatedUser;
-        } else {
-          return user;
-        }
-      });
-    });
-  };
+  // const updateUser = (updatedUser) => {
+  //   setUsers((prevUsers) => {
+  //     return prevUsers.map((user) => {
+  //       if (user.id === updatedUser.id) {
+  //         return updatedUser;
+  //       } else {
+  //         return user;
+  //       }
+  //     });
+  //   });
+  // };
 
   if (loading) return <h2>Loading</h2>
+
+  console.log(enrollments)
 
   return (
     <UserProvider>
@@ -78,11 +81,12 @@ function App() {
           <Route path="/programs" element={<Programs />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
-          <Route path="/current-student/:id" element={<StudentInfo />} />
+          <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/successful-registration" element={<RegistrationSuccess />} />
+          <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

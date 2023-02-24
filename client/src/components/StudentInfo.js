@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const StudentInfo = () => {
+const StudentInfo = ({ enrollStudent }) => {
 
   const [currentStudent, setCurrentStudent] = useState([])
   const [courses, setCourses] = useState([])
@@ -10,6 +10,7 @@ const StudentInfo = () => {
   const [loading, setLoading] = useState(true)
 
   const params = useParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/students/${params.id}`)
@@ -17,29 +18,20 @@ const StudentInfo = () => {
       .then(student => setCurrentStudent(student))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
-  }, [])
-
+  }, [params.id])
 
   useEffect(() => {
     fetch('/courses')
       .then(r => r.json())
-      .then(courses => {
-        setCourses(courses)
-        console.log("Current courses:", courses)
-      })
+      .then(courses => setCourses(courses))
       .catch(error => alert(error))
   }, [])
-
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-  ))
 
   const handleCourseChange = e => {
     const courseId = e.target.value;
     const selectedCourse = courses.find(course => course.title === courseId);
     setSelectedCourse(selectedCourse);
   };
-
 
   const handleEnrollmentSubmit = e => {
     e.preventDefault()
@@ -53,11 +45,19 @@ const StudentInfo = () => {
         course_id: selectedCourse.id
       })
     })
-      .then(r => r.json())
-      .catch(error => alert(error))
+      .then(r => {
+        if (r.ok) {
+          r.json().then(enrollStudent)
+          navigate("/enrollment-success")
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
   }
 
-
+  const courseOptions = courses.map((course) => (
+    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
+  ))
 
   if (loading) return <h2>Loading</h2>
 
@@ -90,7 +90,7 @@ const StudentInfo = () => {
         <br />
         <input type="submit" value="Enroll Student" />
       </form>
-      <br/>
+      <br />
       {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>
   )

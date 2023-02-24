@@ -14,7 +14,7 @@ const UserInfo = () => {
       .then(user => setCurrentUser(user))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [params.id])
 
   if (loading) return <h2>Loading</h2>
 

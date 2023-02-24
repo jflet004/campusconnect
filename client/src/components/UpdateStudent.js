@@ -27,7 +27,7 @@ const UpdateStudent = ({ updateStudent }) => {
         student_since: student.student_since,
         notes: student.notes
       }))
-  }, [])
+  }, [params.id])
 
 
   const handleChange = e => {
@@ -144,6 +144,7 @@ const UpdateStudent = ({ updateStudent }) => {
         <br />
         <Link to={`/current-student/${params.id}`}>Back</Link>
       </form>
+      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>
   )
 }

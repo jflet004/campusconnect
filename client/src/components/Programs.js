@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../context/user'
+import React from 'react'
 
 const Programs = () => {
 

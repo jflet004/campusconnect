@@ -25,16 +25,12 @@ const RegisterStudent = ({ addStudent }) => {
       .then(r => r.json())
       .then(course => {
         setCourses(course)
-        console.log("Current course:", course)
       })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
 
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-  ))
-
+  
   const handleChange = e => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -42,7 +38,7 @@ const RegisterStudent = ({ addStudent }) => {
       setFormData({ ...formData, gender: e.target.value })
     }
   }
-
+  
   const handleSubmit = e => {
     e.preventDefault()
     fetch("/students/", {
@@ -52,15 +48,21 @@ const RegisterStudent = ({ addStudent }) => {
       },
       body: JSON.stringify(formData)
     })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(addStudent)
-          navigate('/successful-registration')
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    .then(r => {
+      if (r.ok) {
+        r.json().then(addStudent)
+        navigate('/successful-registration')
+      } else {
+        r.json().then(data => setErrors(data.errors))
+      }
+    })
   }
+  
+  const courseOptions = courses.map((course) => (
+    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
+  ))
+
+  if(loading) return <h1>Loading</h1>
 
   return (
     <div>
