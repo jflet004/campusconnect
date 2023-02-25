@@ -7,7 +7,7 @@ const EnrollmentSuccess = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigate(-1)
+      navigate("/programs")
     }, 1000)
 
     return () => clearTimeout(timeout)

@@ -15,27 +15,33 @@ const Programs = ({ courses }) => {
   });
 
   const filteredCourses = courses.filter(course => {
+    const status = course.students_enrolled >= course.capacity ? "Closed" : "Open";
+
     return (
       course.title.toLowerCase().includes(filters.title.toLowerCase()) &&
       course.start_time.toLowerCase().includes(filters.start_time.toLowerCase()) &&
       course.end_time.toLowerCase().includes(filters.end_time.toLowerCase()) &&
       course.location.toLowerCase().includes(filters.location.toLowerCase()) &&
-      String(course.capacity).toLowerCase().includes(filters.capacity.toLowerCase()) &&
+      (status.toLowerCase().includes(filters.capacity.toLowerCase()) || String(course.capacity).toLowerCase().includes(filters.capacity.toLowerCase())) &&
       String(course.price).toLowerCase().includes(filters.price.toLowerCase())
+    )
+  })
 
-    );
-  });
 
-  console.log(filteredCourses)
-
-  
   const handleFilterChange = (key, value) => {
     setFilters({
       ...filters,
       [key]: value
     });
   };
-  
+
+  const getCourseStatus = (course) => {
+    const status = course.students_enrolled >= course.capacity ? "Closed" : "Open"
+    const color = course.students_enrolled >= course.capacity ? "red" : "green"
+    const enrollment = `(${course.students_enrolled}/${course.capacity})`
+    return { status, color, enrollment };
+  };
+
   return (
     <div >
       <h1>Programs</h1>
@@ -100,18 +106,20 @@ const Programs = ({ courses }) => {
         </thead>
         <tbody>
           {
-          filteredCourses.map(course => (
-            <tr key={course.id}>
-              {/* <td><button onClick={() => {navigate(`/current-course/${course.id}`)}}>🔎</button> {course.first_title} {course.last_title}</td> */}
-              <td>{course.title}</td>
-              <td>{course.start_time}</td>
-              <td>{course.end_time}</td>
-              <td>{course.location}</td>
-              <td>{course.students_enrolled}/{course.capacity}</td>
-              {/* <td><button onClick={() => {navigate(`/current-user/${course.user.id}`)}}>🔎</button> {course.user.first_title} {course.user.last_title}</td> */}
-              <td>{course.price}</td>
-            </tr>
-          ))}
+            filteredCourses.map(course => (
+              <tr key={course.id}>
+                {/* <td><button onClick={() => {navigate(`/current-course/${course.id}`)}}>🔎</button> {course.first_title} {course.last_title}</td> */}
+                <td>{course.title}</td>
+                <td>{course.start_time}</td>
+                <td>{course.end_time}</td>
+                <td>{course.location}</td>
+                <td style={{ color: getCourseStatus(course).color }}>
+                  {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
+                </td>
+                {/* <td><button onClick={() => {navigate(`/current-user/${course.user.id}`)}}>🔎</button> {course.user.first_title} {course.user.last_title}</td> */}
+                <td>${course.price}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
