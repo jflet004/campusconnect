@@ -85,11 +85,11 @@ puts "Seeding new data"
 # s49	=	Student.create(first_name: "Quinn", last_name: "Martinez", birthday: Date.new(2008, 7, 21), gender: "Non-binary/non-conforming", interest: "Art", notes: "Your perseverance and determination are inspiring.", user_id: u18.id)
 
 puts "Creating courses"
-c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30,0), end_time: DateTime.new(2023,3,1,11,0,0), location: 'Room 20', price: 19)
-c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0,0), end_time: DateTime.new(2023,3,1,10,30,0), location: 'Room 21', price: 19)
-c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0,0), end_time: DateTime.new(2023,3,1,12,30,0), location: 'Room 20', price: 19)
-c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0,0), end_time: DateTime.new(2023,3,1,14,30,0), location: 'Room 20', price: 19)
-c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0,0), end_time: DateTime.new(2023,3,1,19,0,0), location: 'Room 21', price: 19)
+c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30,0), end_time: DateTime.new(2023,3,1,11,0,0), location: 'Room 20', price: 19, capacity: 10)
+c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0,0), end_time: DateTime.new(2023,3,1,10,30,0), location: 'Room 21', price: 19, capacity: 10)
+c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0,0), end_time: DateTime.new(2023,3,1,12,30,0), location: 'Room 20', price: 19, capacity: 10)
+c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0,0), end_time: DateTime.new(2023,3,1,14,30,0), location: 'Room 20', price: 19, capacity: 10)
+c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0,0), end_time: DateTime.new(2023,3,1,19,0,0), location: 'Room 21', price: 19, capacity: 10)
 
 
 

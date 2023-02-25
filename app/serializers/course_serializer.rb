@@ -1,5 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :id, :title, :start_time, :end_time, :location, :price
+  attributes :id, :title, :start_time, :end_time, :location, :capacity, :students_enrolled, :price
   has_many :students
 
   def start_time

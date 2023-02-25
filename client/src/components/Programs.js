@@ -10,6 +10,7 @@ const Programs = ({ courses }) => {
     start_time: '',
     end_time: '',
     location: '',
+    capacity: '',
     price: ''
   });
 
@@ -19,10 +20,13 @@ const Programs = ({ courses }) => {
       course.start_time.toLowerCase().includes(filters.start_time.toLowerCase()) &&
       course.end_time.toLowerCase().includes(filters.end_time.toLowerCase()) &&
       course.location.toLowerCase().includes(filters.location.toLowerCase()) &&
+      String(course.capacity).toLowerCase().includes(filters.capacity.toLowerCase()) &&
       String(course.price).toLowerCase().includes(filters.price.toLowerCase())
 
     );
   });
+
+  console.log(filteredCourses)
 
   
   const handleFilterChange = (key, value) => {
@@ -32,8 +36,6 @@ const Programs = ({ courses }) => {
     });
   };
   
-  console.log("filtered courses: ",filteredCourses)
-
   return (
     <div >
       <h1>Programs</h1>
@@ -77,6 +79,15 @@ const Programs = ({ courses }) => {
               />
             </th>
             <th>
+              <label>Students</label>
+              <br />
+              <input
+                type="text"
+                value={filters.capacity}
+                onChange={e => handleFilterChange('capacity', e.target.value)}
+              />
+            </th>
+            <th>
               <label>Price</label>
               <br />
               <input
@@ -96,6 +107,7 @@ const Programs = ({ courses }) => {
               <td>{course.start_time}</td>
               <td>{course.end_time}</td>
               <td>{course.location}</td>
+              <td>{course.students_enrolled}/{course.capacity}</td>
               {/* <td><button onClick={() => {navigate(`/current-user/${course.user.id}`)}}>🔎</button> {course.user.first_title} {course.user.last_title}</td> */}
               <td>{course.price}</td>
             </tr>
