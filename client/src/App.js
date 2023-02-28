@@ -17,6 +17,7 @@ import UpdateStudent from './components/UpdateStudent';
 import Header from './components/Header';
 import RegistrationSuccess from './components/RegistrationSuccess';
 import EnrollmentSuccess from './components/EnrollmentSuccess';
+import ProgramInfo from './components/ProgramInfo';
 
 function App() {
 
@@ -88,6 +89,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs courses={courses}/>} />
+          <Route path="/programs/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} />} />

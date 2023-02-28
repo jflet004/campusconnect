@@ -75,9 +75,9 @@ const StudentInfo = ({ enrollStudent }) => {
       <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}>{course.title}: {course.start_time}-{course.end_time}</li>)}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link></li>)}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br/></span><em>{currentStudent.notes}</em></p>
-      <Link to="/current-students">Back</Link>
+      <Link to="/current-students">back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
 
         <h1>Enrollment</h1>

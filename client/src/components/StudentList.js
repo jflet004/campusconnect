@@ -37,8 +37,6 @@ const StudentList = ({ students }) => {
     });
   };
   
-  console.log("filtered students: ",filteredStudents)
-
   return (
     <div >
       <h1>Student List</h1>
