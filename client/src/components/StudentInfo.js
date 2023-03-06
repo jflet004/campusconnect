@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const StudentInfo = ({ enrollStudent }) => {
+const StudentInfo = ({ enrollStudent, dropStudent }) => {
 
   const [currentStudent, setCurrentStudent] = useState([])
   const [courses, setCourses] = useState([])
@@ -35,7 +35,7 @@ const StudentInfo = ({ enrollStudent }) => {
 
   const handleEnrollmentSubmit = e => {
     e.preventDefault()
-    if(!selectedCourse) {
+    if (!selectedCourse) {
       setErrors(["Please select a course"])
       return
     }
@@ -63,11 +63,36 @@ const StudentInfo = ({ enrollStudent }) => {
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
+  const handleDropCourse = (course, studentId) => {
+    const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
+
+    fetch(`/enrollments/${enrollmentId}`, {
+      method: "DELETE"
+    })
+    .then(r => {
+      if(r.ok) {
+        dropStudent(currentStudent)
+        navigate("/drop-successful")
+      } else {
+        r.json().then(data => {
+          console.log(data);
+          setErrors(data.errors);
+        })
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      alert("An error occurred while dropping the course.");
+    })
+    
+  }
+  
+
   if (loading) return <h2>Loading</h2>
 
   return (
     <div className='info-card'>
-      <h2>{currentStudent.first_name}'s Profile <span style={{fontSize: "15px"}}>(Student)</span></h2>
+      <h2>{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
       <Link to={`/update-student/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentStudent.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentStudent.last_name}</p>
@@ -75,8 +100,8 @@ const StudentInfo = ({ enrollStudent }) => {
       <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link></li>)}</p>
-      <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br/></span><em>{currentStudent.notes}</em></p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))}>Drop</button></li>)}</p>
+      <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students">back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
 

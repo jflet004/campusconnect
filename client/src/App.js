@@ -18,12 +18,14 @@ import Header from './components/Header';
 import RegistrationSuccess from './components/RegistrationSuccess';
 import EnrollmentSuccess from './components/EnrollmentSuccess';
 import ProgramInfo from './components/ProgramInfo';
+import DropSuccessful from './components/DropSuccessful';
+import UpdateUser from './components/UpdateUser';
 
 function App() {
 
   const [students, setStudents] = useState([])
   const [courses, setCourses] = useState([])
-  // const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([])
   const [enrollments, setEnrollment] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -53,32 +55,31 @@ function App() {
 
   const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
   const enrollStudent = courseEnrollment => setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
-  const updateStudent = (updatedStudent) => {
-    setStudents((prevStudents) => {
-      return prevStudents.map((student) => {
+  const dropStudent = selectedCourse => setEnrollment(enrollments => enrollments.filter(enrollment => enrollment.id !== selectedCourse.id))
+  const updateStudent = updatedStudent => {
+    setStudents(prevStudents => {
+      return prevStudents.map(student => {
         if (student.id === updatedStudent.id) {
-          return updatedStudent;
+          return updatedStudent
         } else {
-          return student;
+          return student
+        }
+      })
+    })
+  }
+  const updateUser = (updatedUser) => {
+    setUsers((prevUsers) => {
+      return prevUsers.map((user) => {
+        if (user.id === updatedUser.id) {
+          return updatedUser;
+        } else {
+          return user;
         }
       });
     });
   };
-  // const updateUser = (updatedUser) => {
-  //   setUsers((prevUsers) => {
-  //     return prevUsers.map((user) => {
-  //       if (user.id === updatedUser.id) {
-  //         return updatedUser;
-  //       } else {
-  //         return user;
-  //       }
-  //     });
-  //   });
-  // };
 
   if (loading) return <h2>Loading</h2>
-
-  console.log(enrollments)
 
   return (
     <UserProvider>
@@ -92,12 +93,14 @@ function App() {
           <Route path="/programs/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
-          <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} />} />
+          <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
+          <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
           <Route path="/successful-registration" element={<RegistrationSuccess />} />
           <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
+          <Route path="/drop-successful" element={<DropSuccessful />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

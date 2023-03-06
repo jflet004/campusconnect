@@ -23,6 +23,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    user = User.find(params[:id])
+    user.update(user_params)
+    render json: user, status: :accepted
+  end
+
+
+
   def users_with_no_students
     render json: User.with_no_students, status: :ok
   end

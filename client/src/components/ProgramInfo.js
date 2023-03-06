@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const ProgramInfo = () => {
 
@@ -14,7 +14,7 @@ const ProgramInfo = () => {
       .then(course => setCourse(course))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
-  }, [])
+  }, [params.id])
 
   if (loading) return <h1>Loading</h1>
 

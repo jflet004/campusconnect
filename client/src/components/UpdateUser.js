@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const UpdateStudent = ({ updateStudent }) => {
+const UpdateUser = ({ updateUser }) => {
 
   const params = useParams()
   const navigate = useNavigate()
@@ -11,22 +11,28 @@ const UpdateStudent = ({ updateStudent }) => {
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
-    birthday: "",
-    gender: "",
-    created_at: "",
+    email: "",
+    phone_number: "",
+    address: "",
+    city: "",
+    state: "",
+    zip_code: "",
     notes: ""
   })
 
   useEffect(() => {
-    fetch(`/students/${params.id}`)
+    fetch(`/users/${params.id}`)
       .then(r => r.json())
-      .then(student => setFormData({
-        first_name: student.first_name,
-        last_name: student.last_name,
-        birthday: student.birthday,
-        gender: student.gender,
-        created_at: student.created_at,
-        notes: student.notes
+      .then(user => setFormData({
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        phone_number: user.phone_number,
+        address: user.address,
+        city: user.city,
+        state: user.state,
+        zip_code: user.zip_code,
+        notes: user.notes
       }))
   }, [params.id])
 
@@ -41,7 +47,7 @@ const UpdateStudent = ({ updateStudent }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch(`/students/${params.id}`, {
+    fetch(`/users/${params.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
@@ -50,8 +56,8 @@ const UpdateStudent = ({ updateStudent }) => {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(updateStudent)
-          navigate(`/current-student/${params.id}`)
+          r.json().then(updateUser)
+          navigate(`/current-user/${params.id}`)
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -81,62 +87,63 @@ const UpdateStudent = ({ updateStudent }) => {
           onChange={handleChange}
         />
         <br />
-        <label>Birthday</label>
+        <label>Email</label>
         <br />
         <input
-          type="date"
-          name="birthday"
-          value={formData.birthday}
+          type="text"
+          name="email"
+          value={formData.email}
           onChange={handleChange}
         />
         <br />
-        <label>Student Since</label>
+        <label>Phone #</label>
         <br />
         <input
-          type="date"
-          name="created_at"
-          value={formData.created_at}
+          type="text"
+          name="phone_number"
+          value={formData.phone_number}
           onChange={handleChange}
         />
         <br />
         <br />
-        <label>Gender</label>
+        <label>Address</label>
         <br />
         <input
-          type="radio"
-          name="gender"
-          value="Male"
-          checked={formData.gender === "Male"}
+          type="text"
+          name="address"
+          value={formData.address}
           onChange={handleChange}
         />
-        <label>Male</label>
+        <br />
+        <br />
+        <label>City</label>
         <br />
         <input
-          type="radio"
-          name="gender"
-          value="Female"
-          checked={formData.gender === "Female"}
+          type="text"
+          name="city"
+          value={formData.city}
           onChange={handleChange}
         />
-        <label>Female</label>
+        <br />
+        <br />
+        <label>State</label>
         <br />
         <input
-          type="radio"
-          name="gender"
-          value="Non-binary/non-conforming"
-          checked={formData.gender === "Non-binary/non-conforming"}
+          type="text"
+          name="state"
+          value={formData.state}
           onChange={handleChange}
         />
-        <label>Non-binary/non-conforming</label>
+        <br />
+        <br />
+        <label>Zip Code</label>
         <br />
         <input
-          type="radio"
-          name="gender"
-          value="Prefer not to respond"
-          checked={formData.gender === "Prefer not to respond"}
+          type="text"
+          name="zip_code"
+          value={formData.zip_code}
           onChange={handleChange}
         />
-        <label>Prefer not to respond</label>
         <br />
         <br />
         <label>Notes</label>
@@ -159,4 +166,4 @@ const UpdateStudent = ({ updateStudent }) => {
   )
 }
 
-export default UpdateStudent
+export default UpdateUser

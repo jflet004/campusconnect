@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :enrollments
   resources :students
-  resources :users, only: [:index, :show, :create]
+  resources :users
 
   post "/signup", to: "users#create"
   get "/user-info/:id", to: "users#user_info"
