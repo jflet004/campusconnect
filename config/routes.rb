@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :enrollments
   resources :students
   resources :users
+  resources :classrooms, only:[:index]
 
   post "/signup", to: "users#create"
   get "/user-info/:id", to: "users#user_info"

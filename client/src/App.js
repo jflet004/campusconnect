@@ -20,6 +20,7 @@ import EnrollmentSuccess from './components/EnrollmentSuccess';
 import ProgramInfo from './components/ProgramInfo';
 import DropSuccessful from './components/DropSuccessful';
 import UpdateUser from './components/UpdateUser';
+import AddProgram from './components/AddProgram';
 
 function App() {
 
@@ -56,6 +57,11 @@ function App() {
   const addStudent = registeredStudents => {
     setStudents(newStudent => [...newStudent, registeredStudents])
   }
+
+  const addCourse = currentCourses => {
+    setCourses(newCourse => [...newCourse, currentCourses])
+  }
+  
   
   const enrollStudent = courseEnrollment => {
     setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
@@ -101,6 +107,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs courses={courses} />} />
+          <Route path="/new-program" element={<AddProgram addCourse={addCourse} />} />
           <Route path="/programs/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />

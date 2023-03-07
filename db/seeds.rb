@@ -3,6 +3,7 @@
 # puts "Deleted all students"
 # User.destroy_all
 # puts "Deleted all users"
+Classroom.destroy_all
 Course.destroy_all
 puts "Deleted all courses"
 
@@ -84,14 +85,39 @@ puts "Seeding new data"
 # s48	=	Student.create(first_name: "Noah", last_name: "Edwards", birthday: Date.new(2012, 12, 20), gender: "Prefer not to respond", interest: "Music", notes: "Keep up the good work, I know you can achieve great things.", user_id: u11.id)
 # s49	=	Student.create(first_name: "Quinn", last_name: "Martinez", birthday: Date.new(2008, 7, 21), gender: "Non-binary/non-conforming", interest: "Art", notes: "Your perseverance and determination are inspiring.", user_id: u18.id)
 
+
+puts "Creating rooms"
+
+r1 = Classroom.create(name: 'Room 1')
+r2 = Classroom.create(name: 'Room 2')
+r3 = Classroom.create(name: 'Room 3')
+r4 = Classroom.create(name: 'Room 4')
+r5 = Classroom.create(name: 'Room 5')
+r6 = Classroom.create(name: 'Room 6')
+r7 = Classroom.create(name: 'Room 7')
+r8 = Classroom.create(name: 'Room 8')
+r9 = Classroom.create(name: 'Room 9')
+r10 = Classroom.create(name: 'Room 10')
+r11 = Classroom.create(name: 'Room 11')
+r12 = Classroom.create(name: 'Room 12')
+r13 = Classroom.create(name: 'Room 13')
+r14 = Classroom.create(name: 'Room 14')
+r15 = Classroom.create(name: 'Room 15')
+r16 = Classroom.create(name: 'Room 16')
+r17 = Classroom.create(name: 'Room 17')
+r18 = Classroom.create(name: 'Room 18')
+r19 = Classroom.create(name: 'Upstairs Dance Room')
+r20 = Classroom.create(name: 'Room 20')
+r21 = Classroom.create(name: 'Room 21')
+r22 = Classroom.create(name: 'Room 22')
+r23 = Classroom.create(name: 'Downstairs Dance Room')
+
 puts "Creating courses"
-c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30,0), end_time: DateTime.new(2023,3,1,11,0,0), location: 'Room 20', price: 19, capacity: 10)
-c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0,0), end_time: DateTime.new(2023,3,1,10,30,0), location: 'Room 21', price: 19, capacity: 10)
-c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0,0), end_time: DateTime.new(2023,3,1,12,30,0), location: 'Room 20', price: 19, capacity: 10)
-c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0,0), end_time: DateTime.new(2023,3,1,14,30,0), location: 'Room 20', price: 19, capacity: 10)
-c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0,0), end_time: DateTime.new(2023,3,1,19,0,0), location: 'Room 21', price: 19, capacity: 10)
-
-
+c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30,0), end_time: DateTime.new(2023,3,1,11,0,0), location: r20.name, price: 19, capacity: 10)
+c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0,0), end_time: DateTime.new(2023,3,1,10,30,0), location: r21.name, price: 19, capacity: 10)
+c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0,0), end_time: DateTime.new(2023,3,1,12,30,0), location: r20.name, price: 19, capacity: 10)
+c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0,0), end_time: DateTime.new(2023,3,1,14,30,0), location: r20.name, price: 19, capacity: 10)
+c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0,0), end_time: DateTime.new(2023,3,1,19,0,0), location: r21.name, price: 19, capacity: 10)
 
 
 puts "Done seeding!"

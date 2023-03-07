@@ -10,6 +10,11 @@ class CoursesController < ApplicationController
     render json: course, status: :ok
   end
 
+  def create
+    course = Course.create!(course_params)
+    render json: course, status: :created
+  end
+
 
   private
 

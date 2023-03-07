@@ -5,7 +5,12 @@ const AdminPage = () => {
   return (
     <div>
       <h1>AdminPage</h1>
-      <Link to="/current-students">Current Students</Link>
+      <Link to="/current-students">View Students</Link>
+      <br/>
+      <Link to="/programs">View Programs</Link>
+      <br/>
+      <Link to="/new-program">Add Program</Link>
+      <br/>
     </div>
   )
 }

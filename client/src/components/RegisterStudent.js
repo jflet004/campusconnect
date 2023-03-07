@@ -41,7 +41,8 @@ const RegisterStudent = ({ addStudent }) => {
   
   const handleSubmit = e => {
     e.preventDefault()
-    fetch("/students/", {
+    console.log(formData)
+    fetch("/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
