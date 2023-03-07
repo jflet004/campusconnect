@@ -21,19 +21,32 @@ import ProgramInfo from './components/ProgramInfo';
 import DropSuccessful from './components/DropSuccessful';
 import UpdateUser from './components/UpdateUser';
 import AddProgram from './components/AddProgram';
+import TeacherList from './components/TeacherList';
+import TeacherInfo from './components/TeacherInfo';
+import UpdateTeacher from './components/UpdateTeacher';
 
 function App() {
 
   const [students, setStudents] = useState([])
+  const [teachers, setTeachers] = useState([])
   const [courses, setCourses] = useState([])
   const [users, setUsers] = useState([])
-  const [enrollments, setEnrollment] = useState([])
+  const [enrollments, setEnrollments] = useState([])
+  const [assignments, setAssignments] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch("/students")
       .then(r => r.json())
       .then(students => setStudents(students))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    fetch("/teachers")
+      .then(r => r.json())
+      .then(teachers => setTeachers(teachers))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
@@ -49,7 +62,7 @@ function App() {
   useEffect(() => {
     fetch("/enrollments")
       .then(r => r.json())
-      .then(enrollments => setEnrollment(enrollments))
+      .then(enrollments => setEnrollments(enrollments))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
@@ -64,12 +77,21 @@ function App() {
   
   
   const enrollStudent = courseEnrollment => {
-    setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
+    setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
   }
 
   const dropStudent = studentId => {
-    setEnrollment(enrollments => {
+    setEnrollments(enrollments => {
       enrollments.filter(enrollment => enrollment.student_id !== studentId)
+    })
+  }
+  const assignTeacher = courseAssignment => {
+    setAssignments(newAssignment => [...newAssignment, courseAssignment])
+  }
+
+  const removeTeacher = teacherId => {
+    setAssignments(assignments => {
+      assignments.filter(assignment => assignment.teacher_id !== teacherId)
     })
   }
   
@@ -80,6 +102,18 @@ function App() {
           return updatedStudent
         } else {
           return student
+        }
+      })
+    })
+  }
+
+  const updateTeacher = updatedTeacher => {
+    setTeachers(prevTeacher => {
+      return prevTeacher.map(teacher => {
+        if (teacher.id === updatedTeacher.id) {
+          return updatedTeacher
+        } else {
+          return teacher
         }
       })
     })
@@ -111,8 +145,11 @@ function App() {
           <Route path="/programs/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
+          <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
           <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
+          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher} removeTeacher={removeTeacher} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
+          <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
