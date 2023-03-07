@@ -5,7 +5,8 @@
 # puts "Deleted all users"
 Classroom.destroy_all
 Course.destroy_all
-puts "Deleted all courses"
+Teacher.destroy_all
+puts "Deleted previous data"
 
 puts "Seeding new data"
 
