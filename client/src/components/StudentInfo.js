@@ -71,7 +71,7 @@ const StudentInfo = ({ enrollStudent, dropStudent }) => {
     })
     .then(r => {
       if(r.ok) {
-        dropStudent(currentStudent)
+        dropStudent(studentId)
         navigate("/drop-successful")
       } else {
         r.json().then(data => {

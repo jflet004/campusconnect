@@ -53,9 +53,20 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  const addStudent = registeredStudents => setStudents(newStudent => [...newStudent, registeredStudents])
-  const enrollStudent = courseEnrollment => setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
-  const dropStudent = selectedCourse => setEnrollment(enrollments => enrollments.filter(enrollment => enrollment.id !== selectedCourse.id))
+  const addStudent = registeredStudents => {
+    setStudents(newStudent => [...newStudent, registeredStudents])
+  }
+  
+  const enrollStudent = courseEnrollment => {
+    setEnrollment(newEnrollment => [...newEnrollment, courseEnrollment])
+  }
+
+  const dropStudent = studentId => {
+    setEnrollment(enrollments => {
+      enrollments.filter(enrollment => enrollment.student_id !== studentId)
+    })
+  }
+  
   const updateStudent = updatedStudent => {
     setStudents(prevStudents => {
       return prevStudents.map(student => {
@@ -89,7 +100,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<Programs courses={courses}/>} />
+          <Route path="/programs" element={<Programs courses={courses} />} />
           <Route path="/programs/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
