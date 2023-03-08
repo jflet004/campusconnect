@@ -64,9 +64,10 @@ const TeacherInfo = ({ assignTeacher, removeTeacher }) => {
   ))
 
   const handleTeacherRemoval = (course, teacherId) => {
-    const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === teacherId).id
+    console.log(course.teacher_assignments.map(a => a.id))
+    const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
 
-    fetch(`/enrollments/${enrollmentId}`, {
+    fetch(`/teacher_assignments/${assignmentId}`, {
       method: "DELETE"
     })
     .then(r => {

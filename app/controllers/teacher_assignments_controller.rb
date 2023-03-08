@@ -9,6 +9,13 @@ class TeacherAssignmentsController < ApplicationController
     render json: assignment, status: :created
   end
 
+  def destroy
+    # byebug
+    assignment = TeacherAssignment.find(params[:id])
+    assignment.destroy
+    head :no_content
+  end
+
   private
 
   def teacher_assignments_params
