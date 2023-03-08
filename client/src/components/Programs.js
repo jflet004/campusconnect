@@ -108,7 +108,7 @@ const Programs = ({ courses }) => {
           {
             filteredCourses.map(course => (
               <tr key={course.id}>
-                <td><button onClick={() => { navigate(`/programs/${course.id}`) }}>🔎</button> {course.first_title} {course.last_title}</td>
+                <td><button onClick={() => { navigate(`/courses/${course.id}`) }}>🔎</button> {course.first_title} {course.last_title}</td>
                 <td>{course.title}</td>
                 <td>{course.start_time}</td>
                 <td>{course.end_time}</td>

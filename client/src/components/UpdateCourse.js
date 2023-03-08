@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const AddProgram = ({ addCourse, teachers, classrooms }) => {
+const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
 
+  const params = useParams()
   const navigate = useNavigate()
 
-  const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState(false)
+
   const [formData, setFormData] = useState({
     title: "",
     start_time: "",
@@ -17,6 +18,20 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     teacher_id: ""
   })
 
+  useEffect(() => {
+    fetch(`/courses/${params.id}`)
+      .then(r => r.json())
+      .then(course => setFormData({
+        title: course.title,
+        start_time: course.start_time,
+        end_time: course.end_time,
+        price: course.price,
+        capacity: course.capacity,
+        location: course.location,
+        teacher_id: course.teacher_id
+      }))
+  }, [params.id])
+
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -25,8 +40,8 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch("/courses", {
-      method: "POST",
+    fetch(`/courses/${params.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
@@ -34,8 +49,8 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(addCourse)
-          navigate('/enrollment-success')
+          r.json().then(updateCourse)
+          navigate(`/current-course/${params.id}`)
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -45,14 +60,12 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
   const teacherOptions = teachers.map((teacher) => (
     <option key={teacher.id} value={teacher.id}>{teacher.first_name} {teacher.last_name}</option>
   ))
-
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
 
-  // if (loading) return <h1>Loading</h1>
 
   return (
     <div>
-      <h1>New Program Form</h1>
+      <h1>UpdatePage</h1>
       <form onSubmit={handleSubmit}>
         <label>Title</label>
         <br />
@@ -63,7 +76,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           onChange={handleChange}
         />
         <br />
-        <label>Start</label>
+        <label>Start Time</label>
         <br />
         <input
           type="datetime-local"
@@ -72,30 +85,12 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           onChange={handleChange}
         />
         <br />
-        <label>End</label>
+        <label>End Time</label>
         <br />
         <input
           type="datetime-local"
           name="end_time"
           value={formData.end_time}
-          onChange={handleChange}
-        />
-        <br />
-        <label>Capacity</label>
-        <br />
-        <input
-          type="integer"
-          name="capacity"
-          value={formData.capacity}
-          onChange={handleChange}
-        />
-        <br />
-        <label>Price</label>
-        <br />
-        <input
-          type="float"
-          name="price"
-          value={formData.price}
           onChange={handleChange}
         />
         <br />
@@ -122,12 +117,13 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
         </select>
         <br />
         <br />
-        <input type="submit" value="Submit Registration Form" />
+        <input type="submit" value="Update teacher" />
+        <br />
+        <Link to={`/current-course/${params.id}`}>Back</Link>
       </form>
-      <br />
-      {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
+      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>
   )
 }
 
-export default AddProgram
+export default UpdateCourse

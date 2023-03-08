@@ -24,10 +24,12 @@ import AddProgram from './components/AddProgram';
 import TeacherList from './components/TeacherList';
 import TeacherInfo from './components/TeacherInfo';
 import UpdateTeacher from './components/UpdateTeacher';
+import UpdateCourse from './components/UpdateCourse';
 
 function App() {
 
   const [students, setStudents] = useState([])
+  const [classrooms, setClassrooms] = useState([])
   const [teachers, setTeachers] = useState([])
   const [courses, setCourses] = useState([])
   const [users, setUsers] = useState([])
@@ -65,6 +67,14 @@ function App() {
       .then(enrollments => setEnrollments(enrollments))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
+    fetch("/classrooms")
+    .then(r => r.json())
+    .then(data => setClassrooms(data))
+    .catch(error => alert(error))
+    .finally(() => setLoading(false))
   }, [])
 
   const addStudent = registeredStudents => {
@@ -118,6 +128,19 @@ function App() {
       })
     })
   }
+
+  const updateCourse = updatedCourse => {
+    setCourses(prevCourse => {
+      return prevCourse.map(course => {
+        if (course.id === updatedCourse.id) {
+          return updatedCourse
+        } else {
+          return course
+        }
+      })
+    })
+  }
+
   const updateUser = (updatedUser) => {
     setUsers((prevUsers) => {
       return prevUsers.map((user) => {
@@ -140,9 +163,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<Programs courses={courses} />} />
-          <Route path="/new-program" element={<AddProgram addCourse={addCourse} />} />
-          <Route path="/programs/:id" element={<ProgramInfo />} />
+          <Route path="/courses" element={<Programs courses={courses} />} />
+          <Route path="/new-course" element={<AddProgram addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
+          <Route path="/current-course/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
@@ -150,6 +173,7 @@ function App() {
           <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher} removeTeacher={removeTeacher} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
+          <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
           <Route path="/current-user/:id" element={<UserInfo />} />
           <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
           <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />

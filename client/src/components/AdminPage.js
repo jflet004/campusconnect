@@ -7,9 +7,11 @@ const AdminPage = () => {
       <h1>AdminPage</h1>
       <Link to="/current-students">View Students</Link>
       <br/>
-      <Link to="/programs">View Programs</Link>
+      <Link to="/current-teachers">View Teachers</Link>
       <br/>
-      <Link to="/new-program">Add Program</Link>
+      <Link to="/courses">View Programs</Link>
+      <br/>
+      <Link to="/new-course">Add Program</Link>
       <br/>
     </div>
   )

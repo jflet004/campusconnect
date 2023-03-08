@@ -145,11 +145,11 @@ t28	=	Teacher.create(first_name: 'Timothy', last_name: 'Maloof', email: 'mysteri
 t29	=	Teacher.create(first_name: 'Wilder', last_name: 'Lopez', email: 'wilderlopezc@icloud.com', active: 'true', phone_number: '954-422-6263', address: '330 Oak St', city: 'Santa Monica', state: 'CA', postal_code: '90158', gender: "male")
 
 puts "Creating courses"
-c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30,0), end_time: DateTime.new(2023,3,1,11,0,0), location: r20.name, price: 19, capacity: 10)
-c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0,0), end_time: DateTime.new(2023,3,1,10,30,0), location: r21.name, price: 19, capacity: 10)
-c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0,0), end_time: DateTime.new(2023,3,1,12,30,0), location: r20.name, price: 19, capacity: 10)
-c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0,0), end_time: DateTime.new(2023,3,1,14,30,0), location: r20.name, price: 19, capacity: 10)
-c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0,0), end_time: DateTime.new(2023,3,1,19,0,0), location: r21.name, price: 19, capacity: 10)
+c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30), end_time: DateTime.new(2023,3,1,11,0), location: r20.name, price: 19, capacity: 10, teacher_id: t1.id)
+c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0), end_time: DateTime.new(2023,3,1,10,0), location: r21.name, price: 19, capacity: 10, teacher_id: t2.id)
+c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0), end_time: DateTime.new(2023,3,1,12,30), location: r20.name, price: 19, capacity: 10, teacher_id: t3.id)
+c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0), end_time: DateTime.new(2023,3,1,14,30), location: r20.name, price: 19, capacity: 10, teacher_id: t24.id)
+c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0), end_time: DateTime.new(2023,3,1,19,0), location: r21.name, price: 19, capacity: 10, teacher_id: t15.id)
 
 
 puts "Done seeding!"
