@@ -25,6 +25,7 @@ import TeacherList from './components/TeacherList';
 import TeacherInfo from './components/TeacherInfo';
 import UpdateTeacher from './components/UpdateTeacher';
 import UpdateCourse from './components/UpdateCourse';
+import Calendar from './components/Calendar';
 
 function App() {
 
@@ -162,6 +163,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/calendar" element={<Calendar />} />
           <Route path="/about" element={<About />} />
           <Route path="/courses" element={<Programs courses={courses} />} />
           <Route path="/new-course" element={<AddProgram addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
