@@ -23,7 +23,8 @@ const Calendar = () => {
           capacity: course.capacity,
           students_enrolled: course.students_enrolled,
           price: course.price,
-          teacher_id: course.teacher_id
+          teacher_id: course.teacher_id,
+          daysOfWeek: course.days_of_week
         }));
         setEvents(events);
       })

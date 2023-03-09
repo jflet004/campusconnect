@@ -1,5 +1,5 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :id, :title, :start_time, :end_time, :location, :capacity, :students_enrolled, :price, :teacher_id
+  attributes :id, :title, :start_time, :end_time, :location, :capacity, :students_enrolled, :price, :teacher_id, :days_of_week
   has_one :teacher
   has_many :enrollments
   has_many :students, through: :enrollments
@@ -7,6 +7,8 @@ class CourseSerializer < ActiveModel::Serializer
   # def start_time
   #   object.start_time.strftime('%I:%M %p')
   # end
+
+
   def start_time
     object.start_time.strftime('%Y-%m-%dT%H:%M:%S.%L').chop
   end
@@ -18,5 +20,6 @@ class CourseSerializer < ActiveModel::Serializer
   # def end_time
   #   object.end_time.strftime('%I:%M %p')
   # end
+
 
 end

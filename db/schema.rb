@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_214627) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_230002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_214627) do
     t.datetime "updated_at", null: false
     t.integer "capacity"
     t.integer "teacher_id"
+    t.string "days_of_week", default: [], array: true
   end
 
   create_table "enrollments", force: :cascade do |t|

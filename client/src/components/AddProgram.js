@@ -14,14 +14,24 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     price: "",
     capacity: "",
     location: "",
-    teacher_id: ""
+    teacher_id: "",
+    days_of_week: ""
   })
 
 
   const handleChange = e => {
     const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
+
+    // Handle multi-select input field
+    if (name === "days_of_week") {
+      const selectedDays = Array.from(e.target.selectedOptions, option => option.value)
+      setFormData({ ...formData, days_of_week: selectedDays })
+    } else {
+      setFormData({ ...formData, [name]: value })
+    }
   }
+
+
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -105,9 +115,26 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           name="location"
           value={formData.location}
           onChange={handleChange}
-          >
+        >
           <option value="">Select one</option>
           {locationOptions}
+        </select>
+        <br />
+        <label>Recurrence (hold down shift to select multiple days)</label>
+        <br />
+        <select
+          name="days_of_week"
+          multiple={true}
+          value={formData.days_of_week}
+          onChange={handleChange}
+        >
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
         </select>
         <br />
         <label>Teacher</label>
@@ -116,7 +143,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           name="teacher_id"
           value={formData.teacher_id}
           onChange={handleChange}
-          >
+        >
           <option value="">Select one</option>
           {teacherOptions}
         </select>
