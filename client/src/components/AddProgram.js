@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const AddProgram = ({ addCourse, teachers, classrooms }) => {
 
   const navigate = useNavigate()
 
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
@@ -15,21 +15,43 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     capacity: "",
     location: "",
     teacher_id: "",
-    days_of_week: ""
+    days_of_week: []
   })
 
 
-  const handleChange = e => {
-    const { name, value } = e.target
+  // const handleInputChange = e => {
+  //   const { name, value } = e.target
 
-    // Handle multi-select input field
-    if (name === "days_of_week") {
-      const selectedDays = Array.from(e.target.selectedOptions, option => option.value)
-      setFormData({ ...formData, days_of_week: selectedDays })
-    } else {
-      setFormData({ ...formData, [name]: value })
-    }
+  //   // Handle multi-select input field
+  //   if (name === "days_of_week") {
+  //     const selectedDays = Array.from(e.target.selectedOptions, option => option.value)
+  //     setFormData({ ...formData, days_of_week: selectedDays })
+  //     console.log(selectedDays)
+  //   } else {
+  //     setFormData({ ...formData, [name]: value })
+  //   }
+  // }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
   }
+
+  const handleDaysOfWeekChange = (event) => {
+    const selectedDays = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    )
+    setFormData({
+      ...formData,
+      days_of_week: selectedDays,
+    })
+  }
+
+  console.log(formData.days_of_week)
 
 
 
@@ -70,7 +92,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           type="text"
           name="title"
           value={formData.title}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <br />
         <label>Start</label>
@@ -79,7 +101,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           type="datetime-local"
           name="start_time"
           value={formData.start_time}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <br />
         <label>End</label>
@@ -88,7 +110,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           type="datetime-local"
           name="end_time"
           value={formData.end_time}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <br />
         <label>Capacity</label>
@@ -97,7 +119,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           type="integer"
           name="capacity"
           value={formData.capacity}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <br />
         <label>Price</label>
@@ -106,7 +128,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
           type="float"
           name="price"
           value={formData.price}
-          onChange={handleChange}
+          onChange={handleInputChange}
         />
         <br />
         <label>Location</label>
@@ -114,19 +136,19 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
         <select
           name="location"
           value={formData.location}
-          onChange={handleChange}
+          onChange={handleInputChange}
         >
           <option value="">Select one</option>
           {locationOptions}
         </select>
         <br />
-        <label>Recurrence (hold down shift to select multiple days)</label>
+        <label>Recurrence</label>
         <br />
         <select
           name="days_of_week"
           multiple={true}
           value={formData.days_of_week}
-          onChange={handleChange}
+          onChange={handleDaysOfWeekChange}
         >
           <option value="0">Sunday</option>
           <option value="1">Monday</option>
@@ -142,7 +164,7 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
         <select
           name="teacher_id"
           value={formData.teacher_id}
-          onChange={handleChange}
+          onChange={handleInputChange}
         >
           <option value="">Select one</option>
           {teacherOptions}
