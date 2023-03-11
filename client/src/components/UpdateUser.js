@@ -157,7 +157,7 @@ const UpdateUser = ({ updateUser }) => {
         />
         <br />
         <br />
-        <input type="submit" value="Update Student" />
+        <input type="submit" value="Update Parent/Guardian" />
         <br />
         <Link to={`/current-student/${params.id}`}>Back</Link>
       </form>

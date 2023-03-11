@@ -7,7 +7,7 @@ class TeachersController < ApplicationController
 
   def show
     teacher = Teacher.find(params[:id])
-    render json: teacher, status: :ok
+    render json: teacher, include: ["courses", "courses.teacher_assignments"], status: :ok
   end
 
   def create

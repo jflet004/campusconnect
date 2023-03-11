@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const TeacherInfo = ({ assignTeacher }) => {
+const TeacherInfo = ({ assignTeacher, releaseTeacher }) => {
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [courses, setCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [errors, setErrors] = useState(false)
   const [loading, setLoading] = useState(true)
+
+  console.log(currentTeacher)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -63,12 +65,37 @@ const TeacherInfo = ({ assignTeacher }) => {
   const courseOptions = courses.map((course) => (
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
+
+    const handleCourseRelease = (course, teacherId) => {
+      console.log(course)
+    const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
+
+    fetch(`/teacher_assignments/${assignmentId}`, {
+      method: "DELETE"
+    })
+    .then(r => {
+      if(r.ok) {
+        releaseTeacher(teacherId)
+        navigate("/drop-successful")
+      } else {
+        r.json().then(data => {
+          console.log(data);
+          setErrors(data.errors);
+        })
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      alert("An error occurred while dropping the course.");
+    })
+    
+  }
   
   if (loading) return <h2>Loading</h2>
 
   return (
     <div className='info-card'>
-      <h2>{currentTeacher.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
+      <h2>{currentTeacher.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Teacher)</span></h2>
       <Link to={`/update-teacher/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentTeacher.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentTeacher.last_name}</p>
@@ -78,7 +105,12 @@ const TeacherInfo = ({ assignTeacher }) => {
       <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
       <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
       <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button>Drop</button></li>) : null}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => {
+
+        handleCourseRelease(course, parseInt(params.id))
+        console.log(course)
+
+        }}>Drop</button></li>) : null}</p>
       <Link to="/current-teachers">back to Teacher List</Link>
       <form onSubmit={handleAssignmentSubmit}>
 

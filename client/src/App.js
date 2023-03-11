@@ -110,7 +110,7 @@ function App() {
     setAssignments(newAssignment => [...newAssignment, courseAssignment])
   }
 
-  const removeTeacher = teacherId => {
+  const releaseTeacher = teacherId => {
     setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
   }
   
@@ -180,7 +180,7 @@ function App() {
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
           <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher}/>} />
+          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher} releaseTeacher={releaseTeacher}/>} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
           <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />

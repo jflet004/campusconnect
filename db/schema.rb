@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_230002) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_11_220026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,13 +24,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_230002) do
     t.string "title"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.string "location"
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "capacity"
-    t.integer "teacher_id"
     t.string "days_of_week", default: [], array: true
+    t.string "location"
   end
 
   create_table "enrollments", force: :cascade do |t|

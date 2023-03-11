@@ -1,7 +1,7 @@
 class StudentSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :birthday, :age, :gender, :interest, :user_id, :notes, :created_at
-  has_one :user
+  attributes :id, :first_name, :last_name, :birthday, :age, :created_at, :gender, :interest, :notes
   has_many :courses
+  has_one :user
 
 
   def age

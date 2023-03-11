@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const StudentList = ({ students }) => {
 
   const navigate = useNavigate()
-
+  
   const [filters, setFilters] = useState({
     name: '',
     age: '',
