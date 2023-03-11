@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const TeacherInfo = ({ assignTeacher, removeTeacher }) => {
+const TeacherInfo = ({ assignTeacher }) => {
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [courses, setCourses] = useState([])
@@ -59,35 +59,11 @@ const TeacherInfo = ({ assignTeacher, removeTeacher }) => {
       })
   }
 
+
   const courseOptions = courses.map((course) => (
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
-
-  const handleTeacherRemoval = (course, teacherId) => {
-    console.log(course.teacher_assignments.map(a => a.id))
-    const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
-
-    fetch(`/teacher_assignments/${assignmentId}`, {
-      method: "DELETE"
-    })
-    .then(r => {
-      if(r.ok) {
-        removeTeacher(teacherId)
-        navigate("/drop-successful")
-      } else {
-        r.json().then(data => {
-          setErrors(data.errors);
-        })
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      alert("An error occurred while dropping the course.");
-    })
-    
-  }
   
-
   if (loading) return <h2>Loading</h2>
 
   return (
@@ -102,7 +78,7 @@ const TeacherInfo = ({ assignTeacher, removeTeacher }) => {
       <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
       <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
       <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleTeacherRemoval(course, parseInt(params.id))}>Drop</button></li>) : null}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button>Drop</button></li>) : null}</p>
       <Link to="/current-teachers">back to Teacher List</Link>
       <form onSubmit={handleAssignmentSubmit}>
 

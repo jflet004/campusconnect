@@ -18,7 +18,6 @@ class EnrollmentsController < ApplicationController
   end
   
   def destroy
-    # byebug
     enrollment = Enrollment.find(params[:id])
     enrollment.destroy
     head :no_content

@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Programs = ({ courses }) => {
+const Programs = ({ courses, deleteCourse }) => {
 
   const navigate = useNavigate()
 
@@ -14,9 +14,21 @@ const Programs = ({ courses }) => {
     price: ''
   });
 
+  const handleCourseDelete = (courseId) => {
+    fetch(`/courses/${courseId}`, {
+      method: "DELETE"
+    })
+      .then(r => {
+        if (r.ok) {
+          deleteCourse(courseId)
+        } else {
+          r.json().then(data => console.log(data))
+        }
+      })
+  }
+
   const filteredCourses = courses.filter(course => {
     const status = course.students_enrolled >= course.capacity ? "Closed" : "Open";
-
     return (
       course.title.toLowerCase().includes(filters.title.toLowerCase()) &&
       course.start_time.toLowerCase().includes(filters.start_time.toLowerCase()) &&
@@ -35,12 +47,15 @@ const Programs = ({ courses }) => {
     });
   };
 
+
+
   const getCourseStatus = (course) => {
     const status = course.students_enrolled >= course.capacity ? "Closed" : "Open"
     const color = course.students_enrolled >= course.capacity ? "red" : "green"
     const enrollment = `(${course.students_enrolled}/${course.capacity})`
     return { status, color, enrollment };
   };
+
 
   return (
     <div >
@@ -117,6 +132,7 @@ const Programs = ({ courses }) => {
                   {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
                 </td>
                 <td>${course.price}</td>
+                <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td>
               </tr>
             ))}
         </tbody>

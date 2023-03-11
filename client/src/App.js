@@ -71,6 +71,14 @@ function App() {
   }, [])
 
   useEffect(() => {
+    fetch("/teacher_assignments")
+      .then(r => r.json())
+      .then(assignments => setAssignments(assignments))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }, [])
+
+  useEffect(() => {
     fetch("/classrooms")
     .then(r => r.json())
     .then(data => setClassrooms(data))
@@ -85,25 +93,25 @@ function App() {
   const addCourse = currentCourses => {
     setCourses(newCourse => [...newCourse, currentCourses])
   }
-  
+
+  const deleteCourse = courseId => {
+    setCourses(courses.filter(course => course.id !== courseId))
+  }
   
   const enrollStudent = courseEnrollment => {
     setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
   }
 
   const dropStudent = studentId => {
-    setEnrollments(enrollments => {
-      enrollments.filter(enrollment => enrollment.student_id !== studentId)
-    })
+    setEnrollments(enrollments.filter(enrollment => enrollment.student_id !== studentId))
   }
+
   const assignTeacher = courseAssignment => {
     setAssignments(newAssignment => [...newAssignment, courseAssignment])
   }
 
   const removeTeacher = teacherId => {
-    setAssignments(assignments => {
-      assignments.filter(assignment => assignment.teacher_id !== teacherId)
-    })
+    setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
   }
   
   const updateStudent = updatedStudent => {
@@ -165,14 +173,14 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/about" element={<About />} />
-          <Route path="/courses" element={<Programs courses={courses} />} />
+          <Route path="/courses" element={<Programs courses={courses} deleteCourse={deleteCourse} />} />
           <Route path="/new-course" element={<AddProgram addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
           <Route path="/current-course/:id" element={<ProgramInfo />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
           <Route path="/current-student/:id" element={<StudentInfo enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher} removeTeacher={removeTeacher} />} />
+          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher}/>} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
           <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
