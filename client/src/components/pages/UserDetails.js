@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-const UserInfo = () => {
+const UserDetails = () => {
 
   const [user, setUser] = useState([])
   const [loading, setLoading] = useState(true)
@@ -20,7 +20,7 @@ const UserInfo = () => {
 
   return (
     <div>
-      <h1>{user.first_name} {user.last_name} <span style={{fontSize:"15px"}}>(Parent/Guardian)</span></h1>
+      <h1>{user.first_name} {user.last_name} <span style={{ fontSize: "15px" }}>(Parent/Guardian)</span></h1>
       <Link to={`/update-user/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {user.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {user.last_name}</p>
@@ -42,4 +42,4 @@ const UserInfo = () => {
   )
 }
 
-export default UserInfo
+export default UserDetails

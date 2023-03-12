@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-const ProgramInfo = () => {
+const CourseDetails = () => {
 
   const [course, setCourse] = useState([])
   const [loading, setLoading] = useState(true)
@@ -33,4 +33,4 @@ const ProgramInfo = () => {
   )
 }
 
-export default ProgramInfo
+export default CourseDetails

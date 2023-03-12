@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const Programs = ({ courses, deleteCourse }) => {
+const CourseList = ({ courses, deleteCourse }) => {
 
   const navigate = useNavigate()
 
+  const [errors, setErrors] = useState(false)
   const [filters, setFilters] = useState({
     title: '',
     start_time: '',
@@ -22,7 +23,7 @@ const Programs = ({ courses, deleteCourse }) => {
         if (r.ok) {
           deleteCourse(courseId)
         } else {
-          r.json().then(data => console.log(data))
+          r.json().then(data => setErrors(data.errors))
         }
       })
   }
@@ -39,15 +40,9 @@ const Programs = ({ courses, deleteCourse }) => {
     )
   })
 
-
   const handleFilterChange = (key, value) => {
-    setFilters({
-      ...filters,
-      [key]: value
-    });
-  };
-
-
+    setFilters({...filters, [key]: value})
+  }
 
   const getCourseStatus = (course) => {
     const status = course.students_enrolled >= course.capacity ? "Closed" : "Open"
@@ -59,7 +54,7 @@ const Programs = ({ courses, deleteCourse }) => {
 
   return (
     <div >
-      <h1>Programs</h1>
+      <h1>Courses</h1>
       <table>
         <thead>
           <tr>
@@ -141,4 +136,4 @@ const Programs = ({ courses, deleteCourse }) => {
   )
 }
 
-export default Programs
+export default CourseList

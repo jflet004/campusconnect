@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const TeacherInfo = ({ assignTeacher, releaseTeacher }) => {
+const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [courses, setCourses] = useState([])
@@ -66,31 +66,31 @@ const TeacherInfo = ({ assignTeacher, releaseTeacher }) => {
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
-    const handleCourseRelease = (course, teacherId) => {
-      console.log(course)
+  const handleCourseRelease = (course, teacherId) => {
+    console.log(course)
     const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
 
     fetch(`/teacher_assignments/${assignmentId}`, {
       method: "DELETE"
     })
-    .then(r => {
-      if(r.ok) {
-        releaseTeacher(teacherId)
-        navigate("/drop-successful")
-      } else {
-        r.json().then(data => {
-          console.log(data);
-          setErrors(data.errors);
-        })
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      alert("An error occurred while dropping the course.");
-    })
-    
+      .then(r => {
+        if (r.ok) {
+          releaseTeacher(teacherId)
+          navigate("/drop-successful")
+        } else {
+          r.json().then(data => {
+            console.log(data);
+            setErrors(data.errors);
+          })
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert("An error occurred while dropping the course.");
+      })
+
   }
-  
+
   if (loading) return <h2>Loading</h2>
 
   return (
@@ -110,7 +110,7 @@ const TeacherInfo = ({ assignTeacher, releaseTeacher }) => {
         handleCourseRelease(course, parseInt(params.id))
         console.log(course)
 
-        }}>Drop</button></li>) : null}</p>
+      }}>Drop</button></li>) : null}</p>
       <Link to="/current-teachers">back to Teacher List</Link>
       <form onSubmit={handleAssignmentSubmit}>
 
@@ -134,4 +134,4 @@ const TeacherInfo = ({ assignTeacher, releaseTeacher }) => {
   )
 }
 
-export default TeacherInfo
+export default TeacherDetails

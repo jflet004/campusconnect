@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const DropSuccessful = () => {
+const DropSuccess = () => {
 
   const navigate = useNavigate()
 
@@ -15,9 +15,9 @@ const DropSuccessful = () => {
 
   return (
     <div>
-      <h2 style={{color: "green"}}>The student has been dropped successfully!</h2>
+      <h2 style={{ color: "green" }}>The student has been dropped successfully!</h2>
     </div>
   )
 }
 
-export default DropSuccessful
+export default DropSuccess

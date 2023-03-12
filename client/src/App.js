@@ -1,31 +1,30 @@
-import './App.css';
 import React, { useState, useEffect } from 'react'
 import { Routes, Route } from "react-router-dom"
 import { UserProvider } from "./context/user"
-import Home from './components/Home';
-import StudentList from './components/StudentList';
+import Home from './components/pages/Home';
 import NavBar from './components/NavBar';
-import RegisterStudent from './components/RegisterStudent';
-import Signup from './components/Signup';
-import AdminPage from './components/AdminPage';
-import About from './components/About';
-import Programs from './components/Programs';
-import Events from './components/Events';
-import StudentInfo from './components/StudentInfo';
-import UserInfo from './components/UserInfo';
-import UpdateStudent from './components/UpdateStudent';
+import About from './components/pages/About';
+import Events from './components/pages/Events';
+import Signup from './components/pages/Signup';
 import Header from './components/Header';
-import RegistrationSuccess from './components/RegistrationSuccess';
-import EnrollmentSuccess from './components/EnrollmentSuccess';
-import ProgramInfo from './components/ProgramInfo';
-import DropSuccessful from './components/DropSuccessful';
-import UpdateUser from './components/UpdateUser';
-import AddProgram from './components/AddProgram';
-import TeacherList from './components/TeacherList';
-import TeacherInfo from './components/TeacherInfo';
-import UpdateTeacher from './components/UpdateTeacher';
-import UpdateCourse from './components/UpdateCourse';
-import Calendar from './components/Calendar';
+import AdminPage from './components/pages/AdminPage';
+import StudentList from './components/pages/StudentList';
+import CourseList from './components/pages/CourseList';
+import TeacherList from './components/pages/TeacherList';
+import StudentDetails from './components/pages/StudentDetails';
+import TeacherDetails from './components/pages/TeacherDetails';
+import CourseDetails from './components/pages/CourseDetails';
+import UserDetails from './components/pages/UserDetails';
+import NewStudent from './components/pages/NewStudent';
+import NewCourse from './components/pages/NewCourse';
+import UpdateStudent from './components/pages/UpdateStudent';
+import UpdateUser from './components/pages/UpdateUser';
+import UpdateTeacher from './components/pages/UpdateTeacher';
+import UpdateCourse from './components/pages/UpdateCourse';
+import RegistrationSuccess from './components/success_messages/RegistrationSuccess';
+import EnrollmentSuccess from './components/success_messages/EnrollmentSuccess';
+import DropSuccess from './components/success_messages/DropSuccess';
+import Calendar from './components/pages/Calendar';
 
 function App() {
 
@@ -80,10 +79,10 @@ function App() {
 
   useEffect(() => {
     fetch("/classrooms")
-    .then(r => r.json())
-    .then(data => setClassrooms(data))
-    .catch(error => alert(error))
-    .finally(() => setLoading(false))
+      .then(r => r.json())
+      .then(data => setClassrooms(data))
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
   }, [])
 
   const addStudent = registeredStudents => {
@@ -97,7 +96,7 @@ function App() {
   const deleteCourse = courseId => {
     setCourses(courses.filter(course => course.id !== courseId))
   }
-  
+
   const enrollStudent = courseEnrollment => {
     setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
   }
@@ -113,7 +112,7 @@ function App() {
   const releaseTeacher = teacherId => {
     setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
   }
-  
+
   const updateStudent = updatedStudent => {
     setStudents(prevStudents => {
       return prevStudents.map(student => {
@@ -173,23 +172,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/about" element={<About />} />
-          <Route path="/courses" element={<Programs courses={courses} deleteCourse={deleteCourse} />} />
-          <Route path="/new-course" element={<AddProgram addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
-          <Route path="/current-course/:id" element={<ProgramInfo />} />
+          <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
+          <Route path="/new-course" element={<NewCourse addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
+          <Route path="/current-course/:id" element={<CourseDetails />} />
           <Route path="/events" element={<Events />} />
           <Route path="/current-students" element={<StudentList students={students} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
-          <Route path="/student/:id" element={<StudentInfo enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-          <Route path="/current-teacher/:id" element={<TeacherInfo assignTeacher={assignTeacher} releaseTeacher={releaseTeacher}/>} />
+          <Route path="/student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
+          <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
           <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
-          <Route path="/users/:id" element={<UserInfo />} />
+          <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
-          <Route path="/register-students" element={<RegisterStudent addStudent={addStudent} />} />
+          <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
           <Route path="/successful-registration" element={<RegistrationSuccess />} />
           <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
-          <Route path="/drop-successful" element={<DropSuccessful />} />
+          <Route path="/drop-successful" element={<DropSuccess />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>

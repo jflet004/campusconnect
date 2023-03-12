@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const AddProgram = ({ addCourse, teachers, classrooms }) => {
+const NewCourse = ({ addCourse, teachers, classrooms }) => {
 
   const navigate = useNavigate()
 
@@ -36,10 +36,6 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     })
   }
 
-  console.log(formData.days_of_week)
-
-
-
   const handleSubmit = e => {
     e.preventDefault()
     fetch("/courses", {
@@ -65,11 +61,9 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
 
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
 
-  // if (loading) return <h1>Loading</h1>
-
   return (
     <div>
-      <h1>New Program Form</h1>
+      <h1>New Course Form</h1>
       <form onSubmit={handleSubmit}>
         <label>Title</label>
         <br />
@@ -164,4 +158,4 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
   )
 }
 
-export default AddProgram
+export default NewCourse

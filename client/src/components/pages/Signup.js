@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/user'
+import { UserContext } from '../../context/user'
 
 const SignUp = () => {
 
@@ -153,7 +153,7 @@ const SignUp = () => {
         <input type='submit' value='Sign up' />
         <br />
       </form>
-        <br />
+      <br />
       {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
     </div>
   )

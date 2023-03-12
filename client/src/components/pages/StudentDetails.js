@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const StudentInfo = ({ enrollStudent, dropStudent }) => {
+const StudentDetails = ({ enrollStudent, dropStudent }) => {
 
   const [currentStudent, setCurrentStudent] = useState([])
   const [courses, setCourses] = useState([])
@@ -69,24 +69,24 @@ const StudentInfo = ({ enrollStudent, dropStudent }) => {
     fetch(`/enrollments/${enrollmentId}`, {
       method: "DELETE"
     })
-    .then(r => {
-      if(r.ok) {
-        dropStudent(studentId)
-        navigate("/drop-successful")
-      } else {
-        r.json().then(data => {
-          console.log(data);
-          setErrors(data.errors);
-        })
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      alert("An error occurred while dropping the course.");
-    })
-    
+      .then(r => {
+        if (r.ok) {
+          dropStudent(studentId)
+          navigate("/drop-successful")
+        } else {
+          r.json().then(data => {
+            console.log(data);
+            setErrors(data.errors);
+          })
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        alert("An error occurred while dropping the course.");
+      })
+
   }
-  
+
 
   if (loading) return <h2>Loading</h2>
 
@@ -125,4 +125,4 @@ const StudentInfo = ({ enrollStudent, dropStudent }) => {
   )
 }
 
-export default StudentInfo
+export default StudentDetails
