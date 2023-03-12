@@ -5,7 +5,6 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
 
   const navigate = useNavigate()
 
-  // const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
@@ -17,20 +16,6 @@ const AddProgram = ({ addCourse, teachers, classrooms }) => {
     teacher_id: "",
     days_of_week: []
   })
-
-
-  // const handleInputChange = e => {
-  //   const { name, value } = e.target
-
-  //   // Handle multi-select input field
-  //   if (name === "days_of_week") {
-  //     const selectedDays = Array.from(e.target.selectedOptions, option => option.value)
-  //     setFormData({ ...formData, days_of_week: selectedDays })
-  //     console.log(selectedDays)
-  //   } else {
-  //     setFormData({ ...formData, [name]: value })
-  //   }
-  // }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
