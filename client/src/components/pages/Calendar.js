@@ -4,6 +4,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 const Calendar = () => {
 
@@ -32,6 +34,14 @@ const Calendar = () => {
       .catch(error => console.error(error));
   }, []);
 
+  const handleEventClick = (info) => {
+    const popover = new bootstrap.Popover(info.el, {
+      title: info.event.title,
+      content: `Start: ${formatDate(info.event.start, {timeZone: 'UTC'})}<br>End: ${formatDate(info.event.end, {timeZone: 'UTC'})}`,
+      html: true
+    });
+    popover.show();
+  }
 
   return (
     <div className='calendar'>
@@ -44,6 +54,7 @@ const Calendar = () => {
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         }}
         events={events}
+        eventRender={handleEventClick}
       />
 
     </div>
