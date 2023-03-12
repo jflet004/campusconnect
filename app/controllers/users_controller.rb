@@ -6,13 +6,11 @@ class UsersController < ApplicationController
   end
   
   def show
-    if current_user
-      render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
-    else
-      render json: {error: "User not found"}, status: :not_found
-    end
+    user = User.find(params[:id])
+    render json: user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
   end
-
+  
+  
   def create
     user = User.create(user_params)
     if user.valid?
@@ -22,15 +20,22 @@ class UsersController < ApplicationController
       render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
-
+  
   def update
     user = User.find(params[:id])
     user.update(user_params)
     render json: user, status: :accepted
   end
-
-
-
+  
+  def me
+    if current_user
+      render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
+    else
+      render json: {error: "User not found"}, status: :not_found
+    end
+  end
+  
+  
   def users_with_no_students
     render json: User.with_no_students, status: :ok
   end

@@ -57,7 +57,7 @@ const UpdateUser = ({ updateUser }) => {
       .then(r => {
         if (r.ok) {
           r.json().then(updateUser)
-          navigate(`/current-user/${params.id}`)
+          navigate(`/users/${params.id}`)
         } else {
           r.json().then(data => setErrors(data.errors))
         }
