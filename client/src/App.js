@@ -26,9 +26,6 @@ import EnrollmentSuccess from './components/success_messages/EnrollmentSuccess';
 import DropSuccess from './components/success_messages/DropSuccess';
 import Calendar from './components/pages/Calendar';
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap'
-
 function App() {
 
   const [students, setStudents] = useState([])

@@ -13,7 +13,6 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
     price: "",
     capacity: "",
     location: "",
-    teacher_id: "",
     start_recur: "",
     days_of_week: []
   })
@@ -55,10 +54,6 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
         }
       })
   }
-
-  const teacherOptions = teachers.map((teacher) => (
-    <option key={teacher.id} value={teacher.id}>{teacher.first_name} {teacher.last_name}</option>
-  ))
 
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
 
@@ -148,19 +143,7 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
           <option value="6">Saturday</option>
         </select>
         <br />
-        <label>Teacher</label>
-        <br />
-        <select
-          name="teacher_id"
-          value={formData.teacher_id}
-          onChange={handleInputChange}
-        >
-          <option value="">Select one</option>
-          {teacherOptions}
-        </select>
-        <br />
-        <br />
-        <input type="submit" value="Submit Registration Form" />
+        <input type="submit" value="Add New Course" />
       </form>
       <br />
       {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}

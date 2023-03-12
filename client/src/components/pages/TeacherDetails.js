@@ -9,8 +9,6 @@ const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
   const [errors, setErrors] = useState(false)
   const [loading, setLoading] = useState(true)
 
-  console.log(currentTeacher)
-
   const params = useParams()
   const navigate = useNavigate()
 
@@ -105,12 +103,7 @@ const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
       <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
       <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
       <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => {
-
-        handleCourseRelease(course, parseInt(params.id))
-        console.log(course)
-
-      }}>Drop</button></li>) : null}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }}>Drop</button></li>) : null}</p>
       <Link to="/current-teachers">back to Teacher List</Link>
       <form onSubmit={handleAssignmentSubmit}>
 

@@ -22,11 +22,10 @@ const NavBar = () => {
     <div className='nav-bar'>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
-      <NavLink to="/programs">Programs</NavLink>
-      <NavLink to="/calendar">Calendar</NavLink>
-      <NavLink to="/events">Events</NavLink>
+      <NavLink to="/courses">Programs</NavLink>
       {currentUser && currentUser.admin && (
         <>
+          <NavLink to="/calendar">Calendar</NavLink>
           <NavLink to="/admin">Admin Page</NavLink>
         </>
       )}
