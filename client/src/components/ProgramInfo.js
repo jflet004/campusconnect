@@ -27,7 +27,7 @@ const ProgramInfo = () => {
       <p><span style={{ fontWeight: 'bold' }}>End Time:</span> {course.end_time}</p>
       <p><span style={{ fontWeight: 'bold' }}>Location:</span> {course.location}</p>
       <p><span style={{ fontWeight: 'bold' }}>Price:</span> {course.price}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Teacher:</span> {course.teacher.first_name} {course.teacher.last_name}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Teacher:</span> {course.teachers_full_name} {course.teachers.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Enrolled Students:</span> {course.students ? course.students.map(student => <li key={student.id}><Link to={`/current-student/${student.id}`}>{student.first_name} {student.last_name}</Link></li>) : null}</p>
     </div>
   )

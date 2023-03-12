@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
-const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
+const UpdateCourse = ({ updateCourse, classrooms }) => {
 
   const params = useParams()
   const navigate = useNavigate()
@@ -14,8 +14,7 @@ const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
     end_time: "",
     price: "",
     capacity: "",
-    location: "",
-    teacher_id: ""
+    location: ""
   })
 
   useEffect(() => {
@@ -27,8 +26,7 @@ const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
         end_time: course.end_time,
         price: course.price,
         capacity: course.capacity,
-        location: course.location,
-        teacher_id: course.teacher_id
+        location: course.location
       }))
   }, [params.id])
 
@@ -57,11 +55,7 @@ const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
       })
   }
 
-  const teacherOptions = teachers.map((teacher) => (
-    <option key={teacher.id} value={teacher.id}>{teacher.first_name} {teacher.last_name}</option>
-  ))
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
-
 
   return (
     <div>
@@ -105,19 +99,7 @@ const UpdateCourse = ({ updateCourse, teachers, classrooms }) => {
           {locationOptions}
         </select>
         <br />
-        <label>Teacher</label>
-        <br />
-        <select
-          name="teacher_id"
-          value={formData.teacher_id}
-          onChange={handleChange}
-          >
-          <option value="">Select one</option>
-          {teacherOptions}
-        </select>
-        <br />
-        <br />
-        <input type="submit" value="Update teacher" />
+        <input type="submit" value="Update course" />
         <br />
         <Link to={`/current-course/${params.id}`}>Back</Link>
       </form>
