@@ -41,7 +41,6 @@ const NewStudent = ({ addStudent }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(formData)
     fetch("/students", {
       method: "POST",
       headers: {

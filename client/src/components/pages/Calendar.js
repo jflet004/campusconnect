@@ -24,7 +24,8 @@ const Calendar = () => {
           students_enrolled: course.students_enrolled,
           price: course.price,
           teacher_id: course.teacher_id,
-          daysOfWeek: course.days_of_week
+          daysOfWeek: course.days_of_week,
+          startRecur: course.start_recur
         }));
         setEvents(events);
       })

@@ -14,6 +14,7 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
     capacity: "",
     location: "",
     teacher_id: "",
+    start_recur: "",
     days_of_week: []
   })
 
@@ -120,6 +121,15 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
           <option value="">Select one</option>
           {locationOptions}
         </select>
+        <br />
+        <label>Rec Start</label>
+        <br />
+        <input
+          type="date"
+          name="start_recur"
+          value={formData.start_recur}
+          onChange={handleInputChange}
+        />
         <br />
         <label>Recurrence</label>
         <br />
