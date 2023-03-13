@@ -52,6 +52,7 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       .then(r => {
         if (r.ok) {
           r.json().then(enrollStudent)
+          setCourses(courses)
           navigate("/enrollment-success")
         } else {
           r.json().then(data => setErrors(data.errors))
@@ -100,7 +101,7 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))}>Drop</button></li>)}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))}>Drop</button></li>)}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students">back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>

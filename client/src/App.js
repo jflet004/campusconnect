@@ -188,7 +188,7 @@ function App() {
           <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
           <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
-          <Route path="/current-course/:id" element={<CourseDetails />} />
+          <Route path="/current-course/:id" element={<CourseDetails  />} />
           <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
           <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
           <Route path="/users/:id" element={<UserDetails />} />

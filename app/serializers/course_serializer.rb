@@ -1,6 +1,7 @@
 class CourseSerializer < ActiveModel::Serializer
-  attributes :id, :title, :start_time, :end_time, :location, :price, :capacity, :days_of_week, :start_recur, :teachers_full_name
+  attributes :id, :title, :start_time, :end_time, :location, :price, :capacity, :number_of_students_enrolled, :days_of_week, :start_recur, :teachers_full_name
   has_many :enrollments
+  has_many :students, through: :enrollments
   has_many :teacher_assignments
   has_many :teachers, through: :teacher_assignments
   

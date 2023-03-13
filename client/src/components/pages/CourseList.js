@@ -4,6 +4,7 @@ import { UserContext } from '../../context/user';
 
 const CourseList = ({ courses, deleteCourse }) => {
 
+  
   const { currentUser } = useContext(UserContext)
 
   const navigate = useNavigate()
@@ -32,7 +33,7 @@ const CourseList = ({ courses, deleteCourse }) => {
   }
 
   const filteredCourses = courses.filter(course => {
-    const status = course.students_enrolled >= course.capacity ? "Closed" : "Open";
+    const status = course.number_of_students_enrolled >= course.capacity ? "Closed" : "Open";
     return (
       course.title.toLowerCase().includes(filters.title.toLowerCase()) &&
       course.start_time.toLowerCase().includes(filters.start_time.toLowerCase()) &&
@@ -48,9 +49,9 @@ const CourseList = ({ courses, deleteCourse }) => {
   }
 
   const getCourseStatus = (course) => {
-    const status = course.students_enrolled >= course.capacity ? "Closed" : "Open"
-    const color = course.students_enrolled >= course.capacity ? "red" : "green"
-    const enrollment = `(${course.students_enrolled}/${course.capacity})`
+    const status = course.number_of_students_enrolled >= course.capacity ? "Closed" : "Open"
+    const color = course.number_of_students_enrolled >= course.capacity ? "red" : "green"
+    const enrollment = `(${course.number_of_students_enrolled}/${course.capacity})`
     return { status, color, enrollment };
   };
 

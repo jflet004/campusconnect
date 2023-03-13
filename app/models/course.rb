@@ -28,5 +28,9 @@ class Course < ApplicationRecord
       "#{teacher.first_name} #{teacher.last_name}"
     end.join(",")
   end
+
+  def number_of_students_enrolled
+    self.enrollments.count
+  end
   
 end
