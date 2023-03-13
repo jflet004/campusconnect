@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/user'
+import "./css/NavBar.css"
 
 const NavBar = () => {
 
@@ -19,7 +20,7 @@ const NavBar = () => {
 
 
   return (
-    <div className='nav-bar'>
+    <div className='navbar'>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/courses">Programs</NavLink>

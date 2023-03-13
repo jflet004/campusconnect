@@ -1,0 +1,22 @@
+/* Styles for AdminPage component */
+h1 {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+a {
+  display: block;
+  font-size: 25px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+a:hover {
+  color: #666;
+  text-decoration: underline;
+}

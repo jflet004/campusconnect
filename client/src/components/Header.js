@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/user';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import './css/Header.css'
 const Header = () => {
   
   const { currentUser } = useContext(UserContext)
@@ -27,7 +27,7 @@ const Header = () => {
 if (loading) return <h1>Loading</h1>
 
 return (
-  <div>
+  <div className='header'>
     {!currentUser || currentUser.error ? (
       <h3>Welcome. Please login or create an account</h3>
       ) : (
@@ -39,6 +39,7 @@ return (
           <p><em>{dailyQuote.text}</em></p>
           )}
           <button onClick={handleGoBack}>Back to previous page</button>
+      <br/>
       </div>
     )}
   <>

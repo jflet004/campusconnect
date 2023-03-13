@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
+import '../css/LoginForm.css'
 
 const Home = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext)
@@ -67,12 +68,11 @@ const Home = () => {
   }
 
   return (
-    <div className='form'>
+    <div className='login-form'>
       {!currentUser || currentUser.error ?
         <>
           <form onSubmit={handleSubmit}>
             <label>Email</label>
-            <br />
             <input
               type='email'
               name='email'
@@ -80,13 +80,12 @@ const Home = () => {
               onChange={handleChange} />
             <br />
             <label>Password</label>
-            <br />
             <input type='password'
               name='password'
               value={password}
               onChange={handleChange} />
             <br />
-            <input className="login-btn" type='submit' value='Login' />
+            <input type='submit' value='Login' />
             <br />
           </form>
         </> :

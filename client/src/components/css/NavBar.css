@@ -1,0 +1,19 @@
+.navbar {
+  background: linear-gradient(to right, #8E2DE2, #4A00E0);
+  padding: 10px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  margin-right: 50px;
+  margin-left: 50px;
+}
+
+.navbar a:hover {
+  color: #f9f278;
+}
