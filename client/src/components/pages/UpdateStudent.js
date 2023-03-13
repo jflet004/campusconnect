@@ -152,7 +152,7 @@ const UpdateStudent = ({ updateStudent }) => {
         <br />
         <input type="submit" value="Update Student" />
         <br />
-        <Link to={`/current-student/${params.id}`}>Back</Link>
+        <Link to={`/selected-student/${params.id}`}>Back</Link>
       </form>
       {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>

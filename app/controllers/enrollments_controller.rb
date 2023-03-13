@@ -1,5 +1,6 @@
 class EnrollmentsController < ApplicationController
-
+  before_action :require_admin
+  
   def index
     enrollments = Enrollment.all
     render json: enrollments, status: :ok

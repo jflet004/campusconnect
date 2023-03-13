@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
-
+  before_action :require_admin, only: [:create, :update, :destroy]
+  
   def index
     courses = Course.all
     render json: courses, status: :ok

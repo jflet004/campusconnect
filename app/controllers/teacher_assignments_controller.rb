@@ -1,5 +1,5 @@
   class TeacherAssignmentsController < ApplicationController
-
+    before_action :require_admin
     def index
       assignments = TeacherAssignment.all
       render json: assignments, status: :ok

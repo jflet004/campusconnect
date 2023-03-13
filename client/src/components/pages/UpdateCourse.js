@@ -103,7 +103,7 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
         <br />
         <Link to={`/current-course/${params.id}`}>Back</Link>
       </form>
-      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
+      {errors ? <li>{errors}</li> : null}
     </div>
   )
 }

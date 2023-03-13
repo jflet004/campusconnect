@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/user';
 
-const TeacherList = ({ teachers }) => {
+const TeacherList = ({ teachers, errors }) => {
+
+  const { currentUser } = useContext(UserContext)
   
   const navigate = useNavigate()
 
@@ -28,8 +31,12 @@ const TeacherList = ({ teachers }) => {
     });
   };
 
+  
   return (
     <div >
+      <br/>
+      {errors ? <li>{errors}</li> :
+      <>
       <h1>Teacher List</h1>
       <table>
         <thead>
@@ -67,7 +74,7 @@ const TeacherList = ({ teachers }) => {
           {
             filteredTeachers.map(teacher => (
               <tr key={teacher.id}>
-                <td><button onClick={() => { navigate(`/current-teacher/${teacher.id}`) }}>🔎</button> {teacher.first_name} {teacher.last_name}</td>
+                <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-teacher/${teacher.id}`) }}>🔎</button> : null} {teacher.first_name} {teacher.last_name}</td>
                 <td>{teacher.created_at}</td>
                 <td>{teacher.email}</td>
                 <td>{teacher.phone_number}</td>
@@ -75,6 +82,7 @@ const TeacherList = ({ teachers }) => {
             ))}
         </tbody>
       </table>
+      </>}
     </div>
   )
 }

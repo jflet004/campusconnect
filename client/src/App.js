@@ -4,7 +4,6 @@ import { UserProvider } from "./context/user"
 import Home from './components/pages/Home';
 import NavBar from './components/NavBar';
 import About from './components/pages/About';
-import Events from './components/pages/Events';
 import Signup from './components/pages/Signup';
 import Header from './components/Header';
 import AdminPage from './components/pages/AdminPage';
@@ -36,19 +35,30 @@ function App() {
   const [enrollments, setEnrollments] = useState([])
   const [assignments, setAssignments] = useState([])
   const [loading, setLoading] = useState(true)
+  const [errors, setErrors] = useState(false)
 
   useEffect(() => {
     fetch("/students")
-      .then(r => r.json())
-      .then(students => setStudents(students))
+      .then(r => 
+        {if(r.ok) {
+        r.json().then(students => setStudents(students))
+      } else {
+        r.json().then(data => setErrors(data.errors))
+      }
+    })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
 
   useEffect(() => {
     fetch("/teachers")
-      .then(r => r.json())
-      .then(teachers => setTeachers(teachers))
+      .then(r => 
+        {if(r.ok) {
+        r.json().then(teachers => setTeachers(teachers))
+      } else {
+        r.json().then(data => setErrors(data.errors))
+      }
+    })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
@@ -172,24 +182,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/about" element={<About />} />
-          <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/new-course" element={<NewCourse addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
+          <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
+          <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
+          <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
+          <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
           <Route path="/current-course/:id" element={<CourseDetails />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/current-students" element={<StudentList students={students} />} />
-          <Route path="/current-teachers" element={<TeacherList teachers={teachers} />} />
-          <Route path="/student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
+          <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
           <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
+          <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
           <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
           <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
-          <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
-          <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
-          <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
           <Route path="/successful-registration" element={<RegistrationSuccess />} />
           <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
           <Route path="/drop-successful" element={<DropSuccess />} />
-          <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>

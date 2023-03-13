@@ -1,5 +1,6 @@
 class StudentsController < ApplicationController
-
+  before_action :require_admin, only: [:index, :show, :update]
+  
   def index
     students = Student.all.order(:last_name)
     render json: students, status: :ok

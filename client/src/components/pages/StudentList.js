@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const StudentList = ({ students }) => {
+const StudentList = ({ students, errors }) => {
 
   const navigate = useNavigate()
   
@@ -39,6 +39,9 @@ const StudentList = ({ students }) => {
   
   return (
     <div >
+      <br/>
+      {errors ? <li>{errors}</li> :
+      <>
       <h1>Student List</h1>
       <table>
         <thead>
@@ -112,7 +115,7 @@ const StudentList = ({ students }) => {
           {
           filteredStudents.map(student => (
             <tr key={student.id}>
-              <td><button onClick={() => {navigate(`/student/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
+              <td><button onClick={() => {navigate(`/current-student/${student.id}`)}}>🔎</button> {student.first_name} {student.last_name}</td>
               <td>{student.age}</td>
               <td>{student.interest}</td>
               <td>{student.created_at}</td>
@@ -123,6 +126,7 @@ const StudentList = ({ students }) => {
           ))}
         </tbody>
       </table>
+      </>}
     </div>
   )
 }

@@ -91,7 +91,7 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
   if (loading) return <h2>Loading</h2>
 
   return (
-    <div className='info-card'>
+    <div >
       <h2>{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
       <Link to={`/update-student/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentStudent.first_name}</p>

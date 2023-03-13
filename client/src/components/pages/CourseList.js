@@ -130,11 +130,12 @@ const CourseList = ({ courses, deleteCourse }) => {
                   {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
                 </td>
                 <td>${course.price}</td>
-                <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td>
+                {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td> : null}
               </tr>
             ))}
         </tbody>
       </table>
+      {errors ? <li>{errors}</li> : null}
     </div>
   )
 }

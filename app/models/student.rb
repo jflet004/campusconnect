@@ -5,6 +5,5 @@ class Student < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   validates :notes, length: { maximum: 1000 }
-  validates :user_id, uniqueness: true
 
 end

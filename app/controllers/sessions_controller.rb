@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+  before_action :require_logout, only: :create
   def create
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
@@ -14,5 +14,13 @@ class SessionsController < ApplicationController
     session.delete :user_id
     head :no_content
   end
+
+private
+
+def require_logout
+  if current_user.present?
+    render json: { errors: "You must log out before you can log in as a different user" }, status: :unprocessable_entity
+  end
+end
   
 end

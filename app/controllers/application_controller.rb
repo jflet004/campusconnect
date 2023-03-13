@@ -8,6 +8,12 @@ class ApplicationController < ActionController::API
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+  
+  def require_admin
+    unless current_user&.admin?
+      render json: { errors: "You do not have permission to perform this action." }, status: :unauthorized
+    end
+  end
 
   private
 

@@ -92,7 +92,7 @@ const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
   if (loading) return <h2>Loading</h2>
 
   return (
-    <div className='info-card'>
+    <div >
       <h2>{currentTeacher.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Teacher)</span></h2>
       <Link to={`/update-teacher/${params.id}`}>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentTeacher.first_name}</p>
