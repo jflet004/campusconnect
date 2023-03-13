@@ -3,4 +3,8 @@ class Student < ApplicationRecord
   has_many :enrollments
   has_many :courses, through: :enrollments
 
+  validates :first_name, :last_name, presence: true
+  validates :notes, length: { maximum: 1000 }
+  validates :user_id, uniqueness: true
+
 end
