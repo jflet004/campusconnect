@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-
+import "../css/Details.css"
 const UserDetails = () => {
 
   const [user, setUser] = useState([])
@@ -19,9 +19,10 @@ const UserDetails = () => {
   if (loading) return <h2>Loading</h2>
 
   return (
-    <div>
-      <h1>{user.first_name} {user.last_name} <span style={{ fontSize: "15px" }}>(Parent/Guardian)</span></h1>
-      <Link to={`/update-user/${params.id}`}>Edit</Link>
+    <div className='details-card'>
+      <h1 className='details-title'>{user.first_name} {user.last_name} <span style={{ fontSize: "15px" }}>(Parent/Guardian)</span></h1>
+      <Link to={`/update-user/${params.id}`} className='details-link'>Edit</Link>
+      <h3>Current Balance: ${user.balance}</h3>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {user.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {user.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Email:</span> {user.email}</p>
@@ -37,7 +38,7 @@ const UserDetails = () => {
         ))}
       </ul>
       <p><span style={{ fontWeight: 'bold' }}>Notes:</span> <em>{user.notes}</em></p>
-      <Link to="/current-students">Back</Link>
+      <Link to="/current-students" className='details-link'>Back</Link>
     </div>
   )
 }

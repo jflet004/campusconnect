@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-
+import "../css/Details.css"
 const StudentDetails = ({ enrollStudent, dropStudent }) => {
 
   const [currentStudent, setCurrentStudent] = useState([])
@@ -92,24 +92,26 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
   if (loading) return <h2>Loading</h2>
 
   return (
-    <div >
-      <h2>{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
-      <Link to={`/update-student/${params.id}`}>Edit</Link>
+    <div className='details-card' >
+      <h2 className='details-title' >{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
+      <Link to={`/update-student/${params.id}`} className='details-link'>Edit</Link>
       <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentStudent.first_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentStudent.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Age:</span> {currentStudent.age}</p>
       <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`}>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))}>Drop</button></li>)}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`}  className='details'>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br /></span><em>{currentStudent.notes}</em></p>
-      <Link to="/current-students">back to Student List</Link>
+      <Link to="/current-students" className='details-link'>back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
 
-        <h1>Enrollment</h1>
+        <br />
+        <h1 className='details-title'>Enrollment</h1>
         <label>Courses</label>
         <br />
         <select
+          className='details-select'
           name="selectedCourse"
           value={selectedCourse ? selectedCourse.title : ''}
           onChange={handleCourseChange}
@@ -118,7 +120,7 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
           {courseOptions}
         </select>
         <br />
-        <input type="submit" value="Enroll Student" />
+        <input type="submit" value="Enroll Student" className='details-list' />
       </form>
       <br />
       {errors ? errors.map(error => <li key={error} className="error-msg">{error}</li>) : null}

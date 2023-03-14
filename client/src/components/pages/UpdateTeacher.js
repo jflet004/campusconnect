@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import "../css/Details.css"
 
 const UpdateTeacher = ({ updateTeacher }) => {
 
@@ -61,8 +62,8 @@ const UpdateTeacher = ({ updateTeacher }) => {
 
 
   return (
-    <div>
-      <h1>UpdatePage</h1>
+    <div className='details-card'>
+      <h1 className='details-title'>Update Teacher</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
         <br />
@@ -137,9 +138,9 @@ const UpdateTeacher = ({ updateTeacher }) => {
         />
         <br />
         <br />
-        <input type="submit" value="Update teacher" />
+        <input type="submit" value="Update teacher" className='details-list' />
         <br />
-        <Link to={`/current-teacher/${params.id}`}>Back</Link>
+        <Link to={`/current-teacher/${params.id}`} className='details-link'>Back</Link>
       </form>
       {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import "../css/Details.css"
 
 const UpdateUser = ({ updateUser }) => {
 
@@ -66,7 +67,7 @@ const UpdateUser = ({ updateUser }) => {
 
 
   return (
-    <div>
+    <div className='details-card'>
       <h1>UpdatePage</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
@@ -105,7 +106,6 @@ const UpdateUser = ({ updateUser }) => {
           onChange={handleChange}
         />
         <br />
-        <br />
         <label>Address</label>
         <br />
         <input
@@ -114,7 +114,6 @@ const UpdateUser = ({ updateUser }) => {
           value={formData.address}
           onChange={handleChange}
         />
-        <br />
         <br />
         <label>City</label>
         <br />
@@ -125,7 +124,6 @@ const UpdateUser = ({ updateUser }) => {
           onChange={handleChange}
         />
         <br />
-        <br />
         <label>State</label>
         <br />
         <input
@@ -134,7 +132,6 @@ const UpdateUser = ({ updateUser }) => {
           value={formData.state}
           onChange={handleChange}
         />
-        <br />
         <br />
         <label>Zip Code</label>
         <br />
@@ -157,9 +154,9 @@ const UpdateUser = ({ updateUser }) => {
         />
         <br />
         <br />
-        <input type="submit" value="Update Parent/Guardian" />
+        <input type="submit" value="Update Parent/Guardian" className='details-list' />
         <br />
-        <Link to={`/current-student/${params.id}`}>Back</Link>
+        <Link to={`/users/${params.id}`} className='details-link'>Back</Link>
       </form>
       {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
+import '../css/LoginForm.css'
 
 const SignUp = () => {
 
@@ -76,75 +77,58 @@ const SignUp = () => {
   }
 
   return (
-    <div className='form'>
+    <div className='login-form'>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
-        <br />
         <input
           type='text'
           name='first_name'
           value={first_name}
           onChange={handleChange} />
-        <br />
         <label>Last Name</label>
-        <br />
         <input
           type='text'
           name='last_name'
           value={last_name}
           onChange={handleChange} />
-        <br />
         <label>Email</label>
-        <br />
         <input
           type='text'
           name='email'
           value={email}
           onChange={handleChange} />
-        <br />
         <label>Address</label>
-        <br />
         <input
           type='text'
           name='address'
           value={address}
           onChange={handleChange} />
-        <br />
         <label>City</label>
-        <br />
         <input
           type='text'
           name='city'
           value={city}
           onChange={handleChange} />
-        <br />
         <label>State</label>
-        <br />
         <input
           type='text'
           name='state'
           value={state}
           onChange={handleChange} />
-        <br />
         <label>Zip Code</label>
-        <br />
         <input
           type='text'
           name='zip_code'
           value={zip_code}
           onChange={handleChange} />
-        <br />
         <label>Phone Number</label>
-        <br />
         <input
           type='text'
           name='phone_number'
           value={phone_number}
           onChange={handleChange} />
-        <br />
         <h3>Create Password</h3>
         <label>Password</label>
-        <br />
         <input type='password'
           name='password'
           value={password}
@@ -154,7 +138,7 @@ const SignUp = () => {
         <br />
       </form>
       <br />
-      {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
+      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>
   )
 }

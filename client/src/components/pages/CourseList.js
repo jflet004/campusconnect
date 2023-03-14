@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
+import '../css/List.css'
 
 const CourseList = ({ courses, deleteCourse }) => {
 
@@ -58,7 +59,6 @@ const CourseList = ({ courses, deleteCourse }) => {
 
   return (
     <div >
-      <h1>Courses</h1>
       <table>
         <thead>
           <tr>
@@ -99,7 +99,7 @@ const CourseList = ({ courses, deleteCourse }) => {
               />
             </th>
             <th>
-              <label>Students</label>
+              <label>Status</label>
               <br />
               <input
                 type="text"
@@ -122,10 +122,9 @@ const CourseList = ({ courses, deleteCourse }) => {
           {
             filteredCourses.map(course => (
               <tr key={course.id}>
-                <td><button onClick={() => { navigate(`/current-course/${course.id}`) }}>🔎</button> {course.first_title} {course.last_title}</td>
-                <td>{course.title}</td>
-                <td>{course.start_time}</td>
-                <td>{course.end_time}</td>
+                <td><button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> {course.title}</td>
+                <td>{course.start_time.slice(0,5)}</td>
+                <td>{course.end_time.slice(0,5)}</td>
                 <td>{course.location}</td>
                 <td style={{ color: getCourseStatus(course).color }}>
                   {getCourseStatus(course).status} {getCourseStatus(course).enrollment}

@@ -1,0 +1,80 @@
+/* Set styles for the main container */
+.details-card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 75px auto;
+  max-width: 500px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Set styles for the page heading */
+.details-title {
+  margin-top: 0;
+  font-size: 25px;
+}
+
+/* Set styles for the edit link */
+.details-link {
+  display: inline-block;
+  background-color: #00968f;
+  color: white;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.details {
+  display: inline-block;
+  background-color: #003da5;
+  color: white;
+  padding: 2px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.details-list {
+  color: #00968f;
+  font-weight: bold;
+  /* margin-bottom: 20px; */
+}
+
+.drop-btn {
+  background: #697f8f;
+  color: #ffffff;
+  padding: 2px;
+  border: none;
+  border-radius: 3px;
+  width: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: auto;
+  margin-left: 10px;
+}
+
+.details-select {
+  width: 75%;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Set styles for the course information */
+p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* Set styles for the bold span elements */
+span {
+  font-weight: bold;
+}

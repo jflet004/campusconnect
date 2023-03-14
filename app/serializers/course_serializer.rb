@@ -7,11 +7,11 @@ class CourseSerializer < ActiveModel::Serializer
   
 
   def start_time
-    object.start_time.strftime('%Y-%m-%dT%H:%M:%S')
+    object.start_time.strftime('%H:%M:%S')
   end
 
   def end_time
-    object.end_time.strftime('%Y-%m-%dT%H:%M:%S')
+    object.end_time.strftime('%H:%M:%S')
   end
   
   # def start_recur

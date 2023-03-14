@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import '../css/StudentList.css'
+import '../css/List.css'
 
 const StudentList = ({ students, errors }) => {
-
+console.log(students)
   const navigate = useNavigate()
 
   const [filters, setFilters] = useState({
@@ -116,11 +116,11 @@ const StudentList = ({ students, errors }) => {
               {
                 filteredStudents.map(student => (
                   <tr key={student.id}>
-                    <td><button onClick={() => { navigate(`/current-student/${student.id}`) }}>🔎</button> {student.first_name} {student.last_name}</td>
+                    <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='mg'>🔎</button> {student.first_name} {student.last_name}</td>
                     <td>{student.age}</td>
                     <td>{student.interest}</td>
                     <td>{student.created_at}</td>
-                    <td><button onClick={() => { navigate(`/users/${student.user.id}`) }}>🔎</button> {student.user.first_name} {student.user.last_name}</td>
+                    <td><button onClick={() => { navigate(`/users/${student.user.id}`) }} className='mg'>🔎</button> {student.user.first_name} {student.user.last_name}</td>
                     <td>{student.user.email}</td>
                     <td>{student.user.phone_number}</td>
                   </tr>

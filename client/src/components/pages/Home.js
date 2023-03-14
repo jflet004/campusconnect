@@ -31,6 +31,7 @@ const Home = () => {
       .then(r => {
         if (r.ok) {
           r.json().then(user => {
+            console.log("User in handleSubmit:", user)
             setCurrentUser(user)
             user.admin ? navigate("/admin") : navigate("/")
             setFormData({

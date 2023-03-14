@@ -2,17 +2,19 @@
   text-align: center;
 }
 
-button {
-  background-color: #ffffff;
-  color: #4a00e0;
+.back-btn {
+  background: linear-gradient(to right, #003DA5, #004576);
+  color: #ffffff;
   padding: 7px;
   border: none;
   border-radius: 3px;
-  width: 5%;
+  width: 10%;
   font-size: 16px;
   cursor: pointer;
+  margin-bottom: 30px;
 }
 
-button:hover {
-  background-color: #f2f2f2;
+.back-btn:hover {
+  font-weight: bold;
+  background: linear-gradient(to right, #003DA5, #FCE300);
 }

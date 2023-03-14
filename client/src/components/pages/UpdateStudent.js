@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-
+import "../css/Details.css"
 const UpdateStudent = ({ updateStudent }) => {
 
   const params = useParams()
@@ -60,8 +60,8 @@ const UpdateStudent = ({ updateStudent }) => {
 
 
   return (
-    <div>
-      <h1>UpdatePage</h1>
+    <div className='details-card'>
+      <h1 className='details-title'>Update Student</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
         <br />
@@ -81,6 +81,7 @@ const UpdateStudent = ({ updateStudent }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>Birthday</label>
         <br />
         <input
@@ -89,6 +90,7 @@ const UpdateStudent = ({ updateStudent }) => {
           value={formData.birthday}
           onChange={handleChange}
         />
+        <br />
         <br />
         <label>Student Since</label>
         <br />
@@ -150,9 +152,9 @@ const UpdateStudent = ({ updateStudent }) => {
         />
         <br />
         <br />
-        <input type="submit" value="Update Student" />
+        <input type="submit" value="Update Student" className='details-list'/>
         <br />
-        <Link to={`/selected-student/${params.id}`}>Back</Link>
+        <Link to={`/current-student/${params.id}`} className='details-link'>Back</Link>
       </form>
       {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
     </div>

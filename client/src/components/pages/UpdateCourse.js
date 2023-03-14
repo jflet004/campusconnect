@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import "../css/Details.css"
 
 const UpdateCourse = ({ updateCourse, classrooms }) => {
 
@@ -58,8 +59,8 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
 
   return (
-    <div>
-      <h1>UpdatePage</h1>
+    <div className='details-card'>
+      <h1 className='details-title'>Update Course</h1>
       <form onSubmit={handleSubmit}>
         <label>Title</label>
         <br />
@@ -70,6 +71,7 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>Start Time</label>
         <br />
         <input
@@ -79,6 +81,7 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>End Time</label>
         <br />
         <input
@@ -87,6 +90,7 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
           value={formData.end_time}
           onChange={handleChange}
         />
+        <br />
         <br />
         <label>Location</label>
         <br />
@@ -99,9 +103,9 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
           {locationOptions}
         </select>
         <br />
-        <input type="submit" value="Update course" />
+        <input type="submit" value="Update course" className='details-list'/>
         <br />
-        <Link to={`/current-course/${params.id}`}>Back</Link>
+        <Link to={`/current-course/${params.id}`} className='details-link'>Back</Link>
       </form>
       {errors ? <li>{errors}</li> : null}
     </div>

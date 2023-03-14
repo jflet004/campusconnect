@@ -13,15 +13,17 @@ const NavBar = () => {
     fetch('/logout', {
       method: "DELETE"
     })
-    setCurrentUser(null)
-    navigate('/')
+      .then(() => {
+        setCurrentUser(null)
+        navigate('/')
+      })
+    { }
   }
 
 
 
   return (
     <div className='navbar'>
-      <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/courses">Programs</NavLink>
       {currentUser && currentUser.admin && (
@@ -31,10 +33,13 @@ const NavBar = () => {
         </>
       )}
       {currentUser && !currentUser.error && !currentUser.admin && (
-        <NavLink to="/register-students">Register Students</NavLink>
+        <>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/register-students">Register Students</NavLink>
+        </>
       )}
       {currentUser && !currentUser.error ? (
-        <button onClick={handleLogoutClick}>Logout</button>
+        <button onClick={handleLogoutClick} className='logout-btn'>Logout</button>
       ) : (
         <NavLink to="/signup">Create Account</NavLink>
       )}

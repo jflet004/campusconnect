@@ -38,7 +38,6 @@ return (
         {currentUser.admin && (
           <p><em>{dailyQuote.text}</em></p>
           )}
-          <button onClick={handleGoBack}>Back to previous page</button>
       <br/>
       </div>
     )}

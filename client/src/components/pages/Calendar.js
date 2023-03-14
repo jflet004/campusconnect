@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-
+import '../css/Calendar.css'
 const Calendar = () => {
 
   const [events, setEvents] = useState([])
@@ -18,8 +18,8 @@ const Calendar = () => {
         const events = courses.map(course => ({
           // id: course.id,
           title: course.title,
-          start: course.start_time,
-          end: course.end_time,
+          startTime: course.start_time,
+          endTime: course.end_time,
           location: course.location,
           capacity: course.capacity,
           students_enrolled: course.students_enrolled,
@@ -34,6 +34,10 @@ const Calendar = () => {
       .catch(error => console.error(error));
   }, []);
 
+  const handleEventClick = (info) => {
+    console.log(info)
+  }
+
   console.log(events)
 
   return (
@@ -46,8 +50,11 @@ const Calendar = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         }}
-        events={events}
-      />
+        events= {events}
+
+        eventClick={handleEventClick}
+      
+        />
 
     </div>
   )
