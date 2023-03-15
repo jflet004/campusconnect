@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer>
       <div className="container">
-        <p>&copy; 2023 Enrollify, Inc. All rights reserved.</p>
+        <p>&copy; 2023 CampusConnect, Inc. All rights reserved.</p>
       </div>
     </footer>
   );

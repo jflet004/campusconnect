@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.quote {
+  display: inline-block;
+  vertical-align:middle;
+  text-align: right;
+  margin-top: -137px;
+  margin-left: 300px;
+}
+
 .back-btn {
   background: linear-gradient(to right, #003DA5, #004576);
   color: #ffffff;

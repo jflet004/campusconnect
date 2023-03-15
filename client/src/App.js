@@ -182,29 +182,29 @@ function App() {
         <NavBar />
         <Header />
         <div className='page-content'>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/new-course" element={<NewCourse addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
-          <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
-          <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
-          <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
-          <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
-          <Route path="/current-course/:id" element={<CourseDetails />} />
-          <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-          <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
-          <Route path="/users/:id" element={<UserDetails />} />
-          <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
-          <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
-          <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
-          <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
-          <Route path="/successful-registration" element={<RegistrationSuccess />} />
-          <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
-          <Route path="/drop-successful" element={<DropSuccess />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/new-course" element={<NewCourse addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
+            <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
+            <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
+            <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
+            <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
+            <Route path="/current-course/:id" element={<CourseDetails />} />
+            <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
+            <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
+            <Route path="/users/:id" element={<UserDetails />} />
+            <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
+            <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
+            <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
+            <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
+            <Route path="/successful-registration" element={<RegistrationSuccess />} />
+            <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
+            <Route path="/drop-successful" element={<DropSuccess />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
         </div>
         <Footer />
       </div>

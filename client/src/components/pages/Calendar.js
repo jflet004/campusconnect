@@ -4,12 +4,12 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import '../css/Calendar.css'
+import '../css/Icons.css'
 const Calendar = () => {
 
   const [events, setEvents] = useState([])
   const [loading, setLoading] = useState(true)
-  
+
 
   useEffect(() => {
     fetch('/courses')
@@ -41,8 +41,11 @@ const Calendar = () => {
   console.log(events)
 
   return (
-    <div className='calendar'>
-      <h1>Calendar</h1>
+    <div>
+
+      <img src='web-icons/calendar.svg' width="40px" className="inline" />
+      <h1 className='title'>Calendar</h1>
+
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{
@@ -50,11 +53,11 @@ const Calendar = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,timeGridDay'
         }}
-        events= {events}
+        events={events}
 
         eventClick={handleEventClick}
-      
-        />
+
+      />
 
     </div>
   )

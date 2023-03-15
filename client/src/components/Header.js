@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/user';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './css/Header.css'
+import './css/Icons.css'
 const Header = () => {
   
   const { currentUser } = useContext(UserContext)
@@ -28,6 +29,7 @@ if (loading) return <h1>Loading</h1>
 
 return (
   <div className='header'>
+    <img src='web-icons/logo.svg' className='logo'/>
     {!currentUser || currentUser.error ? (
       <h3>Welcome. Please login or create an account</h3>
       ) : (
@@ -35,9 +37,9 @@ return (
         {location.pathname === '/' && (
           <h3>Welcome {currentUser.first_name}</h3>
           )}
-        {currentUser.admin && (
-          <p><em>{dailyQuote.text}</em></p>
-          )}
+        {/* {currentUser.admin && (
+          <p className='quote'><em>{dailyQuote.text}</em></p>
+          )} */}
       <br/>
       </div>
     )}
