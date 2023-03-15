@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
-
+import '../css/FormStudent.css'
 const NewStudent = ({ addStudent }) => {
 
   const { currentUser } = useContext(UserContext)
@@ -65,7 +65,7 @@ const NewStudent = ({ addStudent }) => {
   if (loading) return <h1>Loading</h1>
 
   return (
-    <div>
+    <div className='student-form'>
       <h1>Register Student Page</h1>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
@@ -86,6 +86,7 @@ const NewStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>Birthday</label>
         <br />
         <input
@@ -95,6 +96,7 @@ const NewStudent = ({ addStudent }) => {
           onChange={handleChange}
         />
         <br />
+        <br />
         <label>Gender</label>
         <br />
         <input
@@ -103,7 +105,7 @@ const NewStudent = ({ addStudent }) => {
           value="Male"
           onChange={handleChange}
         />
-        <label>Male</label>
+        <label> Male</label>
         <br />
         <input
           type="radio"
@@ -111,7 +113,7 @@ const NewStudent = ({ addStudent }) => {
           value="Female"
           onChange={handleChange}
         />
-        <label>Female</label>
+        <label> Female</label>
         <br />
         <input
           type="radio"
@@ -119,7 +121,7 @@ const NewStudent = ({ addStudent }) => {
           value="Non-binary/non-conforming"
           onChange={handleChange}
         />
-        <label>Non-binary/non-conforming</label>
+        <label> Non-binary/non-conforming</label>
         <br />
         <input
           type="radio"
@@ -127,7 +129,8 @@ const NewStudent = ({ addStudent }) => {
           value="Prefer not to respond"
           onChange={handleChange}
         />
-        <label>Prefer not to respond</label>
+        <label> Prefer not to respond</label>
+        <br />
         <br />
         <label>Interest</label>
         <br />

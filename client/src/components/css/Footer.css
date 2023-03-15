@@ -1,0 +1,21 @@
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+footer {
+  background: linear-gradient(to right, #003DA5, #425563);
+  color: aliceblue;
+  text-align: center;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+

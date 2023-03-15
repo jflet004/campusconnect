@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import About from './components/pages/About';
 import Signup from './components/pages/Signup';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AdminPage from './components/pages/AdminPage';
 import StudentList from './components/pages/StudentList';
 import CourseList from './components/pages/CourseList';
@@ -25,6 +26,8 @@ import EnrollmentSuccess from './components/success_messages/EnrollmentSuccess';
 import DropSuccess from './components/success_messages/DropSuccess';
 import Calendar from './components/pages/Calendar';
 
+import "./components/css/Footer.css"
+
 function App() {
 
   const [students, setStudents] = useState([])
@@ -39,26 +42,26 @@ function App() {
 
   useEffect(() => {
     fetch("/students")
-      .then(r => 
-        {if(r.ok) {
-        r.json().then(students => setStudents(students))
-      } else {
-        r.json().then(data => setErrors(data.errors))
-      }
-    })
+      .then(r => {
+        if (r.ok) {
+          r.json().then(students => setStudents(students))
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
 
   useEffect(() => {
     fetch("/teachers")
-      .then(r => 
-        {if(r.ok) {
-        r.json().then(teachers => setTeachers(teachers))
-      } else {
-        r.json().then(data => setErrors(data.errors))
-      }
-    })
+      .then(r => {
+        if (r.ok) {
+          r.json().then(teachers => setTeachers(teachers))
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [])
@@ -175,9 +178,10 @@ function App() {
 
   return (
     <UserProvider>
-      <div >
+      <div className='page-container' >
         <NavBar />
         <Header />
+        <div className='page-content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
@@ -188,7 +192,7 @@ function App() {
           <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
           <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
           <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
-          <Route path="/current-course/:id" element={<CourseDetails  />} />
+          <Route path="/current-course/:id" element={<CourseDetails />} />
           <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
           <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
           <Route path="/users/:id" element={<UserDetails />} />
@@ -201,6 +205,8 @@ function App() {
           <Route path="/drop-successful" element={<DropSuccess />} />
           <Route path="/admin" element={<AdminPage />} />
         </Routes>
+        </div>
+        <Footer />
       </div>
     </UserProvider>
   );

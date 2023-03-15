@@ -3,46 +3,44 @@ body {
   
 }
 
-.login-form {
+.student-form {
   color: aliceblue;
   background: linear-gradient(to left, #003DA5, #425563);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  margin: 0 auto;
+  width: 500px;
+  margin: 100px auto;
 }
 
-.login-form label {
-  display: block;
+.student-form label {
   color: aliceblue;
   font-size: 16px;
   margin-bottom: 5px;
 }
 
-.login-form input, select
-{
-  width: 250px;
-  padding: 10px;
-  border-radius: 3px;
-  border: none;
-  margin-bottom: 10px;
-  
+.student-form input {
+  margin: 10px auto;
 }
 
-.login-form input[type="submit"] {
+.student-form select {
+  margin: 10px auto;
+}
+
+
+.student-form input[type="submit"] {
   background-color: #ffffff;
   color: #003DA5;
   padding: 7px;
   border: none;
   border-radius: 3px;
-  width: 25%;
+  width: 200px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 10px;
 }
 
-.login-form input[type="submit"]:hover {
+.student-form input[type="submit"]:hover {
   background-color: #f2f2f2;
 }
 

@@ -24,6 +24,7 @@ const NavBar = () => {
 
   return (
     <div className='navbar'>
+      <NavLink to="/">{currentUser && !currentUser.error ? "Home" : "Login"}</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/courses">Programs</NavLink>
       {currentUser && currentUser.admin && (
@@ -34,7 +35,6 @@ const NavBar = () => {
       )}
       {currentUser && !currentUser.error && !currentUser.admin && (
         <>
-          <NavLink to="/">Home</NavLink>
           <NavLink to="/register-students">Register Students</NavLink>
         </>
       )}

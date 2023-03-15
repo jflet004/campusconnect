@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../css/CourseForm.css'
 
 const NewCourse = ({ addCourse, teachers, classrooms }) => {
 
@@ -58,45 +59,56 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)
 
   return (
-    <div className='login-form'>
+    <div className='course-form'>
       <h1>New Course Form</h1>
       <form onSubmit={handleSubmit}>
         <label>Title</label>
+        <br />
         <input
           type="text"
           name="title"
           value={formData.title}
           onChange={handleInputChange}
         />
+        <br />
         <label>Start</label>
+        <br />
         <input
           type="datetime-local"
           name="start_time"
           value={formData.start_time}
           onChange={handleInputChange}
         />
+        <br />
         <label>End</label>
+        <br />
         <input
           type="datetime-local"
           name="end_time"
           value={formData.end_time}
           onChange={handleInputChange}
         />
+        <br />
         <label>Capacity</label>
+        <br />
         <input
           type="integer"
           name="capacity"
           value={formData.capacity}
           onChange={handleInputChange}
         />
+        <br />
         <label>Price</label>
+        <br />
         <input
           type="float"
           name="price"
           value={formData.price}
           onChange={handleInputChange}
         />
+        <br />
         <label>Location</label>
+        <br />
         <select
           name="location"
           value={formData.location}
@@ -105,14 +117,18 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
           <option value="">Select one</option>
           {locationOptions}
         </select>
+        <br />
         <label>Rec Start</label>
+        <br />
         <input
           type="date"
           name="start_recur"
           value={formData.start_recur}
           onChange={handleInputChange}
         />
+        <br />
         <label>Recurrence</label>
+        <br />
         <select
           name="days_of_week"
           multiple={true}
@@ -127,7 +143,7 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
           <option value="5">Friday</option>
           <option value="6">Saturday</option>
         </select>
-        <br/>
+        <br />
         <input type="submit" value="Add New Course" />
       </form>
       <br />

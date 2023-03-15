@@ -3,13 +3,14 @@
   padding: 10px;
   display: flex;
   justify-content:left;
-  align-items: left;
+  align-items: center;
 }
 
 .navbar a {
-  color: #ffffff;
+  color:aliceblue;
   text-decoration: none;
   font-size: 16px;
+  font-weight: bold;
   margin-right: 50px;
   margin-left: 50px;
 }
@@ -20,18 +21,20 @@
 
 .logout-btn {
   background: linear-gradient(to right, #003DA5, #425563);
-  color: #ffffff;
+  color:aliceblue;
   padding: 5px;
   border: none;
   border-radius: 3px;
-  width: 10%;
+  width: 7%;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
-  margin-bottom:auto;
+  /* margin-bottom:auto; */
   margin-left:auto;
+  align-items: center;
 }
 
 .logout-btn:hover {
-  font-weight: bold;
+  /* font-weight: bold; */
   background: linear-gradient(to right, #003DA5, #FCE300);
 }
