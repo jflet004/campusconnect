@@ -30,9 +30,8 @@ import "./components/css/Footer.css"
 
 function App() {
 
-  const [students, setStudents] = useState([])
+
   const [classrooms, setClassrooms] = useState([])
-  const [teachers, setTeachers] = useState([])
   const [courses, setCourses] = useState([])
   const [users, setUsers] = useState([])
   const [enrollments, setEnrollments] = useState([])
@@ -40,44 +39,6 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [errors, setErrors] = useState(false)
 
-  useEffect(() => {
-    fetch("/students")
-      .then(r => {
-        if (r.ok) {
-          r.json().then(students => setStudents(students))
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  useEffect(() => {
-    fetch("/teachers")
-      .then(r => {
-        if (r.ok) {
-          r.json().then(teachers => setTeachers(teachers))
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  useEffect(() => {
-    fetch("/courses")
-      .then(r => {
-        if (r.ok) {
-          r.json().then(courses => setCourses(courses))
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
 
   useEffect(() => {
     fetch("/enrollments")
@@ -103,17 +64,9 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  const addStudent = registeredStudents => {
-    setStudents(newStudent => [...newStudent, registeredStudents])
-  }
-
-  const addCourse = currentCourses => {
-    setCourses(newCourse => [...newCourse, currentCourses])
-  }
-
-  const deleteCourse = courseId => {
-    setCourses(courses.filter(course => course.id !== courseId))
-  }
+  // const deleteCourse = courseId => {
+  //   setCourses(courses.filter(course => course.id !== courseId))
+  // }
 
   const enrollStudent = courseEnrollment => {
     setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
@@ -123,36 +76,8 @@ function App() {
     setEnrollments(enrollments.filter(enrollment => enrollment.student_id !== studentId))
   }
 
-  const assignTeacher = courseAssignment => {
-    setAssignments(newAssignment => [...newAssignment, courseAssignment])
-  }
-
   const releaseTeacher = teacherId => {
     setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
-  }
-
-  const updateStudent = updatedStudent => {
-    setStudents(prevStudents => {
-      return prevStudents.map(student => {
-        if (student.id === updatedStudent.id) {
-          return updatedStudent
-        } else {
-          return student
-        }
-      })
-    })
-  }
-
-  const updateTeacher = updatedTeacher => {
-    setTeachers(prevTeacher => {
-      return prevTeacher.map(teacher => {
-        if (teacher.id === updatedTeacher.id) {
-          return updatedTeacher
-        } else {
-          return teacher
-        }
-      })
-    })
   }
 
   const updateCourse = updatedCourse => {
@@ -192,18 +117,18 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/new-course" element={<NewCourse addCourse={addCourse} teachers={teachers} classrooms={classrooms} />} />
-            <Route path="/register-students" element={<NewStudent addStudent={addStudent} />} />
-            <Route path="/courses" element={<CourseList courses={courses} deleteCourse={deleteCourse} />} />
-            <Route path="/current-students" element={<StudentList students={students} errors={errors} />} />
-            <Route path="/current-teachers" element={<TeacherList teachers={teachers} errors={errors} />} />
+            <Route path="/new-course" element={<NewCourse classrooms={classrooms} />} />
+            <Route path="/register-students" element={<NewStudent  />} />
+            <Route path="/courses" element={<CourseList />} />
+            <Route path="/current-students" element={<StudentList errors={errors} />} />
+            <Route path="/current-teachers" element={<TeacherList errors={errors} />} />
             <Route path="/current-course/:id" element={<CourseDetails authErrors={errors} />} />
             <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-            <Route path="/current-teacher/:id" element={<TeacherDetails assignTeacher={assignTeacher} releaseTeacher={releaseTeacher} />} />
+            <Route path="/current-teacher/:id" element={<TeacherDetails releaseTeacher={releaseTeacher} />} />
             <Route path="/users/:id" element={<UserDetails />} />
-            <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} teachers={teachers} classrooms={classrooms} />} />
-            <Route path="/update-student/:id" element={<UpdateStudent updateStudent={updateStudent} />} />
-            <Route path="/update-teacher/:id" element={<UpdateTeacher updateTeacher={updateTeacher} />} />
+            <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} classrooms={classrooms} />} />
+            <Route path="/update-student/:id" element={<UpdateStudent />} />
+            <Route path="/update-teacher/:id" element={<UpdateTeacher />} />
             <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
             <Route path="/successful-registration" element={<RegistrationSuccess />} />
             <Route path="/enrollment-success" element={<EnrollmentSuccess />} />

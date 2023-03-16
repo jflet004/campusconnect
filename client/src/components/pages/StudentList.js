@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/user';
 import '../css/List.css'
 
-const StudentList = ({ students, errors }) => {
-console.log(students)
+const StudentList = () => {
+
+  const {students, loading, errors} = useContext(UserContext)
+
   const navigate = useNavigate()
 
   const [filters, setFilters] = useState({
@@ -14,7 +17,14 @@ console.log(students)
     parent_guardian: '',
     email: '',
     phone: ''
-  });
+  })
+
+  const handleFilterChange = (key, value) => {
+    setFilters({
+      ...filters,
+      [key]: value
+    })
+  }
 
   const filteredStudents = students.filter(student => {
     return (
@@ -30,14 +40,6 @@ console.log(students)
     );
   });
 
-
-  const handleFilterChange = (key, value) => {
-    setFilters({
-      ...filters,
-      [key]: value
-    });
-  };
-
   const studentList = filteredStudents.map(student => (
     <tr key={student.id}>
       <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='mg'>🔎</button> {student.first_name} {student.last_name}</td>
@@ -50,6 +52,8 @@ console.log(students)
     </tr>
   ))
 
+  if(loading) return <h1>Loading</h1>
+  
   return (
     <div >
       <br />

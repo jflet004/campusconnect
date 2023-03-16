@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user'
 import '../css/LoginForm.css'
 
 const Home = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser, login } = useContext(UserContext)
 
   const navigate = useNavigate()
   const [errors, setErrors] = useState([])
@@ -31,8 +31,7 @@ const Home = () => {
       .then(r => {
         if (r.ok) {
           r.json().then(user => {
-            console.log("User in handleSubmit:", user)
-            setCurrentUser(user)
+            login(user)
             user.admin ? navigate("/admin") : navigate("/")
             setFormData({
               email: "",

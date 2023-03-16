@@ -1,16 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import '../css/FormStudent.css'
-const NewStudent = ({ addStudent }) => {
+const NewStudent = () => {
 
-  const { currentUser } = useContext(UserContext)
+  const { currentUser, addStudent, errors } = useContext(UserContext)
 
-  const navigate = useNavigate()
 
   const [courses, setCourses] = useState([])
   const [loading, setLoading] = useState(true)
-  const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -41,21 +38,7 @@ const NewStudent = ({ addStudent }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch("/students", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(addStudent)
-          navigate('/successful-registration')
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    addStudent(formData)
   }
 
   const courseOptions = courses.map((course) => (

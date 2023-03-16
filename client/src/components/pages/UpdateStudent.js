@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 import "../css/Details.css"
-const UpdateStudent = ({ updateStudent }) => {
+
+const UpdateStudent = () => {
+
+  const {updateStudent, errors } = useContext(UserContext)
 
   const params = useParams()
-  const navigate = useNavigate()
-
-  const [errors, setErrors] = useState(false)
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -41,23 +42,8 @@ const UpdateStudent = ({ updateStudent }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch(`/students/${params.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(updateStudent)
-          navigate(`/current-student/${params.id}`)
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    updateStudent(params.id, formData)
   }
-
 
   return (
     <div className='details-card'>

@@ -38,7 +38,11 @@ class UsersController < ApplicationController
   # end
 
   def logged_user
-    
+    if current_user
+      render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
+    else
+      render json: {error: "User not found"}, status: :not_found
+    end
   end
   
   

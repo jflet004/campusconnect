@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { UserContext } from '../../context/user'
 import '../css/CourseForm.css'
 
-const NewCourse = ({ addCourse, teachers, classrooms }) => {
+const NewCourse = ({ classrooms }) => {
 
-  const navigate = useNavigate()
+const { addCourse, errors } = useContext(UserContext)
 
-  const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     start_time: "",
@@ -39,21 +38,7 @@ const NewCourse = ({ addCourse, teachers, classrooms }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch("/courses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(addCourse)
-          navigate('/enrollment-success')
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    addCourse(formData)
   }
 
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)

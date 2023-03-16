@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import '../css/List.css'
 
-const CourseList = ({ courses, newErrors, deleteCourse }) => {
+const CourseList = () => {
 
-  
-  const { currentUser } = useContext(UserContext)
+
+  const { currentUser, courses, deleteCourse, errors } = useContext(UserContext)
 
   const navigate = useNavigate()
 
-  const [errors, setErrors] = useState(false)
   const [filters, setFilters] = useState({
     title: '',
     start_time: '',
@@ -21,16 +20,7 @@ const CourseList = ({ courses, newErrors, deleteCourse }) => {
   });
 
   const handleCourseDelete = (courseId) => {
-    fetch(`/courses/${courseId}`, {
-      method: "DELETE"
-    })
-      .then(r => {
-        if (r.ok) {
-          deleteCourse(courseId)
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    deleteCourse(courseId)
   }
 
   const filteredCourses = courses.filter(course => {
@@ -46,7 +36,7 @@ const CourseList = ({ courses, newErrors, deleteCourse }) => {
   })
 
   const handleFilterChange = (key, value) => {
-    setFilters({...filters, [key]: value})
+    setFilters({ ...filters, [key]: value })
   }
 
   const getCourseStatus = (course) => {
@@ -59,7 +49,6 @@ const CourseList = ({ courses, newErrors, deleteCourse }) => {
 
   return (
     <div >
-       
       <table>
         <thead>
           <tr>
@@ -124,8 +113,8 @@ const CourseList = ({ courses, newErrors, deleteCourse }) => {
             filteredCourses.map(course => (
               <tr key={course.id}>
                 <td><button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> {course.title}</td>
-                <td>{course.start_time.slice(0,5)}</td>
-                <td>{course.end_time.slice(0,5)}</td>
+                <td>{course.start_time.slice(0, 5)}</td>
+                <td>{course.end_time.slice(0, 5)}</td>
                 <td>{course.location}</td>
                 <td style={{ color: getCourseStatus(course).color }}>
                   {getCourseStatus(course).status} {getCourseStatus(course).enrollment}

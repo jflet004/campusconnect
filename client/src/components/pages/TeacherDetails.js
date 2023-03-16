@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 import "../css/Details.css"
-const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
+const TeacherDetails = ({ releaseTeacher }) => {
+
+  const { assignTeacher, errors, setErrors, loading, setLoading } = useContext(UserContext)
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [courses, setCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
-  const [errors, setErrors] = useState(false)
-  const [loading, setLoading] = useState(true)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -39,24 +40,10 @@ const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
       setErrors(["Please select a course"])
       return
     }
-    fetch("/teacher_assignments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        teacher_id: currentTeacher.id,
-        course_id: selectedCourse.id
-      })
+    assignTeacher({
+      teacher_id: currentTeacher.id,
+      course_id: selectedCourse.id
     })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(assignTeacher)
-          navigate("/enrollment-success")
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
   }
 
 
@@ -65,7 +52,7 @@ const TeacherDetails = ({ assignTeacher, releaseTeacher }) => {
   ))
 
   const handleCourseRelease = (course, teacherId) => {
-    console.log(course)
+    
     const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
 
     fetch(`/teacher_assignments/${assignmentId}`, {

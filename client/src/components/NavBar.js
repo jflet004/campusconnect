@@ -5,7 +5,7 @@ import "./css/NavBar.css"
 
 const NavBar = () => {
 
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser, logout} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const NavBar = () => {
       method: "DELETE"
     })
       .then(() => {
-        setCurrentUser(null)
+        logout(null)
         navigate('/')
       })
     { }
