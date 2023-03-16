@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import '../css/List.css'
 
-const CourseList = ({ courses, deleteCourse }) => {
+const CourseList = ({ courses, newErrors, deleteCourse }) => {
 
   
   const { currentUser } = useContext(UserContext)
@@ -59,6 +59,7 @@ const CourseList = ({ courses, deleteCourse }) => {
 
   return (
     <div >
+       
       <table>
         <thead>
           <tr>

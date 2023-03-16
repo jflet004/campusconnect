@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user'
 import '../css/Details.css'
 
 
-const CourseDetails = () => {
+const CourseDetails = ({ authErrors }) => {
 
   const { currentUser } = useContext(UserContext)
 
@@ -23,8 +23,11 @@ const CourseDetails = () => {
 
   if (loading) return <h1>Loading</h1>
 
+  
   return (
     <div className='details-card'>
+      {authErrors ? <li>{authErrors}</li> :
+      <>
       <h1 className='details-title'>
         {course.title}
         <br />
@@ -36,6 +39,7 @@ const CourseDetails = () => {
       <p><span style={{ fontWeight: 'bold' }}>Teacher:</span> {course.teachers_full_name} {course.teachers.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Enrolled Students:</span> {course.students ? course.students.map(student => <li key={student.id} className='details-list'><Link to={`/current-student/${student.id}`} className='details-link'>{student.first_name} {student.last_name}</Link></li>) : null}</p>
       <Link to="/courses" className='details-link'>back to Course List</Link>
+      </>}
     </div>
   )
 }

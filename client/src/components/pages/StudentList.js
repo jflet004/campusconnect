@@ -38,6 +38,18 @@ console.log(students)
     });
   };
 
+  const studentList = filteredStudents.map(student => (
+    <tr key={student.id}>
+      <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='mg'>🔎</button> {student.first_name} {student.last_name}</td>
+      <td>{student.age}</td>
+      <td>{student.interest}</td>
+      <td>{student.created_at}</td>
+      <td><button onClick={() => { navigate(`/users/${student.user.id}`) }} className='mg'>🔎</button> {student.user.first_name} {student.user.last_name}</td>
+      <td>{student.user.email}</td>
+      <td>{student.user.phone_number}</td>
+    </tr>
+  ))
+
   return (
     <div >
       <br />
@@ -113,18 +125,7 @@ console.log(students)
               </tr>
             </thead>
             <tbody>
-              {
-                filteredStudents.map(student => (
-                  <tr key={student.id}>
-                    <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='mg'>🔎</button> {student.first_name} {student.last_name}</td>
-                    <td>{student.age}</td>
-                    <td>{student.interest}</td>
-                    <td>{student.created_at}</td>
-                    <td><button onClick={() => { navigate(`/users/${student.user.id}`) }} className='mg'>🔎</button> {student.user.first_name} {student.user.last_name}</td>
-                    <td>{student.user.email}</td>
-                    <td>{student.user.phone_number}</td>
-                  </tr>
-                ))}
+              {studentList}
             </tbody>
           </table>
         </>}

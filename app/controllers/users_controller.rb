@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  skip_before_action :user_authentication, only:[:create, :show, :index, :me]
+
   def index
     users = User.all
     render json: users, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
@@ -27,12 +29,16 @@ class UsersController < ApplicationController
     render json: user, status: :accepted
   end
   
-  def me
-    if current_user
-      render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
-    else
-      render json: {error: "User not found"}, status: :not_found
-    end
+  # def me
+  #   if current_user
+  #     render json: current_user, include: {students: {include: [:courses]}}, except: [:updated_at, :created_at], methods: :balance, status: :ok
+  #   else
+  #     render json: {error: "User not found"}, status: :not_found
+  #   end
+  # end
+
+  def logged_user
+    
   end
   
   

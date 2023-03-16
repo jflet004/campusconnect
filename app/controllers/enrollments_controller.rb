@@ -1,5 +1,5 @@
 class EnrollmentsController < ApplicationController
-  before_action :require_admin
+  before_action :is_admin?
   
   def index
     enrollments = Enrollment.all

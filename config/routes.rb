@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   resources :classrooms, only:[:index]
 
   post "/signup", to: "users#create"
-  get "/me", to: "users#me"
+  # get "/me", to: "users#me"
+  get "/me", to: "users#logged_user"
   get "/users-with-no-students", to: "users#users_with_no_students"
   get "/admin-users", to: "users#admin_users"
   post "/login", to: "sessions#create"
