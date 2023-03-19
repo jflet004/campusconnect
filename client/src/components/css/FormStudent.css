@@ -1,6 +1,5 @@
 body {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  
 }
 
 .student-form {
@@ -10,7 +9,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 500px;
-  margin: 100px auto;
+  margin: 10px auto;
 }
 
 .student-form label {

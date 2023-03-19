@@ -1,6 +1,5 @@
 body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  
 }
 
 .login-form {
@@ -11,6 +10,7 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 300px;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 .login-form label {

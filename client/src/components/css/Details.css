@@ -78,3 +78,9 @@ p {
 span {
   font-weight: bold;
 }
+
+.errors {
+  /* text-align: center; */
+  font-weight: bold;
+  color: red;
+}

@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 import "../css/Details.css"
 
-const UpdateCourse = ({ updateCourse, classrooms }) => {
+const UpdateCourse = ({ classrooms }) => {
+
+  const { updateCourse } = useContext(UserContext)
 
   const params = useParams()
   const navigate = useNavigate()
@@ -39,21 +42,7 @@ const UpdateCourse = ({ updateCourse, classrooms }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch(`/courses/${params.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(updateCourse)
-          navigate(`/current-course/${params.id}`)
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    updateCourse(params.id, formData)
   }
 
   const locationOptions = classrooms.map(room => <option key={room.id} value={room.name}>{room.name}</option>)

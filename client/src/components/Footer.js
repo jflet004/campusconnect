@@ -3,7 +3,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      <div className="container">
+      <div >
         <p>&copy; 2023 CampusConnect, Inc. All rights reserved.</p>
       </div>
     </footer>

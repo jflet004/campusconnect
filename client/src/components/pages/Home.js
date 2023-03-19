@@ -4,10 +4,10 @@ import { UserContext } from '../../context/user'
 import '../css/LoginForm.css'
 
 const Home = () => {
-  const { currentUser, login } = useContext(UserContext)
+  const { currentUser, login, loggedIn } = useContext(UserContext)
 
   const navigate = useNavigate()
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -37,6 +37,7 @@ const Home = () => {
               email: "",
               password: ""
             })
+            setErrors(false)
           })
         } else {
           r.json().then(data => {
@@ -69,8 +70,8 @@ const Home = () => {
 
   return (
     <div className='login-form'>
-      {!currentUser || currentUser.error ?
-        <>
+      {!loggedIn ?
+        <div >
           <form onSubmit={handleSubmit}>
             <label>Email</label>
             <input
@@ -88,13 +89,15 @@ const Home = () => {
             <input type='submit' value='Login' />
             <br />
           </form>
-        </> :
-        <>
+        </div> :
+        <div>
           <h4>Students Enrolled</h4>
           {studentList}
-        </>
+        </div>
       }
-      {errors ? errors : null}
+      <div className='errors'>
+        {errors ? <li>{errors}</li> : null}
+      </div>
     </div>
   )
 }

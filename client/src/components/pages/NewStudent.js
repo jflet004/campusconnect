@@ -1,13 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { UserContext } from '../../context/user'
 import '../css/FormStudent.css'
+
 const NewStudent = () => {
 
-  const { currentUser, addStudent, errors } = useContext(UserContext)
+  const { currentUser, courses, addStudent, loggedIn, errors } = useContext(UserContext)
 
-
-  const [courses, setCourses] = useState([])
-  const [loading, setLoading] = useState(true)
+  // const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -16,17 +15,6 @@ const NewStudent = () => {
     interest: "",
     user_id: currentUser.id
   })
-
-  useEffect(() => {
-    fetch('/courses')
-      .then(r => r.json())
-      .then(course => {
-        setCourses(course)
-      })
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -45,94 +33,101 @@ const NewStudent = () => {
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
-  if (loading) return <h1>Loading</h1>
-
-  return (
-    <div className='student-form'>
-      <h1>Register Student Page</h1>
-      <form onSubmit={handleSubmit}>
-        <label>First Name</label>
+  // if (loading) return <h1>Loading</h1>
+  if (loggedIn) {
+    return (
+      <div className='student-form'>
+        <h1>Register Student Page</h1>
+        <form onSubmit={handleSubmit}>
+          <label>First Name</label>
+          <br />
+          <input
+            type="text"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+          />
+          <br />
+          <label>Last Name</label>
+          <br />
+          <input
+            type="text"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Birthday</label>
+          <br />
+          <input
+            type="date"
+            name="birthday"
+            value={formData.birthday}
+            onChange={handleChange}
+          />
+          <br />
+          <br />
+          <label>Gender</label>
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="Male"
+            onChange={handleChange}
+          />
+          <label> Male</label>
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="Female"
+            onChange={handleChange}
+          />
+          <label> Female</label>
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="Non-binary/non-conforming"
+            onChange={handleChange}
+          />
+          <label> Non-binary/non-conforming</label>
+          <br />
+          <input
+            type="radio"
+            name="gender"
+            value="Prefer not to respond"
+            onChange={handleChange}
+          />
+          <label> Prefer not to respond</label>
+          <br />
+          <br />
+          <label>Interest</label>
+          <br />
+          <select
+            name="interest"
+            value={formData.interest}
+            onChange={handleChange}
+          >
+            <option value="">Select one</option>
+            {courseOptions}
+          </select>
+          <br />
+          <br />
+          <input type="submit" value="Submit Registration Form" />
+        </form>
         <br />
-        <input
-          type="text"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-        />
-        <br />
-        <label>Last Name</label>
-        <br />
-        <input
-          type="text"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        <label>Birthday</label>
-        <br />
-        <input
-          type="date"
-          name="birthday"
-          value={formData.birthday}
-          onChange={handleChange}
-        />
-        <br />
-        <br />
-        <label>Gender</label>
-        <br />
-        <input
-          type="radio"
-          name="gender"
-          value="Male"
-          onChange={handleChange}
-        />
-        <label> Male</label>
-        <br />
-        <input
-          type="radio"
-          name="gender"
-          value="Female"
-          onChange={handleChange}
-        />
-        <label> Female</label>
-        <br />
-        <input
-          type="radio"
-          name="gender"
-          value="Non-binary/non-conforming"
-          onChange={handleChange}
-        />
-        <label> Non-binary/non-conforming</label>
-        <br />
-        <input
-          type="radio"
-          name="gender"
-          value="Prefer not to respond"
-          onChange={handleChange}
-        />
-        <label> Prefer not to respond</label>
-        <br />
-        <br />
-        <label>Interest</label>
-        <br />
-        <select
-          name="interest"
-          value={formData.interest}
-          onChange={handleChange}
-        >
-          <option value="">Select one</option>
-          {courseOptions}
-        </select>
-        <br />
-        <br />
-        <input type="submit" value="Submit Registration Form" />
-      </form>
-      <br />
-      {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
-    </div>
-  )
+        <div className='errors'>
+          {errors ? <li>{errors}</li> : null}
+        </div>
+      </div>
+    )
+  } else {
+    return (
+      <h1>Log In</h1>
+    )
+  }
 }
 
 export default NewStudent

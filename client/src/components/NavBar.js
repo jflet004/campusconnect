@@ -5,7 +5,7 @@ import "./css/NavBar.css"
 
 const NavBar = () => {
 
-  const { currentUser, logout} = useContext(UserContext)
+  const { currentUser, logout, loggedIn} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -24,21 +24,19 @@ const NavBar = () => {
 
   return (
     <div className='navbar'>
-      <NavLink to="/">{currentUser && !currentUser.error ? "Home" : "Login"}</NavLink>
+      <NavLink to="/">{!loggedIn ? "Login" : "Home"}</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/courses">Programs</NavLink>
-      {currentUser && currentUser.admin && (
+      {loggedIn && currentUser.admin && (
         <>
           <NavLink to="/calendar">Calendar</NavLink>
           <NavLink to="/admin">Admin Page</NavLink>
         </>
       )}
-      {currentUser && !currentUser.error && !currentUser.admin && (
-        <>
+      {loggedIn && !currentUser.admin && (
           <NavLink to="/register-students">Register Students</NavLink>
-        </>
       )}
-      {currentUser && !currentUser.error ? (
+      {loggedIn ? (
         <button onClick={handleLogoutClick} className='logout-btn'>Logout</button>
       ) : (
         <NavLink to="/signup">Create Account</NavLink>

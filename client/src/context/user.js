@@ -10,6 +10,7 @@ function UserProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({})
   const [students, setStudents] = useState([])
   const [teachers, setTeachers] = useState([])
+  const [classrooms, setClassrooms] = useState([])
   const [courses, setCourses] = useState([])
   const [teacherAssignments, setTeacherAssignments] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
@@ -65,6 +66,19 @@ function UserProvider({ children }) {
       .then(r => {
         if (r.ok) {
           r.json().then(courses => setCourses(courses))
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }
+
+  const fetchClassrooms = () => {
+    fetch("/classrooms")
+      .then(r => {
+        if (r.ok) {
+          r.json().then(classrooms => setClassrooms(classrooms))
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -171,14 +185,40 @@ function UserProvider({ children }) {
               return teacher;
             });
             setTeachers(updatedTeachers);
-            navigate(`/current-teacher/${id}`);
+            navigate(`/current-teacher/${id}`)
           });
         } else {
-          r.json().then(data => setErrors(data.errors));
+          r.json().then(data => setErrors(data.errors))
         }
-      });
-  };
+      })
+  }
 
+  const updateCourse = (id, updatedCourse) => {
+    fetch(`/courses/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedCourse)
+    })
+      .then(r => {
+        if (r.ok) {
+          r.json().then(data => {
+            const updatedCourses = courses.map(course => {
+              if (course.id === id) {
+                return data;
+              }
+              return course;
+            });
+            setCourses(updatedCourses);
+            navigate(`/current-course/${id}`)
+          });
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
+  }
+  
   const deleteCourse = (id) => {
     fetch(`/courses/${id}`, {
       method: "DELETE"
@@ -223,7 +263,7 @@ function UserProvider({ children }) {
   if (loading) return <h1>Loading</h1>
 
   return (
-    <UserContext.Provider value={{ currentUser, students, loggedIn, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{ loggedIn, classrooms, updateCourse, currentUser, students, loggedIn, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

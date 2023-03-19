@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { formatDate } from '@fullcalendar/core'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -16,7 +15,6 @@ const Calendar = () => {
       .then(r => r.json())
       .then(courses => {
         const events = courses.map(course => ({
-          // id: course.id,
           title: course.title,
           startTime: course.start_time,
           endTime: course.end_time,
@@ -24,12 +22,12 @@ const Calendar = () => {
           capacity: course.capacity,
           students_enrolled: course.students_enrolled,
           price: course.price,
-          // teacher_id: course.teacher_id,
           daysOfWeek: course.days_of_week,
           startRecur: course.start_recur,
           allDay: false
         }));
         setEvents(events);
+        setLoading(false)
       })
       .catch(error => console.error(error));
   }, []);
@@ -38,12 +36,12 @@ const Calendar = () => {
     console.log(info)
   }
 
-  console.log(events)
+  if(loading) return <h1>Loading</h1>
 
   return (
-    <div>
+    <div className='full-calendar'>
 
-      <img src='web-icons/calendar.svg' width="40px" className="inline" />
+      <img src='web-icons/calendar.svg' width="30px" className="inline" alt='icon' />
       <h1 className='title'>Calendar</h1>
 
       <FullCalendar
@@ -51,7 +49,8 @@ const Calendar = () => {
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          right: 'dayGridMonth,timeGridWeek,timeGridDay',
+          contentHeight: "100px"
         }}
         events={events}
 

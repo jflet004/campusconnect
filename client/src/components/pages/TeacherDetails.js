@@ -4,10 +4,10 @@ import { UserContext } from '../../context/user'
 import "../css/Details.css"
 const TeacherDetails = ({ releaseTeacher }) => {
 
-  const { assignTeacher, errors, setErrors, loading, setLoading } = useContext(UserContext)
+  const { assignTeacher, courses, errors, setErrors, loading, setLoading } = useContext(UserContext)
 
   const [currentTeacher, setCurrentTeacher] = useState([])
-  const [courses, setCourses] = useState([])
+  // const [courses, setCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
 
   const params = useParams()
@@ -19,14 +19,14 @@ const TeacherDetails = ({ releaseTeacher }) => {
       .then(teacher => setCurrentTeacher(teacher))
       .catch(error => alert(error))
       .finally(() => setLoading(false))
-  }, [params.id])
+  }, [params.id, setLoading])
 
-  useEffect(() => {
-    fetch('/courses')
-      .then(r => r.json())
-      .then(courses => setCourses(courses))
-      .catch(error => alert(error))
-  }, [])
+  // useEffect(() => {
+  //   fetch('/courses')
+  //     .then(r => r.json())
+  //     .then(courses => setCourses(courses))
+  //     .catch(error => alert(error))
+  // }, [])
 
   const handleCourseChange = e => {
     const courseId = e.target.value;
@@ -90,7 +90,7 @@ const TeacherDetails = ({ releaseTeacher }) => {
       <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
       <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
       <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/programs/${course.id}`} className='details'>{course.title}: {course.start_time}-{course.end_time}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time}-{course.end_time}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
       <Link to="/current-teachers" className='details-link'>back to Teachers List</Link>
       <form onSubmit={handleAssignmentSubmit}>
       <br/>

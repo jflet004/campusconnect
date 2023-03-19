@@ -14,7 +14,7 @@ const EnrollmentSuccess = () => {
   }, [navigate])
 
   return (
-    <div>
+    <div className='details-card'>
       <h2 style={{color: "green"}}>The enrollment has been successful!</h2>
     </div>
   )

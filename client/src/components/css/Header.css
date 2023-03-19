@@ -1,28 +1,13 @@
 .header {
-  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
-.quote {
-  display: inline-block;
-  vertical-align:middle;
-  text-align: right;
-  margin-top: -137px;
-  margin-left: 300px;
-}
+/* .logo {
+  margin-right: 100px;
+} */
 
-.back-btn {
-  background: linear-gradient(to right, #003DA5, #004576);
-  color: #ffffff;
-  padding: 7px;
-  border: none;
-  border-radius: 3px;
-  width: 10%;
-  font-size: 16px;
-  cursor: pointer;
-  margin-bottom: 30px;
-}
-
-.back-btn:hover {
-  font-weight: bold;
-  background: linear-gradient(to right, #003DA5, #FCE300);
+.header-text{
+  padding-bottom: 18px;
+  margin-left: 420px;
 }

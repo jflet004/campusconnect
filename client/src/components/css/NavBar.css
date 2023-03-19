@@ -22,14 +22,12 @@
 .logout-btn {
   background: linear-gradient(to right, #003DA5, #425563);
   color:aliceblue;
-  padding: 5px;
   border: none;
   border-radius: 3px;
   width: 7%;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  /* margin-bottom:auto; */
   margin-left:auto;
   align-items: center;
 }

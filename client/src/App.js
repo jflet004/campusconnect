@@ -32,7 +32,6 @@ function App() {
 
 
   const [classrooms, setClassrooms] = useState([])
-  const [courses, setCourses] = useState([])
   const [users, setUsers] = useState([])
   const [enrollments, setEnrollments] = useState([])
   const [assignments, setAssignments] = useState([])
@@ -64,10 +63,6 @@ function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  // const deleteCourse = courseId => {
-  //   setCourses(courses.filter(course => course.id !== courseId))
-  // }
-
   const enrollStudent = courseEnrollment => {
     setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
   }
@@ -78,18 +73,6 @@ function App() {
 
   const releaseTeacher = teacherId => {
     setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
-  }
-
-  const updateCourse = updatedCourse => {
-    setCourses(prevCourse => {
-      return prevCourse.map(course => {
-        if (course.id === updatedCourse.id) {
-          return updatedCourse
-        } else {
-          return course
-        }
-      })
-    })
   }
 
   const updateUser = (updatedUser) => {
@@ -126,7 +109,7 @@ function App() {
             <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
             <Route path="/current-teacher/:id" element={<TeacherDetails releaseTeacher={releaseTeacher} />} />
             <Route path="/users/:id" element={<UserDetails />} />
-            <Route path="/update-course/:id" element={<UpdateCourse updateCourse={updateCourse} classrooms={classrooms} />} />
+            <Route path="/update-course/:id" element={<UpdateCourse classrooms={classrooms} />} />
             <Route path="/update-student/:id" element={<UpdateStudent />} />
             <Route path="/update-teacher/:id" element={<UpdateTeacher />} />
             <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />

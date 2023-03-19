@@ -6,7 +6,7 @@ import '../css/List.css'
 const CourseList = () => {
 
 
-  const { currentUser, courses, deleteCourse, errors } = useContext(UserContext)
+  const { currentUser, loggedIn, courses, deleteCourse, errors } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -47,87 +47,95 @@ const CourseList = () => {
   };
 
 
-  return (
-    <div >
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <label>Title</label>
-              <br />
-              <input
-                type="text"
-                value={filters.title}
-                onChange={e => handleFilterChange('title', e.target.value)}
-              />
-            </th>
-            <th>
-              <label>Start</label>
-              <br />
-              <input
-                type="text"
-                value={filters.start_time}
-                onChange={e => handleFilterChange('start_time', e.target.value)}
-              />
-            </th>
-            <th>
-              <label>End</label>
-              <br />
-              <input
-                type="text"
-                value={filters.end_time}
-                onChange={e => handleFilterChange('end_time', e.target.value)}
-              />
-            </th>
-            <th>
-              <label>Location</label>
-              <br />
-              <input
-                type="text"
-                value={filters.location}
-                onChange={e => handleFilterChange('location', e.target.value)}
-              />
-            </th>
-            <th>
-              <label>Status</label>
-              <br />
-              <input
-                type="text"
-                value={filters.capacity}
-                onChange={e => handleFilterChange('capacity', e.target.value)}
-              />
-            </th>
-            <th>
-              <label>Price</label>
-              <br />
-              <input
-                type="text"
-                value={filters.price}
-                onChange={e => handleFilterChange('price', e.target.value)}
-              />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            filteredCourses.map(course => (
-              <tr key={course.id}>
-                <td><button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> {course.title}</td>
-                <td>{course.start_time.slice(0, 5)}</td>
-                <td>{course.end_time.slice(0, 5)}</td>
-                <td>{course.location}</td>
-                <td style={{ color: getCourseStatus(course).color }}>
-                  {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
-                </td>
-                <td>${course.price}</td>
-                {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td> : null}
-              </tr>
-            ))}
-        </tbody>
-      </table>
-      {errors ? <li>{errors}</li> : null}
-    </div>
-  )
+  if (!loggedIn || !currentUser.admin) {
+    return (
+      <div>
+        <h1>Program List</h1>
+      </div>
+    )
+  } else {
+    return (
+      <div >
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <label>Title</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.title}
+                  onChange={e => handleFilterChange('title', e.target.value)}
+                />
+              </th>
+              <th>
+                <label>Start</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.start_time}
+                  onChange={e => handleFilterChange('start_time', e.target.value)}
+                />
+              </th>
+              <th>
+                <label>End</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.end_time}
+                  onChange={e => handleFilterChange('end_time', e.target.value)}
+                />
+              </th>
+              <th>
+                <label>Location</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.location}
+                  onChange={e => handleFilterChange('location', e.target.value)}
+                />
+              </th>
+              <th>
+                <label>Status</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.capacity}
+                  onChange={e => handleFilterChange('capacity', e.target.value)}
+                />
+              </th>
+              <th>
+                <label>Price</label>
+                <br />
+                <input
+                  type="text"
+                  value={filters.price}
+                  onChange={e => handleFilterChange('price', e.target.value)}
+                />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              filteredCourses.map(course => (
+                <tr key={course.id}>
+                  <td><button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> {course.title}</td>
+                  <td>{course.start_time.slice(0, 5)}</td>
+                  <td>{course.end_time.slice(0, 5)}</td>
+                  <td>{course.location}</td>
+                  <td style={{ color: getCourseStatus(course).color }}>
+                    {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
+                  </td>
+                  <td>${course.price}</td>
+                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td> : null}
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        {errors ? <li>{errors}</li> : null}
+      </div>
+    )
+  }
 }
 
 export default CourseList

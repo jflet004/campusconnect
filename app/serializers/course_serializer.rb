@@ -4,7 +4,6 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :students, through: :enrollments
   has_many :teacher_assignments
   has_many :teachers, through: :teacher_assignments
-  
 
   def start_time
     object.start_time.strftime('%H:%M:%S')
@@ -13,11 +12,5 @@ class CourseSerializer < ActiveModel::Serializer
   def end_time
     object.end_time.strftime('%H:%M:%S')
   end
-  
-  # def start_recur
-  #   object.start_recur.strftime('%Y-%m-%dT%H:%M:%S.%L').chop
-  # end
-  
-
 
 end

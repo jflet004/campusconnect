@@ -1,53 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../context/user';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react'
 import './css/Header.css'
 import './css/Icons.css'
+
 const Header = () => {
-  
-  const { currentUser } = useContext(UserContext)
-  const location = useLocation()
-  const navigate = useNavigate()
-
-  const [dailyQuote, setDailyQuote] = useState([])
-  const [loading, setLoading] = useState(true)
-  
-  useEffect(() => {
-    fetch("https://type.fit/api/quotes")
-      .then(r => r.json())
-      .then(quotes => {
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        setDailyQuote(randomQuote);
-      })
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  const handleGoBack = () => navigate(-1)
-
-if (loading) return <h1>Loading</h1>
-
-return (
-  <div className='header'>
-    <img src='web-icons/logo.svg' className='logo'/>
-    {!currentUser || currentUser.error ? (
-      <h3>Welcome. Please login or create an account</h3>
-      ) : (
-        <div>
-        {location.pathname === '/' && (
-          <h3>Welcome {currentUser.first_name}</h3>
-          )}
-        {/* {currentUser.admin && (
-          <p className='quote'><em>{dailyQuote.text}</em></p>
-          )} */}
-      <br/>
-      </div>
-    )}
-  <>
-  </>
-  </div>
-);
-
+  return (
+    <div className='header'>
+      <img src='web-icons/smallLogo.png' className='logo' alt='logo' />
+    </div>
+  );
 }
 
 export default Header

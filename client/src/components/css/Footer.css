@@ -2,7 +2,6 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  margin-right: ;
 }
 
 .page-content {
@@ -13,10 +12,11 @@ footer {
   background: linear-gradient(to right, #003DA5, #425563);
   color: aliceblue;
   text-align: center;
-  height: 50px;
-  position: fixed;
+  font-size: 8px;
+  height: 40px;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
 }
 

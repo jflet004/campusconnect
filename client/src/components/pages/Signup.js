@@ -137,8 +137,9 @@ const SignUp = () => {
         <input type='submit' value='Sign up' />
         <br />
       </form>
-      <br />
-      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
+      <div className='errors'>
+        {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
+      </div>
     </div>
   )
 }
