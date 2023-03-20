@@ -181,7 +181,6 @@ function UserProvider({ children }) {
   }
 
   const enrollStudent = (student) => {
-    console.log(student)
     fetch("/enrollments", {
       method: "POST",
       headers: {
@@ -204,6 +203,7 @@ function UserProvider({ children }) {
   }
 
   const updateStudent = (id, updatedStudent) => {
+    console.log(id)
     fetch(`/students/${id}`, {
       method: "PATCH",
       headers: {
