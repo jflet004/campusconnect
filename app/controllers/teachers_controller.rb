@@ -1,5 +1,5 @@
 class TeachersController < ApplicationController
-  before_action :is_admin?, only: [:index, :show, :create, :update]
+  before_action :is_admin?, except: [:index]
   
   def index
     teachers = Teacher.all.order(:last_name)

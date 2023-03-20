@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Routes, Route } from "react-router-dom"
 import { UserProvider } from "./context/user"
 import Home from './components/pages/Home';
@@ -24,56 +24,15 @@ import UpdateCourse from './components/pages/UpdateCourse';
 import RegistrationSuccess from './components/success_messages/RegistrationSuccess';
 import EnrollmentSuccess from './components/success_messages/EnrollmentSuccess';
 import DropSuccess from './components/success_messages/DropSuccess';
+import AssignmentSuccess from './components/success_messages/AssignmentSuccess';
+import ReleaseSuccess from './components/success_messages/ReleaseSuccess';
 import Calendar from './components/pages/Calendar';
-
 import "./components/css/Footer.css"
 
 function App() {
 
 
-  const [classrooms, setClassrooms] = useState([])
   const [users, setUsers] = useState([])
-  const [enrollments, setEnrollments] = useState([])
-  const [assignments, setAssignments] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [errors, setErrors] = useState(false)
-
-
-  useEffect(() => {
-    fetch("/enrollments")
-      .then(r => r.json())
-      .then(enrollments => setEnrollments(enrollments))
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  useEffect(() => {
-    fetch("/teacher_assignments")
-      .then(r => r.json())
-      .then(assignments => setAssignments(assignments))
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  useEffect(() => {
-    fetch("/classrooms")
-      .then(r => r.json())
-      .then(data => setClassrooms(data))
-      .catch(error => alert(error))
-      .finally(() => setLoading(false))
-  }, [])
-
-  const enrollStudent = courseEnrollment => {
-    setEnrollments(newEnrollment => [...newEnrollment, courseEnrollment])
-  }
-
-  const dropStudent = studentId => {
-    setEnrollments(enrollments.filter(enrollment => enrollment.student_id !== studentId))
-  }
-
-  const releaseTeacher = teacherId => {
-    setAssignments(assignments.filter(assignment => assignment.teacher_id !== teacherId))
-  }
 
   const updateUser = (updatedUser) => {
     setUsers((prevUsers) => {
@@ -87,7 +46,7 @@ function App() {
     });
   };
 
-  if (loading) return <h2>Loading</h2>
+  console.log(users)
 
   return (
     <UserProvider>
@@ -100,22 +59,24 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/about" element={<About />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/new-course" element={<NewCourse classrooms={classrooms} />} />
+            <Route path="/new-course" element={<NewCourse />} />
             <Route path="/register-students" element={<NewStudent  />} />
             <Route path="/courses" element={<CourseList />} />
-            <Route path="/current-students" element={<StudentList errors={errors} />} />
-            <Route path="/current-teachers" element={<TeacherList errors={errors} />} />
-            <Route path="/current-course/:id" element={<CourseDetails authErrors={errors} />} />
-            <Route path="/current-student/:id" element={<StudentDetails enrollStudent={enrollStudent} dropStudent={dropStudent} />} />
-            <Route path="/current-teacher/:id" element={<TeacherDetails releaseTeacher={releaseTeacher} />} />
+            <Route path="/current-students" element={<StudentList />} />
+            <Route path="/current-teachers" element={<TeacherList />} />
+            <Route path="/current-course/:id" element={<CourseDetails />} />
+            <Route path="/current-student/:id" element={<StudentDetails />} />
+            <Route path="/current-teacher/:id" element={<TeacherDetails />} />
             <Route path="/users/:id" element={<UserDetails />} />
-            <Route path="/update-course/:id" element={<UpdateCourse classrooms={classrooms} />} />
+            <Route path="/update-course/:id" element={<UpdateCourse />} />
             <Route path="/update-student/:id" element={<UpdateStudent />} />
             <Route path="/update-teacher/:id" element={<UpdateTeacher />} />
             <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
             <Route path="/successful-registration" element={<RegistrationSuccess />} />
             <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
+            <Route path="/assignment-success" element={<AssignmentSuccess />} />
             <Route path="/drop-successful" element={<DropSuccess />} />
+            <Route path="/release-successful" element={<ReleaseSuccess />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>

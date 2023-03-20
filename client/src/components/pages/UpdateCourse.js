@@ -1,16 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import "../css/Details.css"
 
-const UpdateCourse = ({ classrooms }) => {
+const UpdateCourse = () => {
 
-  const { updateCourse } = useContext(UserContext)
+  const { updateCourse, errors, classrooms } = useContext(UserContext)
 
   const params = useParams()
-  const navigate = useNavigate()
-
-  const [errors, setErrors] = useState(false)
 
   const [formData, setFormData] = useState({
     title: "",
@@ -58,6 +55,7 @@ const UpdateCourse = ({ classrooms }) => {
           name="title"
           value={formData.title}
           onChange={handleChange}
+        className="details-select"
         />
         <br />
         <br />
@@ -68,6 +66,7 @@ const UpdateCourse = ({ classrooms }) => {
           name="start_time"
           value={formData.start_time}
           onChange={handleChange}
+        className="details-select"
         />
         <br />
         <br />
@@ -78,6 +77,7 @@ const UpdateCourse = ({ classrooms }) => {
           name="end_time"
           value={formData.end_time}
           onChange={handleChange}
+        className="details-select"
         />
         <br />
         <br />
@@ -87,6 +87,7 @@ const UpdateCourse = ({ classrooms }) => {
           name="location"
           value={formData.location}
           onChange={handleChange}
+          className="details-select"
           >
           <option value="">Select one</option>
           {locationOptions}

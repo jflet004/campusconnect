@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import '../css/List.css'
+import '../css/Calendar.css'
 
 const StudentList = () => {
 
-  const {students, loading, errors} = useContext(UserContext)
+  const { students, loading, errors } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -52,15 +53,16 @@ const StudentList = () => {
     </tr>
   ))
 
-  if(loading) return <h1>Loading</h1>
-  
+  if (loading) return <h1>Loading</h1>
+
   return (
     <div >
       <br />
       {errors ? <li>{errors}</li> :
         <>
-          <h1>Student List</h1>
-          <table>
+          <img src='web-icons/students.svg' width="30px" className="inline" alt='icon' />
+          <h1 className='title'>Students</h1>
+          <table className='student-table'>
             <thead>
               <tr>
                 <th>

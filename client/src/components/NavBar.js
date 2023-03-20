@@ -26,7 +26,7 @@ const NavBar = () => {
     <div className='navbar'>
       <NavLink to="/">{!loggedIn ? "Login" : "Home"}</NavLink>
       <NavLink to="/about">About</NavLink>
-      <NavLink to="/courses">Programs</NavLink>
+      <NavLink to="/courses">Courses</NavLink>
       {loggedIn && currentUser.admin && (
         <>
           <NavLink to="/calendar">Calendar</NavLink>

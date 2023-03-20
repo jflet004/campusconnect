@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 import "../css/Details.css"
-const StudentDetails = ({ enrollStudent, dropStudent }) => {
+const StudentDetails = () => {
+
+  const { courses, enrollStudent, dropStudent, errors, setErrors, updateCourseEnrollment, updateCourseDrop } = useContext(UserContext)
 
   const [currentStudent, setCurrentStudent] = useState([])
-  const [courses, setCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
-  const [errors, setErrors] = useState(false)
   const [loading, setLoading] = useState(true)
 
   const params = useParams()
-  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/students/${params.id}`)
@@ -19,13 +19,6 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [params.id])
-
-  useEffect(() => {
-    fetch('/courses')
-      .then(r => r.json())
-      .then(courses => setCourses(courses))
-      .catch(error => alert(error))
-  }, [])
 
   const handleCourseChange = e => {
     const courseId = e.target.value;
@@ -39,53 +32,21 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       setErrors(["Please select a course"])
       return
     }
-    fetch("/enrollments", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        student_id: currentStudent.id,
-        course_id: selectedCourse.id
-      })
+    enrollStudent({
+      student_id: currentStudent.id,
+      course_id: selectedCourse.id
     })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(enrollStudent)
-          setCourses(courses)
-          navigate("/enrollment-success")
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    updateCourseEnrollment(selectedCourse.id)
   }
-
+  
   const courseOptions = courses.map((course) => (
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-  ))
-
-  const handleDropCourse = (course, studentId) => {
-    const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
-
-    fetch(`/enrollments/${enrollmentId}`, {
-      method: "DELETE"
-    })
-      .then(r => {
-        if (r.ok) {
-          dropStudent(studentId)
-          navigate("/drop-successful")
-        } else {
-          r.json().then(data => {
-            console.log(data);
-            setErrors(data.errors);
-          })
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("An error occurred while dropping the course.");
-      })
-
+    ))
+    
+    const handleDropCourse = (course, studentId) => {
+      const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
+      dropStudent(enrollmentId, studentId)
+      updateCourseDrop(course.id)
   }
 
 
@@ -101,6 +62,7 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
       <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
       <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Parent/Guardian:</span> {currentStudent.user.first_name} {currentStudent.user.last_name}</p>
       <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time}-{course.end_time}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students" className='details-link'>back to Student List</Link>
@@ -124,7 +86,11 @@ const StudentDetails = ({ enrollStudent, dropStudent }) => {
       </form>
       <br />
       <div className='errors'>
-        {errors ? errors.map(error => <li key={error} className="error-msg">{error}</li>) : null}
+        {Array.isArray(errors) ? (
+          <ul>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>
+        ) : (errors ? <li>{errors}</li> : null)}
       </div>
     </div>
   )

@@ -1,6 +1,8 @@
 class StudentsController < ApplicationController
-  before_action :is_admin?, only: [:index, :show, :update]
-  
+
+  skip_before_action :user_authentication, only:[:index]
+  before_action :is_admin?, only: [:show, :update, :destroy]
+
   def index
     students = Student.all.order(:last_name)
     render json: students, status: :ok
@@ -8,7 +10,7 @@ class StudentsController < ApplicationController
 
   def show
     student = Student.find(params[:id])
-    render json: student, include: ["courses", "courses.enrollments"], status: :ok
+    render json: student, include: ["courses", "courses.enrollments", "user"], status: :ok
   end
 
   def create

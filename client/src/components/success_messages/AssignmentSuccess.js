@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const EnrollmentSuccess = () => {
+const AssignmentSuccess = () => {
 
   const navigate = useNavigate()
 
@@ -15,9 +15,9 @@ const EnrollmentSuccess = () => {
 
   return (
     <div className='details-card'>
-      <h2 style={{color: "#00968f"}}>The enrollment has been successful!</h2>
+      <h2 style={{color: "#00968f"}}>Teacher assignment has been successful!</h2>
     </div>
   )
 }
 
-export default EnrollmentSuccess
+export default AssignmentSuccess

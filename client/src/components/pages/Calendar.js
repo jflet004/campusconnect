@@ -29,14 +29,11 @@ const Calendar = () => {
         setEvents(events);
         setLoading(false)
       })
-      .catch(error => console.error(error));
+      .catch(error => alert(error));
   }, []);
 
-  const handleEventClick = (info) => {
-    console.log(info)
-  }
 
-  if(loading) return <h1>Loading</h1>
+  if (loading) return <h1>Loading</h1>
 
   return (
     <div className='full-calendar'>
@@ -53,11 +50,7 @@ const Calendar = () => {
           contentHeight: "100px"
         }}
         events={events}
-
-        eventClick={handleEventClick}
-
       />
-
     </div>
   )
 }

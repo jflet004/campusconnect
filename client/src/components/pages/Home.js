@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import '../css/LoginForm.css'
@@ -7,11 +7,21 @@ const Home = () => {
   const { currentUser, login, loggedIn } = useContext(UserContext)
 
   const navigate = useNavigate()
+  const [date, setDate] = useState(new Date());
   const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   })
+
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   const { email, password } = formData
 
@@ -69,9 +79,9 @@ const Home = () => {
   }
 
   return (
-    <div className='login-form'>
+    <div>
       {!loggedIn ?
-        <div >
+        <div className='login-form' >
           <form onSubmit={handleSubmit}>
             <label>Email</label>
             <input
@@ -90,9 +100,36 @@ const Home = () => {
             <br />
           </form>
         </div> :
-        <div>
-          <h4>Students Enrolled</h4>
-          {studentList}
+        <div className='details-card'>
+          {!currentUser.admin && (
+            <div>
+              <h4>Students Enrolled</h4>
+              {studentList}
+            </div>
+          )}
+          {currentUser.admin && (
+            <div className='details_card'>
+              <h2>{currentUser.first_name} {currentUser.last_name}</h2>
+              <h3>{date.toDateString()} Agenda</h3>
+              <ul>
+                <li>Review and respond to emails and phone messages.</li>
+                <li>Attend morning staff meeting to discuss any important updates or issues.</li>
+                <li>Conduct classroom observations and provide feedback to teachers.</li>
+                <li>Meet with parents and students to address any concerns or issues.</li>
+                <li>Review and update school policies and procedures.</li>
+                <li>Meet with department heads to discuss curriculum and instructional strategies.</li>
+                <li>Conduct walkthroughs to ensure compliance with safety and security protocols.</li>
+                <li>Attend meetings with the school board or other administrative teams.</li>
+                <li>Review and approve school budget and financial reports.</li>
+                <li>Plan and organize upcoming school events, such as field trips or parent-teacher conferences.</li>
+                <li>Work with human resources to recruit and hire new staff as needed.</li>
+                <li>Attend professional development workshops or conferences to stay up-to-date on best practices and new educational trends.</li>
+                <li>Review and respond to any additional emails or messages before the end of the day.</li>
+                <li>Close out the day by reviewing and prioritizing tasks for the following day.</li>
+              </ul>
+
+            </div>
+          )}
         </div>
       }
       <div className='errors'>

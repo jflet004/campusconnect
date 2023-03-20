@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import "../css/Details.css"
-const TeacherDetails = ({ releaseTeacher }) => {
 
-  const { assignTeacher, courses, errors, setErrors, loading, setLoading } = useContext(UserContext)
+const TeacherDetails = () => {
+
+  const { releaseTeacher, assignTeacher, courses, errors, setErrors, loading, setLoading } = useContext(UserContext)
 
   const [currentTeacher, setCurrentTeacher] = useState([])
-  // const [courses, setCourses] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
 
   const params = useParams()
-  const navigate = useNavigate()
 
   useEffect(() => {
     fetch(`/teachers/${params.id}`)
@@ -20,13 +19,6 @@ const TeacherDetails = ({ releaseTeacher }) => {
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }, [params.id, setLoading])
-
-  // useEffect(() => {
-  //   fetch('/courses')
-  //     .then(r => r.json())
-  //     .then(courses => setCourses(courses))
-  //     .catch(error => alert(error))
-  // }, [])
 
   const handleCourseChange = e => {
     const courseId = e.target.value;
@@ -46,34 +38,13 @@ const TeacherDetails = ({ releaseTeacher }) => {
     })
   }
 
-
   const courseOptions = courses.map((course) => (
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
   const handleCourseRelease = (course, teacherId) => {
-    
     const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
-
-    fetch(`/teacher_assignments/${assignmentId}`, {
-      method: "DELETE"
-    })
-      .then(r => {
-        if (r.ok) {
-          releaseTeacher(teacherId)
-          navigate("/drop-successful")
-        } else {
-          r.json().then(data => {
-            console.log(data);
-            setErrors(data.errors);
-          })
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        alert("An error occurred while dropping the course.");
-      })
-
+    releaseTeacher(assignmentId, teacherId)
   }
 
   if (loading) return <h2>Loading</h2>
@@ -93,7 +64,7 @@ const TeacherDetails = ({ releaseTeacher }) => {
       <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time}-{course.end_time}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
       <Link to="/current-teachers" className='details-link'>back to Teachers List</Link>
       <form onSubmit={handleAssignmentSubmit}>
-      <br/>
+        <br />
 
         <h1 className='details-title'>Assign Course</h1>
         <label>Courses</label>
@@ -111,7 +82,9 @@ const TeacherDetails = ({ releaseTeacher }) => {
         <input type="submit" value="Assign Course" className='details-list' />
       </form>
       <br />
-      {errors ? errors.map(error => <li key={error} className="error-msg">{error}</li>) : null}
+      <div className='errors'>
+        {errors ? errors.map(error => <li key={error} className="error-msg">{error}</li>) : null}
+      </div>
     </div>
   )
 }

@@ -1,15 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import '../css/List.css'
 
 const CourseList = () => {
 
-
-  const { currentUser, loggedIn, courses, deleteCourse, errors } = useContext(UserContext)
-
+  const { currentUser, loggedIn, deleteCourse, courses} = useContext(UserContext)
   const navigate = useNavigate()
-
+  const [availableCourses, setAvailableCourses] = useState([])
   const [filters, setFilters] = useState({
     title: '',
     start_time: '',
@@ -18,6 +16,13 @@ const CourseList = () => {
     capacity: '',
     price: ''
   });
+
+  useEffect(() => {
+    fetch("/courses")
+    .then(r => r.json())
+    .then(data => setAvailableCourses(data))
+    .catch(error => alert(error))
+  },[])
 
   const handleCourseDelete = (courseId) => {
     deleteCourse(courseId)
@@ -46,17 +51,51 @@ const CourseList = () => {
     return { status, color, enrollment };
   };
 
+  const coursesOffered = availableCourses.map(course => {
+    if (course.space_left > 0) {
+      const dayOfWeekStrings = course.days_of_week.map(dayOfWeek => {
+        switch (dayOfWeek) {
+          case '1':
+            return 'Sunday'
+          case '2':
+            return 'Monday'
+          case '3':
+            return 'Tuesday'
+          case '4':
+            return 'Wednesday'
+          case '5':
+            return 'Thursday'
+          case '6':
+            return 'Friday'
+          case '7':
+            return 'Saturday'
+          default:
+            return ''
+        }
+      })
+      const dayOfWeekString = dayOfWeekStrings.join(", ")
+      return (
+        <div>
+          <h4>{course.title}</h4>
+          <p style={{ fontSize: "14px" }}>{dayOfWeekString}</p>
+          <p style={{ fontSize: "14px" }}>{course.start_time.slice(0, 5)} - {course.end_time.slice(0, 5)}</p>
+        </div>
+      )
+    }
+  })
 
-  if (!loggedIn || !currentUser.admin) {
+  if (!loggedIn) {
     return (
-      <div>
-        <h1>Program List</h1>
+      <div className='details-card'>
+        <h1 className='details-title'>Available Courses</h1>
+        <br/>
+        {coursesOffered}
       </div>
     )
   } else {
     return (
       <div >
-        <table>
+        <table className='course-table'>
           <thead>
             <tr>
               <th>
@@ -127,12 +166,11 @@ const CourseList = () => {
                     {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
                   </td>
                   <td>${course.price}</td>
-                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)}>X</button> {course.first_title} {course.last_title}</td> : null}
+                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className="course-delete">X</button> {course.first_title} {course.last_title}</td> : null}
                 </tr>
               ))}
           </tbody>
         </table>
-        {errors ? <li>{errors}</li> : null}
       </div>
     )
   }

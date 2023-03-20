@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
 
-  skip_before_action :user_authentication, only:[:index]
-  # before_action :is_admin?, only: [:show, :create, :update]
+  skip_before_action :user_authentication, only: [:index]
+  before_action :is_admin?, only: [:show, :create, :update]
   
   def index
     courses = Course.all

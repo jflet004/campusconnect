@@ -6,7 +6,6 @@ const NewStudent = () => {
 
   const { currentUser, courses, addStudent, loggedIn, errors } = useContext(UserContext)
 
-  // const [errors, setErrors] = useState(false)
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -33,7 +32,8 @@ const NewStudent = () => {
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
-  // if (loading) return <h1>Loading</h1>
+  console.log(Array.isArray(errors))
+
   if (loggedIn) {
     return (
       <div className='student-form'>
@@ -119,7 +119,11 @@ const NewStudent = () => {
         </form>
         <br />
         <div className='errors'>
-          {errors ? <li>{errors}</li> : null}
+          {Array.isArray(errors) ? (
+            <ul>
+              {errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
+          ) : (errors ? <li>{errors}</li> : null)}
         </div>
       </div>
     )

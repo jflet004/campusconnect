@@ -14,8 +14,8 @@ const DropSuccess = () => {
   }, [navigate])
 
   return (
-    <div>
-      <h2 style={{ color: "green" }}>The student has been dropped successfully!</h2>
+    <div className='details-card'>
+      <h2 style={{ color: "#00968f" }}>The student has been dropped successfully!</h2>
     </div>
   )
 }

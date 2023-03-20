@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const RegistrationSuccess = () => {
   return (
-    <div>
+    <div className='details-card'>
       <p>Your student's registration form has been <b>submitted.</b></p>
       <p>Staff will give you a call soon to check availability.</p>
       <br/>

@@ -32,5 +32,13 @@ class Course < ApplicationRecord
   def number_of_students_enrolled
     self.enrollments.count
   end
-  
+
+  def space_left
+    self.capacity - self.enrollments.count
+  end
+
+  def days_offered
+    self.start_recur.strftime('%A')
+  end
+
 end

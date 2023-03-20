@@ -60,7 +60,7 @@
 
 .details-select {
   width: 75%;
-  font-size: 16px;
+  font-size: 14px;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -68,13 +68,11 @@
   margin-bottom: 10px;
 }
 
-/* Set styles for the course information */
 p {
   margin: 10px 0;
   font-size: 18px;
 }
 
-/* Set styles for the bold span elements */
 span {
   font-weight: bold;
 }
