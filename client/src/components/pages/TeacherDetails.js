@@ -61,7 +61,7 @@ const TeacherDetails = () => {
       <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
       <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
       <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time}-{course.end_time}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
+      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
       <Link to="/current-teachers" className='details-link'>back to Teachers List</Link>
       <form onSubmit={handleAssignmentSubmit}>
         <br />
