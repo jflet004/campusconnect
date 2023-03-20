@@ -152,7 +152,7 @@ function UserProvider({ children }) {
             setCourses([...courses, data])
             setErrors(false)
           })
-          navigate('/enrollment-success')
+          navigate('/submit-successful')
         } else {
           r.json().then(data => setErrors(data.errors))
         }

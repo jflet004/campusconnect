@@ -28,6 +28,7 @@ import AssignmentSuccess from './components/success_messages/AssignmentSuccess';
 import ReleaseSuccess from './components/success_messages/ReleaseSuccess';
 import Calendar from './components/pages/Calendar';
 import "./components/css/Footer.css"
+import NewCourseSuccess from './components/success_messages/NewCourseSuccess';
 
 function App() {
 
@@ -77,6 +78,7 @@ function App() {
             <Route path="/assignment-success" element={<AssignmentSuccess />} />
             <Route path="/drop-successful" element={<DropSuccess />} />
             <Route path="/release-successful" element={<ReleaseSuccess />} />
+            <Route path="/submit-successful" element={<NewCourseSuccess />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
