@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import '../css/Icons.css'
+import '../css/Calendar.css'
+
 const Calendar = () => {
 
   const [events, setEvents] = useState([])
@@ -33,10 +35,12 @@ const Calendar = () => {
   }, []);
 
 
+
+
   if (loading) return <h1>Loading</h1>
 
   return (
-    <div className='full-calendar'>
+    <div className='calendar'>
 
       <img src='web-icons/calendar.svg' width="30px" className="inline" alt='icon' />
       <h1 className='title'>Calendar</h1>
@@ -49,6 +53,7 @@ const Calendar = () => {
           right: 'dayGridMonth,timeGridWeek,timeGridDay',
           contentHeight: "100px"
         }}
+        
         events={events}
       />
     </div>

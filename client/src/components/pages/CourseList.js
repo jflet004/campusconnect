@@ -5,7 +5,7 @@ import '../css/List.css'
 
 const CourseList = () => {
 
-  const { currentUser, loggedIn, deleteCourse, courses} = useContext(UserContext)
+  const { currentUser, loggedIn, deleteCourse, courses } = useContext(UserContext)
   const navigate = useNavigate()
   const [availableCourses, setAvailableCourses] = useState([])
   const [filters, setFilters] = useState({
@@ -19,10 +19,10 @@ const CourseList = () => {
 
   useEffect(() => {
     fetch("/courses")
-    .then(r => r.json())
-    .then(data => setAvailableCourses(data))
-    .catch(error => alert(error))
-  },[])
+      .then(r => r.json())
+      .then(data => setAvailableCourses(data))
+      .catch(error => alert(error))
+  }, [])
 
   const handleCourseDelete = (courseId) => {
     deleteCourse(courseId)
@@ -86,10 +86,14 @@ const CourseList = () => {
 
   if (!loggedIn) {
     return (
-      <div className='details-card'>
+      <div >
+        <div className='details-card'>
         <h1 className='details-title'>Available Courses</h1>
-        <br/>
+        <br />
         {coursesOffered}
+        </div>
+        <br/>
+        <p style={{textAlign:"center", fontWeight:"bold"}}>Create an account or login to view availability</p>
       </div>
     )
   } else {
@@ -158,7 +162,7 @@ const CourseList = () => {
             {
               filteredCourses.map(course => (
                 <tr key={course.id}>
-                  <td><button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> {course.title}</td>
+                  <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> : null} {course.title}</td>
                   <td>{course.start_time.slice(0, 5)}</td>
                   <td>{course.end_time.slice(0, 5)}</td>
                   <td>{course.location}</td>

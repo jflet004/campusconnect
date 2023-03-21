@@ -138,6 +138,8 @@ function UserProvider({ children }) {
       })
   }
 
+  // const addUser = 
+
   const addCourse = (course) => {
     fetch("/courses", {
       method: "POST",
@@ -405,7 +407,7 @@ function UserProvider({ children }) {
   if (loading) return <h1>Loading</h1>
 
   return (
-    <UserContext.Provider value={{updateCourseEnrollment, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{updateCourseEnrollment, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )
