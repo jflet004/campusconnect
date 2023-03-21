@@ -5,7 +5,7 @@ import '../css/LoginForm.css'
 
 const SignUp = () => {
 
-  const { setCurrentUser } = useContext(UserContext)
+  const { signup } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -48,7 +48,7 @@ const SignUp = () => {
       .then(r => {
         if (r.ok) {
           r.json().then(user => {
-            setCurrentUser(user)
+            signup(user)
             navigate('/')
           })
         } else {

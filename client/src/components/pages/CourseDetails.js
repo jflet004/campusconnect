@@ -23,7 +23,6 @@ const CourseDetails = () => {
 
   if (loading) return <h1>Loading</h1>
 
-
   return (
     <div className='details-card'>
       <h1 className='details-title'>

@@ -1,6 +1,6 @@
   class TeacherAssignmentsController < ApplicationController
     
-    before_action :is_admin?, except: [:index]
+    before_action :is_admin?
    
     def index
       assignments = TeacherAssignment.all

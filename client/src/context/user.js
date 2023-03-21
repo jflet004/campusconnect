@@ -138,7 +138,6 @@ function UserProvider({ children }) {
       })
   }
 
-  // const addUser = 
 
   const addCourse = (course) => {
     fetch("/courses", {

@@ -32,8 +32,6 @@ const NewStudent = () => {
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
   ))
 
-  console.log(Array.isArray(errors))
-
   if (loggedIn) {
     return (
       <div className='student-form'>
