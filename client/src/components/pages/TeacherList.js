@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
-import '../css/List.css'
+import '../css/TeacherList.css'
 
 const TeacherList = () => {
 
@@ -32,8 +32,8 @@ const TeacherList = () => {
   });
 
   const teacherList = filteredTeachers.map(teacher => (
-    <tr key={teacher.id}>
-      <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-teacher/${teacher.id}`) }} className='mg'>🔎</button> : null} {teacher.first_name} {teacher.last_name}</td>
+    <tr className='teacher-table-rows' key={teacher.id}>
+      <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-teacher/${teacher.id}`) }} className='details-button'>🔎</button> : null} {teacher.first_name} {teacher.last_name}</td>
       <td>{teacher.email}</td>
       <td>{teacher.phone_number}</td>
     </tr>
@@ -43,9 +43,9 @@ const TeacherList = () => {
 
   return (
     <div >
-      <img src='web-icons/teachers.svg' width="30px" className="inline" alt='icon' />
-      <h1 className='title'>Teachers</h1>
-      <table>
+      <img src='web-icons/teachers.svg' width="30px" className="teacher-icon-inline" alt='icon' />
+      <h1 className='teacher-title'>Teachers</h1>
+      <table className='teacher-table'>
         <thead>
           <tr>
             <th>

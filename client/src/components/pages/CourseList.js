@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
-import '../css/List.css'
+import '../css/CourseList.css'
 
 const CourseList = () => {
 
@@ -161,8 +161,8 @@ const CourseList = () => {
           <tbody>
             {
               filteredCourses.map(course => (
-                <tr key={course.id}>
-                  <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='mg'>🔎</button> : null} {course.title}</td>
+                <tr className='course-table-rows' key={course.id}>
+                  <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='details-button'>🔎</button> : null} {course.title}</td>
                   <td>{course.start_time.slice(0, 5)}</td>
                   <td>{course.end_time.slice(0, 5)}</td>
                   <td>{course.location}</td>
@@ -170,7 +170,7 @@ const CourseList = () => {
                     {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
                   </td>
                   <td>${course.price}</td>
-                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className="course-delete">X</button> {course.first_title} {course.last_title}</td> : null}
+                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
                 </tr>
               ))}
           </tbody>

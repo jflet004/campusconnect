@@ -1,8 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
-import '../css/List.css'
-import '../css/Calendar.css'
+import '../css/StudentList.css'
 
 const StudentList = () => {
 
@@ -42,12 +41,12 @@ const StudentList = () => {
   });
 
   const studentList = filteredStudents.map(student => (
-    <tr key={student.id}>
-      <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='mg'>🔎</button> {student.first_name} {student.last_name}</td>
+    <tr className='student-table-rows' key={student.id}>
+      <td ><button onClick={() => { navigate(`/current-student/${student.id}`) }} className='details-button'>🔎</button> {student.first_name} {student.last_name}</td>
       <td>{student.age}</td>
       <td>{student.interest}</td>
       <td>{student.created_at}</td>
-      <td><button onClick={() => { navigate(`/users/${student.user.id}`) }} className='mg'>🔎</button> {student.user.first_name} {student.user.last_name}</td>
+      <td><button onClick={() => { navigate(`/users/${student.user.id}`) }} className='details-button'>🔎</button> {student.user.first_name} {student.user.last_name}</td>
       <td>{student.user.email}</td>
       <td>{student.user.phone_number}</td>
     </tr>
@@ -60,8 +59,8 @@ const StudentList = () => {
       <br />
       {errors ? <li>{errors}</li> :
         <>
-          <img src='web-icons/students.svg' width="30px" className="inline" alt='icon' />
-          <h1 className='title'>Students</h1>
+          <img src='web-icons/students.svg' width="30px" className="student-icon-inline" alt='icon' />
+          <h1 className='student-title'>Students</h1>
           <table className='student-table'>
             <thead>
               <tr>

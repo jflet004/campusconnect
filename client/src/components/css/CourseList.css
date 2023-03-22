@@ -1,37 +1,41 @@
-/* Styles for StudentList component */
-
-/* Table styles */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 30px;
-  margin-left: 10px;
+.course-icon-inline {
+  display: inline-block;
+  margin-left: 50px;
 }
 
-th,
-td {
+.course-title {
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+  margin-top: -1px;
+}
+
+table.course-table {
+  width: 97%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  margin-left: 30px;
+}
+
+.course-table-rows {
   padding: 5px;
   text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
-td:first-child,
-table.course-table td:nth-child(5) {
+table.course-table td:first-child {
   text-align: left;
-  padding-left: 50px;
+  padding-left: 20px;
 }
 
-table.student-table td:nth-child(5) {
-  text-align: left;
-  padding-left: 50px;
-}
-
-th {
+table.course-table th {
   background-color: #f2f2f2;
   font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Input styles */
 input[type="text"] {
   width: 75%;
   padding: 5px;
@@ -40,8 +44,7 @@ input[type="text"] {
   margin-bottom: 5px;
 }
 
-/* Button styles */
-.mg {
+.details-button {
   background-color: #697f8f;
   border: none;
   color: white;
@@ -53,13 +56,10 @@ input[type="text"] {
   cursor: pointer;
 }
 
-.course-delete {
-  margin-right: 50px;
-  color: white;
-  background-color: #697f8f;
+.delete-course {
+  margin-left: -35px;
 }
 
 button:hover {
-  background-color: #FCE300;
+  background-color: #fce300;
 }
-

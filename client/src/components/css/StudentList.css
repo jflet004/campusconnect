@@ -1,0 +1,66 @@
+.student-icon-inline {
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.student-title {
+  display: inline-block;
+  margin-left: 5px;
+  vertical-align: middle;
+  margin-top: -1px;
+}
+
+table.student-table {
+  width: 97%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  margin-left: 30px;
+}
+
+.student-table-rows {
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+table.student-table td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+
+table.student-table td:nth-child(5) {
+  text-align: left;
+  padding-left: 20px;
+}
+
+table.student-table th {
+  background-color: #f2f2f2;
+  font-size: 16px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+input[type="text"] {
+  width: 75%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+}
+
+.details-button {
+  background-color: #697f8f;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  border-radius: 80px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #fce300;
+}
