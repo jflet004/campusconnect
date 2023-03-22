@@ -10,9 +10,9 @@ const AdminPage = () => {
       <br/>
       <Link to="/current-teachers">View Teachers</Link>
       <br/>
-      <Link to="/courses">View Programs</Link>
+      <Link to="/courses">View Courses</Link>
       <br/>
-      <Link to="/new-course">Add Program</Link>
+      <Link to="/new-course">Add Course</Link>
       <br/>
     </div>
   )

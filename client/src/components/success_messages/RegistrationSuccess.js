@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 
 const RegistrationSuccess = () => {
+
+  // const { currentUser } = useContext(UserContext)
+
+  // useEffect(() => {
+  //   console.log(currentUser)
+  // }, [])
+
   return (
     <div className='details-card'>
       <p>Your student's registration form has been <b>submitted.</b></p>
