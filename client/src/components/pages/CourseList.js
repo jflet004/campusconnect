@@ -75,10 +75,11 @@ const CourseList = () => {
       })
       const dayOfWeekString = dayOfWeekStrings.join(", ")
       return (
-        <div>
+        <div key={course.id}>
           <h4>{course.title}</h4>
           <p style={{ fontSize: "14px" }}>{dayOfWeekString}</p>
           <p style={{ fontSize: "14px" }}>{course.start_time.slice(0, 5)} - {course.end_time.slice(0, 5)}</p>
+          <p style={{ fontSize: "14px", color: getCourseStatus(course).color }}>{getCourseStatus(course).status} {getCourseStatus(course).enrollment}</p>
         </div>
       )
     }
@@ -88,12 +89,13 @@ const CourseList = () => {
     return (
       <div >
         <div className='details-card'>
-        <h1 className='details-title'>Available Courses</h1>
+        <h1 className='details-title'>Courses Offered</h1>
         <br />
         {coursesOffered}
         </div>
         <br/>
-        <p style={{textAlign:"center", fontWeight:"bold"}}>Create an account or login to view availability</p>
+        <p style={{textAlign:"center", fontWeight:"bold"}}>Create an account or login to register your student</p>
+        <br/>
       </div>
     )
   } else {
