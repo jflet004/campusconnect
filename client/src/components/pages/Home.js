@@ -96,24 +96,32 @@ const Home = () => {
   return (
     <div>
       {!loggedIn ?
-        <div className='login-form' >
-          <form onSubmit={handleSubmit}>
-            <label>Email</label>
-            <input
-              type='email'
-              name='email'
-              value={email}
-              onChange={handleChange} />
-            <br />
-            <label>Password</label>
-            <input type='password'
-              name='password'
-              value={password}
-              onChange={handleChange} />
-            <br />
-            <input type='submit' value='Login' />
-            <br />
-          </form>
+        <div>
+          <div className='login-form' >
+            <form onSubmit={handleSubmit}>
+              <label>Email</label>
+              <input
+                type='email'
+                name='email'
+                value={email}
+                onChange={handleChange} />
+              <br />
+              <label>Password</label>
+              <input type='password'
+                name='password'
+                value={password}
+                onChange={handleChange} />
+              <br />
+              <input type='submit' value='Login' />
+              <br />
+            </form>
+          </div>
+          <div className='details-card'>
+            <p style={{ textAlign: "center" }}>Welcome to CampusConnect!
+              <p>
+                If you already have an account, please log in to access your personalized experience. If you don't have an account yet, don't worry - creating one is easy! Simply click on the <strong>'Create Account'</strong> button above and follow the steps.</p>
+            </p>
+          </div>
         </div> :
         <div className='details-card'>
           {!currentUser.admin && (
