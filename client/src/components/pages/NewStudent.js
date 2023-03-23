@@ -22,7 +22,6 @@ const NewStudent = () => {
       setFormData({ ...formData, gender: e.target.value })
     }
   }
-  console.log(formData)
 
   const handleSubmit = e => {
     e.preventDefault()

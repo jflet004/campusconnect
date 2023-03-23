@@ -51,20 +51,21 @@ const StudentDetails = () => {
 
 
   if (loading) return <h2>Loading</h2>
+  
 
   return (
     <div className='details-card' >
       <h2 className='details-title' >{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
       <Link to={`/update-student/${params.id}`} className='details-link'>Edit</Link>
-      <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentStudent.first_name}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentStudent.last_name}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Age:</span> {currentStudent.age}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Birthday:</span> {currentStudent.birthday}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Gender:</span> {currentStudent.gender}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Student Since:</span> {currentStudent.created_at}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Parent/Guardian:</span> {currentStudent.user.first_name} {currentStudent.user.last_name}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
-      <p style={{ whiteSpace: 'pre-wrap' }}><span style={{ fontWeight: 'bold' }}>Notes:<br /></span><em>{currentStudent.notes}</em></p>
+      <p><span>First Name:</span> {currentStudent.first_name}</p>
+      <p><span>Last Name:</span> {currentStudent.last_name}</p>
+      <p><span>Age:</span> {currentStudent.age}</p>
+      <p><span>Birthday:</span> {currentStudent.birthday}</p>
+      <p><span>Gender:</span> {currentStudent.gender}</p>
+      <p><span>Student Since:</span> {currentStudent.created_at}</p>
+      <p><span>Parent/Guardian:</span> {currentStudent.user.first_name} {currentStudent.user.last_name}</p>
+      <p><span>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
+      <p style={{ whiteSpace: 'pre-wrap' }}><span>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students" className='details-link'>back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
 

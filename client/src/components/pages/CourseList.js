@@ -76,7 +76,7 @@ const CourseList = () => {
       const dayOfWeekString = dayOfWeekStrings.join(", ")
       return (
         <div key={course.id}>
-          <h4>{course.title}</h4>
+          <p style={{ fontWeight: "bold" }}>{course.title}</p>
           <p style={{ fontSize: "14px" }}>{dayOfWeekString}</p>
           <p style={{ fontSize: "14px" }}>{course.start_time.slice(0, 5)} - {course.end_time.slice(0, 5)}</p>
           <p style={{ fontSize: "14px", color: getCourseStatus(course).color }}>{getCourseStatus(course).status} {getCourseStatus(course).enrollment}</p>
@@ -85,17 +85,31 @@ const CourseList = () => {
     }
   })
 
+  const courseList = filteredCourses.map(course => (
+    <tr className='course-table-rows' key={course.id}>
+      <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='details-button'>🔎</button> : null} {course.title}</td>
+      <td>{course.start_time.slice(0, 5)}</td>
+      <td>{course.end_time.slice(0, 5)}</td>
+      <td>{course.location}</td>
+      <td style={{ color: getCourseStatus(course).color }}>
+        {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
+      </td>
+      <td>${course.price}</td>
+      {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
+    </tr>
+  ))
+
   if (!loggedIn) {
     return (
       <div >
         <div className='details-card'>
-        <h1 className='details-title'>Courses Offered</h1>
-        <br />
-        {coursesOffered}
+          <h1 className='details-title'>Courses Offered</h1>
+          <br />
+          {coursesOffered}
         </div>
-        <br/>
-        <p style={{textAlign:"center", fontWeight:"bold"}}>Create an account or login to register your student</p>
-        <br/>
+        <br />
+        <p style={{ textAlign: "center", fontWeight: "bold" }}>Create an account or login to register your student</p>
+        <br />
       </div>
     )
   } else {
@@ -161,20 +175,7 @@ const CourseList = () => {
             </tr>
           </thead>
           <tbody>
-            {
-              filteredCourses.map(course => (
-                <tr className='course-table-rows' key={course.id}>
-                  <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='details-button'>🔎</button> : null} {course.title}</td>
-                  <td>{course.start_time.slice(0, 5)}</td>
-                  <td>{course.end_time.slice(0, 5)}</td>
-                  <td>{course.location}</td>
-                  <td style={{ color: getCourseStatus(course).color }}>
-                    {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
-                  </td>
-                  <td>${course.price}</td>
-                  {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
-                </tr>
-              ))}
+            {courseList}
           </tbody>
         </table>
       </div>

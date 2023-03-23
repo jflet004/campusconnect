@@ -47,8 +47,6 @@ function App() {
     });
   };
 
-  console.log(users)
-
   return (
     <UserProvider>
       <div className='page-container' >

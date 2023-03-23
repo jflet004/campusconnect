@@ -53,15 +53,15 @@ const TeacherDetails = () => {
     <div className='details-card' >
       <h2 className='details-title'>{currentTeacher.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Teacher)</span></h2>
       <Link to={`/update-teacher/${params.id}`} className='details-link'>Edit</Link>
-      <p><span style={{ fontWeight: 'bold' }}>First Name:</span> {currentTeacher.first_name}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Last Name:</span> {currentTeacher.last_name}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Email:</span> {currentTeacher.email}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Phone #:</span> {currentTeacher.phone_number}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Address:</span> {currentTeacher.address}</p>
-      <p><span style={{ fontWeight: 'bold' }}>City:</span> {currentTeacher.city}</p>
-      <p><span style={{ fontWeight: 'bold' }}>State:</span> {currentTeacher.state}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span style={{ fontWeight: 'bold' }}>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='details'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
+      <p><span>First Name:</span> {currentTeacher.first_name}</p>
+      <p><span>Last Name:</span> {currentTeacher.last_name}</p>
+      <p><span>Email:</span> {currentTeacher.email}</p>
+      <p><span>Phone #:</span> {currentTeacher.phone_number}</p>
+      <p><span>Address:</span> {currentTeacher.address}</p>
+      <p><span>City:</span> {currentTeacher.city}</p>
+      <p><span>State:</span> {currentTeacher.state}</p>
+      <p><span>Zip Code:</span> {currentTeacher.postal_code}</p>
+      <p><span>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
       <Link to="/current-teachers" className='details-link'>back to Teachers List</Link>
       <form onSubmit={handleAssignmentSubmit}>
         <br />
@@ -83,7 +83,11 @@ const TeacherDetails = () => {
       </form>
       <br />
       <div className='errors'>
-        {errors ? errors.map(error => <li key={error} className="error-msg">{error}</li>) : null}
+        {Array.isArray(errors) ? (
+          <ul>
+            {errors.map(error => <li key={error}>{error}</li>)}
+          </ul>
+        ) : (errors ? <li>{errors}</li> : null)}
       </div>
     </div>
   )

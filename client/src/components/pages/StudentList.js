@@ -6,9 +6,7 @@ import '../css/StudentList.css'
 const StudentList = () => {
 
   const { students, loading, errors } = useContext(UserContext)
-
   const navigate = useNavigate()
-
   const [filters, setFilters] = useState({
     name: '',
     age: '',
@@ -56,84 +54,80 @@ const StudentList = () => {
 
   return (
     <div >
-      <br />
-      {errors ? <li>{errors}</li> :
-        <>
-          <img src='web-icons/students.svg' width="30px" className="student-icon-inline" alt='icon' />
-          <h1 className='student-title'>Students</h1>
-          <table className='student-table'>
-            <thead>
-              <tr>
-                <th>
-                  <label>Name</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.name}
-                    onChange={e => handleFilterChange('name', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Age</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.age}
-                    onChange={e => handleFilterChange('age', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Interest</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.interest}
-                    onChange={e => handleFilterChange('interest', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Student Since</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.created_at}
-                    onChange={e => handleFilterChange('created_at', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Parent/Guardian</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.parent_guardian}
-                    onChange={e => handleFilterChange('parent_guardian', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Email</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.email}
-                    onChange={e => handleFilterChange('email', e.target.value)}
-                  />
-                </th>
-                <th>
-                  <label>Phone #</label>
-                  <br />
-                  <input
-                    type="text"
-                    value={filters.phone}
-                    onChange={e => handleFilterChange('phone', e.target.value)}
-                  />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {studentList}
-            </tbody>
-          </table>
-        </>}
+      <img src='web-icons/students.svg' width="30px" className="student-icon-inline" alt='icon' />
+      <h1 className='student-title'>Students</h1>
+      <table className='student-table'>
+        <thead>
+          <tr>
+            <th>
+              <label>Name</label>
+              <br />
+              <input
+                type="text"
+                value={filters.name}
+                onChange={e => handleFilterChange('name', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Age</label>
+              <br />
+              <input
+                type="text"
+                value={filters.age}
+                onChange={e => handleFilterChange('age', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Interest</label>
+              <br />
+              <input
+                type="text"
+                value={filters.interest}
+                onChange={e => handleFilterChange('interest', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Student Since</label>
+              <br />
+              <input
+                type="text"
+                value={filters.created_at}
+                onChange={e => handleFilterChange('created_at', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Parent/Guardian</label>
+              <br />
+              <input
+                type="text"
+                value={filters.parent_guardian}
+                onChange={e => handleFilterChange('parent_guardian', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Email</label>
+              <br />
+              <input
+                type="text"
+                value={filters.email}
+                onChange={e => handleFilterChange('email', e.target.value)}
+              />
+            </th>
+            <th>
+              <label>Phone #</label>
+              <br />
+              <input
+                type="text"
+                value={filters.phone}
+                onChange={e => handleFilterChange('phone', e.target.value)}
+              />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {studentList}
+        </tbody>
+      </table>
     </div>
   )
 }

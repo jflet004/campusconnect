@@ -7,6 +7,15 @@
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+div.details-card span {
+  font-weight: bold;
+}
+
+.balance,
+.links {
+  color: #003da5;
+}
+
 .details-title {
   margin-top: 0;
   font-size: 25px;
@@ -24,18 +33,6 @@
   margin-top: 10px;
 }
 
-.details {
-  display: inline-block;
-  background-color: #003da5;
-  color: white;
-  padding: 2px 10px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
 .details-list {
   color: #00968f;
   font-weight: bold;
@@ -48,7 +45,7 @@
   border: none;
   border-radius: 3px;
   width: 20px;
-  font-size: 16px;
+  font-size: 10px;
   cursor: pointer;
   margin-bottom: auto;
   margin-left: 10px;
@@ -62,15 +59,6 @@
   border: 1px solid #ccc;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-p {
-  margin: 10px 0;
-  font-size: 18px;
-}
-
-span {
-  font-weight: bold;
 }
 
 .errors {

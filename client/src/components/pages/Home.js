@@ -14,11 +14,6 @@ const Home = () => {
     password: ""
   })
 
-
-  // useEffect(() => {
-  //   console.log(currentUser)
-  // }, [])
-
   const { email, password } = formData
 
   const handleSubmit = e => {

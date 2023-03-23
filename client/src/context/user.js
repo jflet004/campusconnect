@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const UserContext = React.createContext()
 
 function UserProvider({ children }) {
 
   const navigate = useNavigate()
+  const location = useLocation()
   
   const [currentUser, setCurrentUser] = useState({})
   const [students, setStudents] = useState([])
@@ -39,11 +40,16 @@ function UserProvider({ children }) {
       .finally(() => setLoading(false))
   }, [])
 
+  useEffect(() => {
+    setErrors(false)
+  }, [location])
+
   const fetchStudents = () => {
     fetch("/students")
     .then(r => {
       if (r.ok) {
-        r.json().then(students => setStudents(students))
+        r.json().then(students => {
+          setStudents(students)})
       } else {
         r.json().then(data => setErrors(data.errors))
       }
@@ -56,7 +62,8 @@ function UserProvider({ children }) {
     fetch("/teachers")
       .then(r => {
         if (r.ok) {
-          r.json().then(teachers => setTeachers(teachers))
+          r.json().then(teachers => {
+            setTeachers(teachers)})
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -181,6 +188,7 @@ function UserProvider({ children }) {
       })
   }
 
+
   const enrollStudent = (student) => {
     fetch("/enrollments", {
       method: "POST",
@@ -194,17 +202,18 @@ function UserProvider({ children }) {
           r.json().then(data => {
             setEnrollments([...enrollments, data])
             setErrors(false)
-
           })
           navigate("/enrollment-success")
         } else {
-          r.json().then(data => setErrors(data.errors))
+          r.json().then(data => {
+            setErrors(data.errors)
+          })
         }
       })
-  }
+    }
+
 
   const updateStudent = (id, updatedStudent) => {
-    console.log(id)
     fetch(`/students/${id}`, {
       method: "PATCH",
       headers: {
@@ -341,8 +350,8 @@ function UserProvider({ children }) {
           navigate("/drop-successful")
         } else {
           r.json().then(data => {
-            console.log(data);
-            setErrors(data.errors);
+          
+            setErrors(data.errors)
           })
         }
       })
@@ -361,13 +370,22 @@ function UserProvider({ children }) {
           navigate("/release-successful")
         } else {
           r.json().then(data => {
-            console.log(data);
             setErrors(data.errors);
           })
         }
       })
       .catch(() => alert("An error occurred while dropping the course."))
   }
+
+  const displayErrors = () => (
+    <div className='errors'>
+    {Array.isArray(errors) ? (
+      <ul>
+        {errors.map(error => <li key={error}>{error}</li>)}
+      </ul>
+    ) : (errors ? <li>{errors}</li> : null)}
+  </div>
+  )
   
   
 
