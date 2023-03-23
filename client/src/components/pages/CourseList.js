@@ -85,7 +85,7 @@ const CourseList = () => {
     }
     return null;
   })
-  
+
 
   const courseList = filteredCourses.map(course => (
     <tr className='course-table-rows' key={course.id}>
@@ -106,12 +106,11 @@ const CourseList = () => {
     return (
       <div >
         <div className='details-card'>
+          <p style={{ textAlign: "center"}}>Create an account or login to register your student</p>
+        <br />
           <h1 className='details-title'>Courses Offered</h1>
-          <br />
           {coursesOffered}
         </div>
-        <br />
-        <p style={{ textAlign: "center", fontWeight: "bold" }}>Create an account or login to register your student</p>
         <br />
       </div>
     )

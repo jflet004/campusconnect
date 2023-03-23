@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :students
+  has_many :students, dependent: :destroy
   has_secure_password
 
   validates :first_name, presence:true

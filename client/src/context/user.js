@@ -307,7 +307,16 @@ function UserProvider({ children }) {
     setCourses(updatedCourses);
   };
 
-  const updateCurrentUserStudentList = (newStudent) => currentUser.students.push(newStudent)
+  const updateCurrentUserStudentList = (newStudent) => {
+    if(currentUser.students) {
+      return currentUser.students.push(newStudent)
+    } else {
+      return {
+        ...currentUser,
+        students:[newStudent]
+      }
+    }
+  }
   
   const updateCourseDrop = (courseId) => {
     const updatedCourses = courses.map((course) => {
