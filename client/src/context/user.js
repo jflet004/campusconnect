@@ -297,6 +297,8 @@ function UserProvider({ children }) {
     });
     setCourses(updatedCourses);
   };
+
+  const updateCurrentUserStudentList = (newStudent) => currentUser.students.push(newStudent)
   
   const updateCourseDrop = (courseId) => {
     const updatedCourses = courses.map((course) => {
@@ -406,7 +408,7 @@ function UserProvider({ children }) {
   if (loading) return <h1>Loading</h1>
 
   return (
-    <UserContext.Provider value={{updateCourseEnrollment, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

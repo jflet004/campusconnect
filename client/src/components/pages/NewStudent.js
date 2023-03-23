@@ -4,7 +4,7 @@ import '../css/FormStudent.css'
 
 const NewStudent = () => {
 
-  const { currentUser, courses, addStudent, loggedIn, errors } = useContext(UserContext)
+  const { currentUser, courses, addStudent, updateCurrentUserStudentList, loggedIn, errors } = useContext(UserContext)
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -22,10 +22,12 @@ const NewStudent = () => {
       setFormData({ ...formData, gender: e.target.value })
     }
   }
+  console.log(formData)
 
   const handleSubmit = e => {
     e.preventDefault()
     addStudent(formData)
+    updateCurrentUserStudentList(formData)
   }
 
   const courseOptions = courses.map((course) => (

@@ -15,9 +15,9 @@ const Home = () => {
   })
 
 
-  useEffect(() => {
-    console.log(currentUser)
-  }, [])
+  // useEffect(() => {
+  //   console.log(currentUser)
+  // }, [])
 
   const { email, password } = formData
 

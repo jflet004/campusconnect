@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
 
-  skip_before_action :user_authentication, only:[:index]
+  skip_before_action :user_authentication, only:[:index, :create]
   before_action :is_admin?, only: [:show, :update, :destroy]
 
   def index
