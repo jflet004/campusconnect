@@ -17,10 +17,7 @@ const NavBar = () => {
         logout(null)
         navigate('/')
       })
-    { }
   }
-
-
 
   return (
     <div className='navbar'>

@@ -37,7 +37,7 @@ const Calendar = () => {
 
 
 
-  if (loading) return <h1>Loading</h1>
+  if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
     <div className='calendar'>

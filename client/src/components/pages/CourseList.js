@@ -83,7 +83,9 @@ const CourseList = () => {
         </div>
       )
     }
+    return null;
   })
+  
 
   const courseList = filteredCourses.map(course => (
     <tr className='course-table-rows' key={course.id}>
@@ -98,6 +100,7 @@ const CourseList = () => {
       {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
     </tr>
   ))
+
 
   if (!loggedIn) {
     return (

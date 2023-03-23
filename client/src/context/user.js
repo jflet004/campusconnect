@@ -377,17 +377,6 @@ function UserProvider({ children }) {
       .catch(() => alert("An error occurred while dropping the course."))
   }
 
-  const displayErrors = () => (
-    <div className='errors'>
-    {Array.isArray(errors) ? (
-      <ul>
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-    ) : (errors ? <li>{errors}</li> : null)}
-  </div>
-  )
-  
-  
 
   const login = (user) => {
     setCurrentUser(user)
@@ -423,10 +412,20 @@ function UserProvider({ children }) {
     setLoggedIn(true)
   }
 
-  if (loading) return <h1>Loading</h1>
+  const displayErrors = () => (
+    <div className='errors'>
+    {Array.isArray(errors) ? (
+      <ul>
+        {errors.map(error => <li key={error}>{error}</li>)}
+      </ul>
+    ) : (errors ? <li>{errors}</li> : null)}
+  </div>
+  )
+
+  if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

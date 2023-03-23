@@ -5,7 +5,7 @@ import "../css/Details.css"
 
 const UpdateStudent = () => {
 
-  const {updateStudent, errors } = useContext(UserContext)
+  const {updateStudent, displayErrors } = useContext(UserContext)
 
   const params = useParams()
 
@@ -142,7 +142,7 @@ const UpdateStudent = () => {
         <br />
         <Link to={`/current-student/${params.id}`} className='details-link'>Back</Link>
       </form>
-      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
+      {displayErrors()}
     </div>
   )
 }

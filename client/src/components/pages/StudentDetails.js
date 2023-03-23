@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user'
 import "../css/Details.css"
 const StudentDetails = () => {
 
-  const { courses, enrollStudent, dropStudent, errors, setErrors, updateCourseEnrollment, updateCourseDrop } = useContext(UserContext)
+  const { courses, enrollStudent, dropStudent, setErrors, updateCourseEnrollment, updateCourseDrop, displayErrors } = useContext(UserContext)
 
   const [currentStudent, setCurrentStudent] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
@@ -38,20 +38,19 @@ const StudentDetails = () => {
     })
     updateCourseEnrollment(selectedCourse.id)
   }
-  
+
   const courseOptions = courses.map((course) => (
     <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-    ))
-    
-    const handleDropCourse = (course, studentId) => {
-      const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
-      dropStudent(enrollmentId, studentId)
-      updateCourseDrop(course.id)
+  ))
+
+  const handleDropCourse = (course, studentId) => {
+    const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
+    dropStudent(enrollmentId, studentId)
+    updateCourseDrop(course.id)
   }
 
 
-  if (loading) return <h2>Loading</h2>
-  
+  if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
     <div className='details-card' >
@@ -64,7 +63,7 @@ const StudentDetails = () => {
       <p><span>Gender:</span> {currentStudent.gender}</p>
       <p><span>Student Since:</span> {currentStudent.created_at}</p>
       <p><span>Parent/Guardian:</span> {currentStudent.user.first_name} {currentStudent.user.last_name}</p>
-      <p><span>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
+      <p><span>Courses:</span> {currentStudent.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0, 5)}-{course.end_time.slice(0, 5)}</Link>  <button onClick={() => handleDropCourse(course, parseInt(params.id))} className='drop-btn'>X</button></li>)}</p>
       <p style={{ whiteSpace: 'pre-wrap' }}><span>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students" className='details-link'>back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
@@ -86,13 +85,7 @@ const StudentDetails = () => {
         <input type="submit" value="Enroll Student" className='details-list' />
       </form>
       <br />
-      <div className='errors'>
-        {Array.isArray(errors) ? (
-          <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-        ) : (errors ? <li>{errors}</li> : null)}
-      </div>
+      {displayErrors()}
     </div>
   )
 }

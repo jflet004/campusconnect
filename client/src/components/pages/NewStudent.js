@@ -4,7 +4,7 @@ import '../css/FormStudent.css'
 
 const NewStudent = () => {
 
-  const { currentUser, courses, addStudent, updateCurrentUserStudentList, loggedIn, errors } = useContext(UserContext)
+  const { currentUser, courses, addStudent, updateCurrentUserStudentList, loggedIn, displayErrors } = useContext(UserContext)
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -117,13 +117,7 @@ const NewStudent = () => {
           <input type="submit" value="Submit Registration Form" />
         </form>
         <br />
-        <div className='errors'>
-          {Array.isArray(errors) ? (
-            <ul>
-              {errors.map(error => <li key={error}>{error}</li>)}
-            </ul>
-          ) : (errors ? <li>{errors}</li> : null)}
-        </div>
+        {displayErrors()}
       </div>
     )
   } else {

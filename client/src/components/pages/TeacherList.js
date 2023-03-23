@@ -5,7 +5,7 @@ import '../css/TeacherList.css'
 
 const TeacherList = () => {
 
-  const { currentUser, teachers, loading, errors } = useContext(UserContext)
+  const { currentUser, teachers, loading } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -39,8 +39,8 @@ const TeacherList = () => {
     </tr>
   ))
 
-  if (loading) return <h1>Loading</h1>
-
+  if (loading) return <h1 className='loading'>Loading</h1>
+  
   return (
     <div >
       <img src='web-icons/teachers.svg' width="30px" className="teacher-icon-inline" alt='icon' />

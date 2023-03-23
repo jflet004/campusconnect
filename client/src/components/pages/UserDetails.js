@@ -17,8 +17,8 @@ const UserDetails = () => {
       .finally(() => setLoading(false))
   }, [params.id])
 
-  if (loading) return <h2>Loading</h2>
-
+  if (loading) return <h1 className='loading'>Loading</h1>
+  
   return (
     <div className='details-card'>
       <h1 className='details-title'>{user.first_name} {user.last_name} <span style={{ fontSize: "15px" }}>(Parent/Guardian)</span></h1>

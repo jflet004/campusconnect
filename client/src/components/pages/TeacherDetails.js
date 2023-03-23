@@ -5,7 +5,7 @@ import "../css/Details.css"
 
 const TeacherDetails = () => {
 
-  const { releaseTeacher, assignTeacher, courses, errors, setErrors, loading, setLoading } = useContext(UserContext)
+  const { releaseTeacher, assignTeacher, courses, displayErrors, setErrors, loading, setLoading } = useContext(UserContext)
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
@@ -47,7 +47,7 @@ const TeacherDetails = () => {
     releaseTeacher(assignmentId, teacherId)
   }
 
-  if (loading) return <h2>Loading</h2>
+  if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
     <div className='details-card' >
@@ -61,7 +61,7 @@ const TeacherDetails = () => {
       <p><span>City:</span> {currentTeacher.city}</p>
       <p><span>State:</span> {currentTeacher.state}</p>
       <p><span>Zip Code:</span> {currentTeacher.postal_code}</p>
-      <p><span>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0,5)}-{course.end_time.slice(0,5)}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
+      <p><span>Courses:</span> {currentTeacher.courses ? currentTeacher.courses.map(course => <li key={course.id}><Link to={`/current-course/${course.id}`} className='links'>{course.title}: {course.start_time.slice(0, 5)}-{course.end_time.slice(0, 5)}</Link><button onClick={() => { handleCourseRelease(course, parseInt(params.id)) }} className='drop-btn'>X</button></li>) : null}</p>
       <Link to="/current-teachers" className='details-link'>back to Teachers List</Link>
       <form onSubmit={handleAssignmentSubmit}>
         <br />
@@ -82,13 +82,7 @@ const TeacherDetails = () => {
         <input type="submit" value="Assign Course" className='details-list' />
       </form>
       <br />
-      <div className='errors'>
-        {Array.isArray(errors) ? (
-          <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-        ) : (errors ? <li>{errors}</li> : null)}
-      </div>
+      {displayErrors()}
     </div>
   )
 }

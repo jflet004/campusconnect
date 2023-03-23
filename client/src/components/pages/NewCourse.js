@@ -4,7 +4,7 @@ import '../css/CourseForm.css'
 
 const NewCourse = () => {
 
-  const { addCourse, errors, classrooms } = useContext(UserContext)
+  const { addCourse, displayErrors, classrooms } = useContext(UserContext)
 
   const [formData, setFormData] = useState({
     title: "",
@@ -132,9 +132,7 @@ const NewCourse = () => {
         <input type="submit" value="Add New Course" />
       </form>
       <br />
-      <div className='errors'>
-        {errors ? errors.map(error => <li className="error-msg" key={error}>{error}</li>) : null}
-      </div>
+      {displayErrors()}
     </div>
   )
 }

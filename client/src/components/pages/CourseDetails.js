@@ -6,7 +6,7 @@ import '../css/Details.css'
 
 const CourseDetails = () => {
 
-  const { currentUser, errors } = useContext(UserContext)
+  const { currentUser, displayErrors } = useContext(UserContext)
 
   const [course, setCourse] = useState([])
   const [loading, setLoading] = useState(true)
@@ -21,7 +21,7 @@ const CourseDetails = () => {
       .finally(() => setLoading(false))
   }, [params.id])
 
-  if (loading) return <h1>Loading</h1>
+  if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
     <div className='details-card'>
@@ -36,13 +36,7 @@ const CourseDetails = () => {
       <p><span>Teacher:</span> {course.teachers_full_name} {course.teachers.last_name}</p>
       <p><span>Enrolled Students:</span> {course.students ? course.students.map(student => <li key={student.id}><Link to={`/current-student/${student.id}`} className='links'>{student.first_name} {student.last_name}</Link></li>) : null}</p>
       <Link to="/courses" className='details-link'>back to Course List</Link>
-      <div className='errors'>
-        {Array.isArray(errors) ? (
-          <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-        ) : (errors ? <li>{errors}</li> : null)}
-      </div>
+      {displayErrors()}
     </div >
   )
 }

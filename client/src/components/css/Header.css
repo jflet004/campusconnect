@@ -7,3 +7,12 @@
   padding-bottom: 18px;
   margin-left: 420px;
 }
+
+.loading {
+  text-align: center;
+  color: #00968f;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

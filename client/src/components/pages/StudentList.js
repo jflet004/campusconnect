@@ -5,7 +5,7 @@ import '../css/StudentList.css'
 
 const StudentList = () => {
 
-  const { students, loading, errors } = useContext(UserContext)
+  const { students, loading } = useContext(UserContext)
   const navigate = useNavigate()
   const [filters, setFilters] = useState({
     name: '',
@@ -50,8 +50,8 @@ const StudentList = () => {
     </tr>
   ))
 
-  if (loading) return <h1>Loading</h1>
-
+  if (loading) return <h1 className='loading'>Loading</h1>
+  
   return (
     <div >
       <img src='web-icons/students.svg' width="30px" className="student-icon-inline" alt='icon' />
