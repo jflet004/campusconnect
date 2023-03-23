@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import '../css/LoginForm.css'
@@ -80,8 +80,6 @@ const Home = () => {
         <li>Attend morning staff meeting to discuss any important updates or issues.</li>
         <li>Conduct classroom observations and provide feedback to teachers.</li>
         <li>Meet with parents and students to address any concerns or issues.</li>
-        <li>Work with human resources to recruit and hire new staff as needed.</li>
-        <li>Attend professional development workshops or conferences to stay up-to-date on best practices and new educational trends.</li>
         <li>Review and respond to any additional emails or messages before the end of the day.</li>
         <li>Close out the day by reviewing and prioritizing tasks for the following day.</li>
       </ul>

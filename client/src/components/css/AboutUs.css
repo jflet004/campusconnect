@@ -11,7 +11,7 @@
 }
 
 .about-us-title {
-  font-size: 48px;
+  font-size: 38px;
   margin-bottom: 30px;
   color: #1b61b1;
 }
@@ -25,13 +25,19 @@
 }
 
 .about-us-section-title {
-  font-size: 28px;
+  font-size: 20px;
   margin-bottom: 20px;
   color: #00a59d;
 }
 
 .about-us-section-text {
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: #666666;
+}
+
+.about-us-section {
+  font-size: 15px;
   line-height: 1.6;
   color: #666666;
 }

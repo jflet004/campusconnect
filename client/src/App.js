@@ -27,8 +27,10 @@ import DropSuccess from './components/success_messages/DropSuccess';
 import AssignmentSuccess from './components/success_messages/AssignmentSuccess';
 import ReleaseSuccess from './components/success_messages/ReleaseSuccess';
 import Calendar from './components/pages/Calendar';
-import "./components/css/Footer.css"
 import NewCourseSuccess from './components/success_messages/NewCourseSuccess';
+import backgroundImg from './web-icons/background.png'
+import "./components/css/App.css"
+import "./components/css/Footer.css"
 
 function App() {
 
@@ -52,6 +54,8 @@ function App() {
       <div className='page-container' >
         <NavBar />
         <Header />
+        <div className='backgroundImg' />
+          <img src={backgroundImg} alt="background" className='backgroundImg' />
         <div className='page-content'>
           <Routes>
             <Route path="/" element={<Home />} />
