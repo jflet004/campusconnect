@@ -3,8 +3,9 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import calendarLogo from '../../web-icons/calendar.svg'
 import '../css/Icons.css'
-import '../css/Calendar.css'
+
 
 const Calendar = () => {
 
@@ -42,7 +43,7 @@ const Calendar = () => {
   return (
     <div className='calendar'>
 
-      <img src='web-icons/calendar.svg' width="30px" className="inline" alt='icon' />
+      <img src={calendarLogo} width="30px" className="inline" alt='icon' />
       <h1 className='title'>Calendar</h1>
 
       <FullCalendar

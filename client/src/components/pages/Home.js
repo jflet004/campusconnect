@@ -114,6 +114,7 @@ const Home = () => {
               <br />
             </form>
           </div>
+          <br/>
           <div className='details-card'>
             <p style={{ textAlign: "center" }}>Welcome to CampusConnect!
               <p>

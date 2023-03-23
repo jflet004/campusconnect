@@ -8,6 +8,7 @@
 
 .inline {
   display: inline-block;
+  margin-left: 15px;
 }
 
 .title {

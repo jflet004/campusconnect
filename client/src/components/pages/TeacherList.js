@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
+import teacherIcon from '../../web-icons/teachers.svg'
 import '../css/TeacherList.css'
 
 const TeacherList = () => {
@@ -43,7 +44,7 @@ const TeacherList = () => {
   
   return (
     <div >
-      <img src='web-icons/teachers.svg' width="30px" className="teacher-icon-inline" alt='icon' />
+      <img src={teacherIcon} width="30px" className="teacher-icon-inline" alt='icon' />
       <h1 className='teacher-title'>Teachers</h1>
       <table className='teacher-table'>
         <thead>

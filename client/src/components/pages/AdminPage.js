@@ -5,15 +5,22 @@ import '../css/AdminPage.css'
 const AdminPage = () => {
   return (
     <div className='link-container'>
-      {/* <h1>AdminPage</h1> */}
-      <Link to="/current-students">View Students</Link>
-      <br/>
-      <Link to="/current-teachers">View Teachers</Link>
-      <br/>
-      <Link to="/courses">View Courses</Link>
-      <br/>
-      <Link to="/new-course">Add Course</Link>
-      <br/>
+      <div className='admin-students'>
+        <Link to="/current-students">View Students</Link>
+      </div>
+      <br />
+      <div className='admin-teachers'>
+        <Link to="/current-teachers">View Teachers</Link>
+      </div>
+      <br />
+      <div className='admin-courses'>
+        <Link to="/courses">View Courses</Link>
+      </div>
+      <br />
+      <div className='admin-add-course'>
+        <Link to="/new-course">Add Course</Link>
+      </div>
+      <br />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
+import courseIcon from '../../web-icons/courses.svg'
 import '../css/CourseList.css'
 
 const CourseList = () => {
@@ -106,8 +107,8 @@ const CourseList = () => {
     return (
       <div >
         <div className='details-card'>
-          <p style={{ textAlign: "center"}}>Create an account or login to register your student</p>
-        <br />
+          <p style={{ textAlign: "center" }}>Create an account or login to register your student</p>
+          <br />
           <h1 className='details-title'>Courses Offered</h1>
           {coursesOffered}
         </div>
@@ -117,6 +118,8 @@ const CourseList = () => {
   } else {
     return (
       <div >
+        <img src={courseIcon} width="30px" className="student-icon-inline" alt='icon' />
+        <h1 className='student-title'>Courses</h1>
         <table className='course-table'>
           <thead>
             <tr>
