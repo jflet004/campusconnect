@@ -131,7 +131,6 @@ const NewCourse = () => {
         <br />
         <input type="submit" value="Add New Course" />
       </form>
-      <br />
       {displayErrors()}
     </div>
   )

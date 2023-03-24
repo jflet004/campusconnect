@@ -28,7 +28,7 @@ import AssignmentSuccess from './components/success_messages/AssignmentSuccess';
 import ReleaseSuccess from './components/success_messages/ReleaseSuccess';
 import Calendar from './components/pages/Calendar';
 import NewCourseSuccess from './components/success_messages/NewCourseSuccess';
-import backgroundImg from './web-icons/background.png'
+import backgroundImg from './web-icons/background.svg'
 import "./components/css/App.css"
 import "./components/css/Footer.css"
 
