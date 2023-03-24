@@ -412,7 +412,7 @@ function UserProvider({ children }) {
           navigate("/release-successful")
         } else {
           r.json().then(data => {
-            setErrors(data.errors);
+            setErrors(data.errors)
           })
         }
       })
@@ -467,7 +467,7 @@ function UserProvider({ children }) {
   if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{ updateUser, displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{ login, signup, logout, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, updateCurrentUserStudentList, updateUser, students, updateStudent, addStudent, enrollStudent, dropStudent, courses, setCourses, addCourse, deleteCourse, updateCourseDrop, updateCourseEnrollment, teachers, updateTeacher, assignTeacher, releaseTeacher, errors, setErrors, displayErrors, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

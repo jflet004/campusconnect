@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin-top: 20px;
-  width: 1500px;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -13,29 +13,29 @@
 .admin-add-course {
   flex-basis: calc(50% - 50px);
   height: 300px;
-  text-align: center;
-  line-height: 520px;
+  text-align: right;
+  line-height: 320px;
   margin-bottom: 20px;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
-  font-size: 25px;
+  font-size: 20px;
   margin-left: 20px;
 }
 
 .admin-students {
-  background-image: url("../../web-icons/admin-students.png");
+  background-image: url("../../web-icons/student_small.svg");
   background-size: cover;
 }
 .admin-teachers {
-  background-image: url("../../web-icons/admin-teachers.png");
+  background-image: url("../../web-icons/teacher_small.svg");
   background-size: cover;
 }
 .admin-courses {
-  background-image: url("../../web-icons/admin-courses.png");
+  background-image: url("../../web-icons/course_small.svg");
   background-size: cover;
 }
 .admin-add-course {
-  background-image: url("../../web-icons/admin-add-course.png");
+  background-image: url("../../web-icons/add_course_small.svg");
   background-size: cover;
 }
 
@@ -44,15 +44,17 @@
 .admin-courses:hover,
 .admin-add-course:hover {
   font-weight: bold;
+  opacity: 0.7;
 }
 
 .admin-courses a,
 .admin-students a,
 .admin-add-course a,
 .admin-teachers a {
+  margin-right: 40px;
   background-color: white;
   color: #666666;
-  padding: 6px;
-  border-radius: 15px;
+  padding: 16px;
+  border-radius: 25px;
   text-decoration: none;
 }

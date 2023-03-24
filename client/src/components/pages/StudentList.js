@@ -36,8 +36,8 @@ const StudentList = () => {
         student.user.last_name.toLowerCase().includes(filters.parent_guardian.toLowerCase())) &&
       student.user.email.toLowerCase().includes(filters.email.toLowerCase()) &&
       student.user.phone_number.toLowerCase().includes(filters.phone.toLowerCase())
-    );
-  });
+    )
+  })
 
   const studentList = filteredStudents.map(student => (
     <tr className='student-table-rows' key={student.id}>
