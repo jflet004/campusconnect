@@ -36,9 +36,6 @@ class UsersController < ApplicationController
     end
   end
   
-  def users_with_no_students
-    render json: User.with_no_students, status: :ok
-  end
 
   def admin_users
     render json: User.admins, status: :ok
@@ -49,7 +46,6 @@ class UsersController < ApplicationController
     render json: user, include: [:students], status: :ok
   end
   
-
   
   private
 

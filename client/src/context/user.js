@@ -9,6 +9,7 @@ function UserProvider({ children }) {
   const location = useLocation()
 
   const [currentUser, setCurrentUser] = useState({})
+  const [users, setUsers] = useState([])
   const [students, setStudents] = useState([])
   const [teachers, setTeachers] = useState([])
   const [courses, setCourses] = useState([])
@@ -215,6 +216,33 @@ function UserProvider({ children }) {
   }
 
 
+  const updateUser = (id, updatedUser) => {
+    fetch(`/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedUser)
+    })
+      .then(r => {
+        if (r.ok) {
+          r.json().then(data => {
+            const updatedUsers = users.map(user => {
+              if (user.id === id) {
+                return data;
+              }
+              return user;
+            });
+            setUsers(updatedUsers);
+            setErrors(false)
+            navigate(`/users/${id}`)
+          })
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
+  }
+
   const updateStudent = (id, updatedStudent) => {
     fetch(`/students/${id}`, {
       method: "PATCH",
@@ -228,19 +256,19 @@ function UserProvider({ children }) {
           r.json().then(data => {
             const updatedStudents = students.map(student => {
               if (student.id === id) {
-                return data;
+                return data
               }
-              return student;
+              return student
             });
-            setStudents(updatedStudents);
+            setStudents(updatedStudents)
             setErrors(false)
-            navigate(`/current-student/${id}`);
+            navigate(`/current-student/${id}`)
           });
         } else {
-          r.json().then(data => setErrors(data.errors));
+          r.json().then(data => setErrors(data.errors))
         }
-      });
-  };
+      })
+  }
 
   const updateTeacher = (id, updatedTeacher) => {
     fetch(`/teachers/${id}`, {
@@ -321,7 +349,7 @@ function UserProvider({ children }) {
       }
     })
   }
-  
+
 
   const updateCourseDrop = (courseId) => {
     const updatedCourses = courses.map((course) => {
@@ -439,7 +467,7 @@ function UserProvider({ children }) {
   if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{ displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{ updateUser, displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

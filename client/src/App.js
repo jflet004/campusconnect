@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Routes, Route } from "react-router-dom"
 import { UserProvider } from "./context/user"
 import Home from './components/pages/Home';
@@ -34,21 +34,6 @@ import "./components/css/Footer.css"
 
 function App() {
 
-
-  const [users, setUsers] = useState([])
-
-  const updateUser = (updatedUser) => {
-    setUsers((prevUsers) => {
-      return prevUsers.map((user) => {
-        if (user.id === updatedUser.id) {
-          return updatedUser;
-        } else {
-          return user;
-        }
-      });
-    });
-  };
-
   return (
     <UserProvider>
       <div className='page-container' >
@@ -74,7 +59,7 @@ function App() {
             <Route path="/update-course/:id" element={<UpdateCourse />} />
             <Route path="/update-student/:id" element={<UpdateStudent />} />
             <Route path="/update-teacher/:id" element={<UpdateTeacher />} />
-            <Route path="/update-user/:id" element={<UpdateUser updateUser={updateUser} />} />
+            <Route path="/update-user/:id" element={<UpdateUser />} />
             <Route path="/successful-registration" element={<RegistrationSuccess />} />
             <Route path="/enrollment-success" element={<EnrollmentSuccess />} />
             <Route path="/assignment-success" element={<AssignmentSuccess />} />

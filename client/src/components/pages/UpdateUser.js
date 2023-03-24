@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { UserContext } from '../../context/user'
 import "../css/Details.css"
 
-const UpdateUser = ({ updateUser }) => {
+const UpdateUser = () => {
+
+  const { updateUser, displayErrors } = useContext(UserContext)
 
   const params = useParams()
-  const navigate = useNavigate()
 
-  const [errors, setErrors] = useState(false)
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -48,21 +49,7 @@ const UpdateUser = ({ updateUser }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    fetch(`/users/${params.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(r => {
-        if (r.ok) {
-          r.json().then(updateUser)
-          navigate(`/users/${params.id}`)
-        } else {
-          r.json().then(data => setErrors(data.errors))
-        }
-      })
+    updateUser(params.id, formData)
   }
 
 
@@ -158,7 +145,7 @@ const UpdateUser = ({ updateUser }) => {
         <br />
         <Link to={`/users/${params.id}`} className='details-link'>Back</Link>
       </form>
-      {errors ? errors.map(error => <li key={error}>{error}</li>) : null}
+      {displayErrors()}
     </div>
   )
 }
