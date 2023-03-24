@@ -35,9 +35,9 @@ const NavBar = () => {
       )}
       {loggedIn ? (
         <button onClick={handleLogoutClick} className='logout-btn'>Logout</button>
-        ) : (
-          <NavLink to="/signup">Create Account</NavLink>
-          )}
+      ) : (
+        <NavLink to="/signup">Create Account</NavLink>
+      )}
     </div>
   )
 }

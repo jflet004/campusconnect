@@ -114,9 +114,9 @@ const Home = () => {
               <br />
             </form>
           </div>
-          <br/>
+          <br />
           <div className='details-card'>
-            <p style={{ textAlign: "center" }}>Welcome to CampusConnect!
+            <p style={{ textAlign: "center", color: "#666666" }}>Welcome to CampusConnect!
               <p>
                 If you already have an account, please log in to access your personalized experience. If you don't have an account yet, don't worry - creating one is easy! Simply click on the <strong>'Create Account'</strong> button above and follow the steps.</p>
             </p>

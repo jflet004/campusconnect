@@ -55,7 +55,7 @@ const UpdateCourse = () => {
           name="title"
           value={formData.title}
           onChange={handleChange}
-        className="details-select"
+          className="details-select"
         />
         <br />
         <br />
@@ -66,7 +66,7 @@ const UpdateCourse = () => {
           name="start_time"
           value={formData.start_time}
           onChange={handleChange}
-        className="details-select"
+          className="details-select"
         />
         <br />
         <br />
@@ -77,7 +77,7 @@ const UpdateCourse = () => {
           name="end_time"
           value={formData.end_time}
           onChange={handleChange}
-        className="details-select"
+          className="details-select"
         />
         <br />
         <br />
@@ -88,12 +88,12 @@ const UpdateCourse = () => {
           value={formData.location}
           onChange={handleChange}
           className="details-select"
-          >
+        >
           <option value="">Select one</option>
           {locationOptions}
         </select>
         <br />
-        <input type="submit" value="Update course" className='details-list'/>
+        <input type="submit" value="Update course" className='details-list' />
         <br />
         <Link to={`/current-course/${params.id}`} className='details-link'>Back</Link>
       </form>

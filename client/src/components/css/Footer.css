@@ -1,5 +1,5 @@
 footer {
-  background: linear-gradient(to right, #003DA5, #425563);
+  background: linear-gradient(to right, #003da5, #425563);
   color: aliceblue;
   height: 40px;
   bottom: 0;
@@ -11,6 +11,5 @@ footer {
 .footer-text {
   font-size: 16px;
   text-align: center;
-  margin: 10px
+  margin: 10px;
 }
-

@@ -1,13 +1,13 @@
 .navbar {
-  background: linear-gradient(to right, #003DA5, #425563);
+  background: linear-gradient(to right, #003da5, #425563);
   padding: 10px;
   display: flex;
-  justify-content:left;
+  justify-content: left;
   align-items: center;
 }
 
 .navbar a {
-  color:aliceblue;
+  color: aliceblue;
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
@@ -16,23 +16,23 @@
 }
 
 .navbar a:hover {
-  color: #FCE300;
+  color: #fce300;
 }
 
 .logout-btn {
-  background: linear-gradient(to right, #003DA5, #425563);
-  color:aliceblue;
+  background: linear-gradient(to right, #003da5, #425563);
+  color: aliceblue;
   border: none;
   border-radius: 3px;
   width: 7%;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  margin-left:auto;
+  margin-left: auto;
   align-items: center;
 }
 
 .logout-btn:hover {
   /* font-weight: bold; */
-  background: linear-gradient(to right, #003DA5, #FCE300);
+  background: linear-gradient(to right, #003da5, #fce300);
 }

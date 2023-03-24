@@ -33,23 +33,26 @@
 .admin-courses {
   background-image: url("../../web-icons/admin-courses.png");
   background-size: cover;
-
 }
 .admin-add-course {
   background-image: url("../../web-icons/admin-add-course.png");
   background-size: cover;
 }
 
-.admin-students:hover, .admin-teachers:hover, .admin-courses:hover, .admin-add-course:hover {
-  opacity: 0.7;
+.admin-students:hover,
+.admin-teachers:hover,
+.admin-courses:hover,
+.admin-add-course:hover {
   font-weight: bold;
 }
 
-.admin-courses a, .admin-students a, .admin-add-course a, .admin-teachers a {
+.admin-courses a,
+.admin-students a,
+.admin-add-course a,
+.admin-teachers a {
   background-color: white;
-  color: #003da5;
+  color: #666666;
   padding: 6px;
   border-radius: 15px;
   text-decoration: none;
 }
-

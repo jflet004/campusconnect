@@ -7,7 +7,7 @@ function UserProvider({ children }) {
 
   const navigate = useNavigate()
   const location = useLocation()
-  
+
   const [currentUser, setCurrentUser] = useState({})
   const [students, setStudents] = useState([])
   const [teachers, setTeachers] = useState([])
@@ -46,24 +46,11 @@ function UserProvider({ children }) {
 
   const fetchStudents = () => {
     fetch("/students")
-    .then(r => {
-      if (r.ok) {
-        r.json().then(students => {
-          setStudents(students)})
-      } else {
-        r.json().then(data => setErrors(data.errors))
-      }
-    })
-    .catch(error => alert(error))
-    .finally(() => setLoading(false))
-  }
-
-  const fetchTeachers = () => {
-    fetch("/teachers")
       .then(r => {
         if (r.ok) {
-          r.json().then(teachers => {
-            setTeachers(teachers)})
+          r.json().then(students => {
+            setStudents(students)
+          })
         } else {
           r.json().then(data => setErrors(data.errors))
         }
@@ -71,7 +58,22 @@ function UserProvider({ children }) {
       .catch(error => alert(error))
       .finally(() => setLoading(false))
   }
-  
+
+  const fetchTeachers = () => {
+    fetch("/teachers")
+      .then(r => {
+        if (r.ok) {
+          r.json().then(teachers => {
+            setTeachers(teachers)
+          })
+        } else {
+          r.json().then(data => setErrors(data.errors))
+        }
+      })
+      .catch(error => alert(error))
+      .finally(() => setLoading(false))
+  }
+
   const fetchCourses = () => {
     fetch("/courses")
       .then(r => {
@@ -134,7 +136,7 @@ function UserProvider({ children }) {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(data =>{
+          r.json().then(data => {
             setStudents([...students, data])
             setErrors(false)
           })
@@ -156,7 +158,7 @@ function UserProvider({ children }) {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(data =>{
+          r.json().then(data => {
             setCourses([...courses, data])
             setErrors(false)
           })
@@ -210,7 +212,7 @@ function UserProvider({ children }) {
           })
         }
       })
-    }
+  }
 
 
   const updateStudent = (id, updatedStudent) => {
@@ -308,16 +310,16 @@ function UserProvider({ children }) {
   };
 
   const updateCurrentUserStudentList = (newStudent) => {
-    if(currentUser.students) {
+    if (currentUser.students) {
       return currentUser.students.push(newStudent)
     } else {
       return {
         ...currentUser,
-        students:[newStudent]
+        students: [newStudent]
       }
     }
   }
-  
+
   const updateCourseDrop = (courseId) => {
     const updatedCourses = courses.map((course) => {
       if (course.id === courseId) {
@@ -330,7 +332,7 @@ function UserProvider({ children }) {
     });
     setCourses(updatedCourses)
   };
-  
+
   const deleteCourse = (id) => {
     fetch(`/courses/${id}`, {
       method: "DELETE"
@@ -359,7 +361,7 @@ function UserProvider({ children }) {
           navigate("/drop-successful")
         } else {
           r.json().then(data => {
-          
+
             setErrors(data.errors)
           })
         }
@@ -423,18 +425,18 @@ function UserProvider({ children }) {
 
   const displayErrors = () => (
     <div className='errors'>
-    {Array.isArray(errors) ? (
-      <ul>
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-    ) : (errors ? <li>{errors}</li> : null)}
-  </div>
+      {Array.isArray(errors) ? (
+        <ul>
+          {errors.map(error => <li key={error}>{error}</li>)}
+        </ul>
+      ) : (errors ? <li>{errors}</li> : null)}
+    </div>
   )
 
   if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
+    <UserContext.Provider value={{ displayErrors, updateCourseEnrollment, updateCurrentUserStudentList, updateCourseDrop, releaseTeacher, dropStudent, enrollStudent, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, students, login, signup, logout, addStudent, errors, setErrors, updateStudent, updateTeacher, assignTeacher, teachers, courses, setCourses, addCourse, deleteCourse, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

@@ -5,7 +5,7 @@ import "../css/Details.css"
 
 const UpdateStudent = () => {
 
-  const {updateStudent, displayErrors } = useContext(UserContext)
+  const { updateStudent, displayErrors } = useContext(UserContext)
 
   const params = useParams()
 
@@ -138,7 +138,7 @@ const UpdateStudent = () => {
         />
         <br />
         <br />
-        <input type="submit" value="Update Student" className='details-list'/>
+        <input type="submit" value="Update Student" className='details-list' />
         <br />
         <Link to={`/current-student/${params.id}`} className='details-link'>Back</Link>
       </form>

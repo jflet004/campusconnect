@@ -1,11 +1,11 @@
 body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .course-form {
   color: aliceblue;
-  background: linear-gradient(to left, #003DA5, #425563);
+  background: linear-gradient(to left, #003da5, #425563);
   padding: 40px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -29,10 +29,9 @@ body {
   width: 350px;
 }
 
-
 .course-form input[type="submit"] {
   background-color: #ffffff;
-  color: #003DA5;
+  color: #003da5;
   padding: 7px;
   border: none;
   border-radius: 3px;
@@ -45,4 +44,3 @@ body {
 .course-form input[type="submit"]:hover {
   background-color: #f2f2f2;
 }
-

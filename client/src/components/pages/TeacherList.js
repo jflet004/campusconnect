@@ -41,7 +41,7 @@ const TeacherList = () => {
   ))
 
   if (loading) return <h1 className='loading'>Loading</h1>
-  
+
   return (
     <div >
       <img src={teacherIcon} width="30px" className="teacher-icon-inline" alt='icon' />

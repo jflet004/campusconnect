@@ -54,7 +54,7 @@ const Calendar = () => {
           right: 'dayGridMonth,timeGridWeek,timeGridDay',
           contentHeight: "100px"
         }}
-        
+
         events={events}
       />
     </div>

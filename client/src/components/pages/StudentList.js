@@ -52,7 +52,7 @@ const StudentList = () => {
   ))
 
   if (loading) return <h1 className='loading'>Loading</h1>
-  
+
   return (
     <div >
       <img src={studentIcon} width="30px" className="student-icon-inline" alt='icon' />
