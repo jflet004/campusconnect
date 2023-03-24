@@ -1,6 +1,6 @@
 # CampusConnect App
 
-Welcome to the Enrollify App, a web application built with Ruby on Rails and ReactJS. This app is designed to help parents and guardians: Register your children for courses, view student information, and pay outstanding balances. And for school administrators: Manage courses, teachers, and students, create new courses, and update information as needed.
+Welcome to the CampusConnect App, a web application built with Ruby on Rails and ReactJS. This app is designed to help parents and guardians: Register your children for courses, view student information, and pay outstanding balances. And for school administrators: Manage courses, teachers, and students, create new courses, and update information as needed.
 
 ## Getting Started
 

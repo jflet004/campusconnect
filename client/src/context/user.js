@@ -310,15 +310,18 @@ function UserProvider({ children }) {
   };
 
   const updateCurrentUserStudentList = (newStudent) => {
-    if (currentUser.students) {
-      return currentUser.students.push(newStudent)
-    } else {
-      return {
-        ...currentUser,
-        students: [newStudent]
+    setCurrentUser(() => {
+      if (!currentUser.students) {
+        currentUser.students = [newStudent]
+        currentUser.balance = 0
+        return currentUser;
+      } else {
+        currentUser.students.push(newStudent)
+        return currentUser
       }
-    }
+    })
   }
+  
 
   const updateCourseDrop = (courseId) => {
     const updatedCourses = courses.map((course) => {
