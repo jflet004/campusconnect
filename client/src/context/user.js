@@ -325,8 +325,9 @@ function UserProvider({ children }) {
   }
 
   const updateCourseEnrollment = (courseId) => {
+    console.log(!errors)
     const updatedCourses = courses.map((course) => {
-      if (course.id === courseId) {
+      if (course.id === courseId && errors) {
         return {
           ...course,
           number_of_students_enrolled: course.number_of_students_enrolled + 1,
