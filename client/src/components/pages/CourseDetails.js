@@ -31,6 +31,7 @@ const CourseDetails = () => {
         {currentUser.admin ? <Link to={`/update-course/${params.id}`} className='details-link'>Edit</Link> : null}</h1>
       <p><span>Start Time:</span> {course.start_time.slice(0, 5)}</p>
       <p><span>End Time:</span> {course.end_time.slice(0, 5)}</p>
+      <p><span>Recurring:</span> {course.start_recur}</p>
       <p><span>Location:</span> {course.location}</p>
       <p><span>Price:</span> ${course.price}</p>
       <p><span>Teacher:</span> {course.teachers_full_name} {course.teachers.last_name}</p>

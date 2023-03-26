@@ -6,7 +6,7 @@ class CourseSerializer < ActiveModel::Serializer
   has_many :teachers, through: :teacher_assignments
 
   def start_time
-    object.start_time.strftime('%H:%M:%S:%A')
+    object.start_time.strftime('%H:%M:%S')
   end
 
   def end_time

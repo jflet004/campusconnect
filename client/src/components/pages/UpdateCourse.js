@@ -26,6 +26,7 @@ const UpdateCourse = () => {
         start_time: course.start_time,
         end_time: course.end_time,
         price: course.price,
+        start_recur: course.start_recur,
         capacity: course.capacity,
         location: course.location
       }))
@@ -76,6 +77,27 @@ const UpdateCourse = () => {
           type="datetime-local"
           name="end_time"
           value={formData.end_time}
+          onChange={handleChange}
+          className="details-select"
+        />
+        <br />
+        <label>End Time</label>
+        <br />
+        <input
+          type="date"
+          name="start_recur"
+          value={formData.start_recur}
+          onChange={handleChange}
+          className="details-select"
+        />
+        <br />
+        <br />
+        <label>Price</label>
+        <br />
+        <input
+          type="text"
+          name="price"
+          value={formData.price}
           onChange={handleChange}
           className="details-select"
         />

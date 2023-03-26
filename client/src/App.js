@@ -31,6 +31,7 @@ import NewCourseSuccess from './components/success_messages/NewCourseSuccess';
 import backgroundImg from './web-icons/background.svg'
 import "./components/css/App.css"
 import "./components/css/Footer.css"
+import SecretPage from './components/pages/SecretPage';
 
 function App() {
 
@@ -67,6 +68,7 @@ function App() {
             <Route path="/release-successful" element={<ReleaseSuccess />} />
             <Route path="/submit-successful" element={<NewCourseSuccess />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/secret" element={<SecretPage />} />
           </Routes>
         </div>
         <Footer />
