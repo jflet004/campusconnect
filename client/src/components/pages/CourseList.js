@@ -8,7 +8,7 @@ const CourseList = () => {
 
   const { currentUser, loggedIn, deleteCourse, courses } = useContext(UserContext)
   const navigate = useNavigate()
-  // const [availableCourses, setAvailableCourses] = useState([])
+  const [availableCourses, setAvailableCourses] = useState([])
   const [filters, setFilters] = useState({
     title: '',
     start_time: '',
@@ -18,12 +18,12 @@ const CourseList = () => {
     price: ''
   });
 
-  // useEffect(() => {
-  //   fetch("/courses")
-  //     .then(r => r.json())
-  //     .then(data => setAvailableCourses(data))
-  //     .catch(error => alert(error))
-  // }, [])
+  useEffect(() => {
+    fetch("/courses")
+      .then(r => r.json())
+      .then(data => setAvailableCourses(data))
+      .catch(error => alert(error))
+  }, [])
 
   const handleCourseDelete = (courseId) => {
     deleteCourse(courseId)
@@ -52,22 +52,23 @@ const CourseList = () => {
     return { status, color, enrollment };
   };
 
-  const coursesOffered = courses.map(course => {
+  const coursesOffered = availableCourses.map(course => {
+    if (course.space_left > 0) {
       const dayOfWeekStrings = course.days_of_week.map(dayOfWeek => {
         switch (dayOfWeek) {
-          case '0':
-            return 'Sunday'
           case '1':
-            return 'Monday'
+            return 'Sunday'
           case '2':
-            return 'Tuesday'
+            return 'Monday'
           case '3':
-            return 'Wednesday'
+            return 'Tuesday'
           case '4':
-            return 'Thursday'
+            return 'Wednesday'
           case '5':
-            return 'Friday'
+            return 'Thursday'
           case '6':
+            return 'Friday'
+          case '7':
             return 'Saturday'
           default:
             return ''
@@ -82,6 +83,8 @@ const CourseList = () => {
           <p style={{ fontSize: "14px", color: getCourseStatus(course).color }}>{getCourseStatus(course).status} {getCourseStatus(course).enrollment}</p>
         </div>
       )
+    }
+    return null;
   })
 
 

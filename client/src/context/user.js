@@ -27,11 +27,11 @@ function UserProvider({ children }) {
         setCurrentUser(data)
         if (data.error) {
           setLoggedIn(false)
-          fetchCourses()
         } else {
           setLoggedIn(true)
           fetchStudents()
           fetchTeachers()
+          fetchCourses()
           fetchClassrooms()
           fetchEnrollments()
           fetchTeacherAssignments()
@@ -204,6 +204,7 @@ function UserProvider({ children }) {
         if (r.ok) {
           r.json().then(data => {
             setEnrollments([...enrollments, data])
+            updateStudentEnrollment(student.course_id)
             setErrors(false)
           })
           navigate("/enrollment-success")
@@ -213,6 +214,19 @@ function UserProvider({ children }) {
           })
         }
       })
+  }
+
+  const updateStudentEnrollment = (courseId) => {
+    const updatedCourses = courses.map((course) => {
+      if (course.id === courseId) {
+        return {
+          ...course,
+          number_of_students_enrolled: course.number_of_students_enrolled + 1
+        }
+      }
+      return course
+    })
+    setCourses(updatedCourses)
   }
 
 
@@ -324,26 +338,16 @@ function UserProvider({ children }) {
       })
   }
 
-  const updateCourseEnrollment = (courseId) => {
-    console.log(!errors)
-    const updatedCourses = courses.map((course) => {
-      if (course.id === courseId && errors) {
-        return {
-          ...course,
-          number_of_students_enrolled: course.number_of_students_enrolled + 1,
-        };
-      }
-      return course;
-    });
-    setCourses(updatedCourses);
-  };
+
+
+
 
   const updateCurrentUserStudentList = (newStudent) => {
     setCurrentUser(() => {
       if (!currentUser.students) {
         currentUser.students = [newStudent]
         currentUser.balance = 0
-        return currentUser;
+        return currentUser
       } else {
         currentUser.students.push(newStudent)
         return currentUser
@@ -352,18 +356,6 @@ function UserProvider({ children }) {
   }
 
 
-  const updateCourseDrop = (courseId) => {
-    const updatedCourses = courses.map((course) => {
-      if (course.id === courseId) {
-        return {
-          ...course,
-          number_of_students_enrolled: course.number_of_students_enrolled - 1,
-        }
-      }
-      return course
-    });
-    setCourses(updatedCourses)
-  };
 
   const deleteCourse = (id) => {
     fetch(`/courses/${id}`, {
@@ -374,14 +366,13 @@ function UserProvider({ children }) {
           const updatedCourses = courses.filter(course => course.id !== id)
           setCourses(updatedCourses)
           setErrors(false)
-          navigate('/admin')
         } else {
           r.json().then(data => setErrors(data.errors))
         }
       });
   };
 
-  const dropStudent = (enrollmentId, studentId) => {
+  const dropStudent = (enrollmentId, studentId, courseId) => {
     fetch(`/enrollments/${enrollmentId}`, {
       method: "DELETE"
     })
@@ -389,6 +380,7 @@ function UserProvider({ children }) {
         if (r.ok) {
           const updatedEnrollments = enrollments.filter(enrollment => enrollment.student_id !== studentId)
           setEnrollments(updatedEnrollments)
+          updateStudentDrop(courseId)
           setErrors(false)
           navigate("/drop-successful")
         } else {
@@ -399,6 +391,19 @@ function UserProvider({ children }) {
         }
       })
       .catch(() => alert("An error occurred while dropping the course."))
+  }
+
+  const updateStudentDrop = (courseId) => {
+    const updatedCourses = courses.map((course) => {
+      if (course.id === courseId) {
+        return {
+          ...course,
+          number_of_students_enrolled: course.number_of_students_enrolled - 1,
+        }
+      }
+      return course
+    })
+    setCourses(updatedCourses)
   }
 
   const releaseTeacher = (assignmentId, teacherId) => {
@@ -436,7 +441,7 @@ function UserProvider({ children }) {
     setCurrentUser({})
     setStudents([])
     setTeachers([])
-    // setCourses([])
+    setCourses([])
     setClassrooms([])
     setEnrollments([])
     setTeacherAssignments([])
@@ -468,7 +473,7 @@ function UserProvider({ children }) {
   if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{ login, signup, logout, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, updateCurrentUserStudentList, updateUser, students, updateStudent, addStudent, enrollStudent, dropStudent, courses, setCourses, addCourse, deleteCourse, updateCourseDrop, updateCourseEnrollment, teachers, updateTeacher, assignTeacher, releaseTeacher, errors, setErrors, displayErrors, loading, setLoading }}>
+    <UserContext.Provider value={{ login, signup, logout, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, updateCurrentUserStudentList, updateUser, students, updateStudent, addStudent, enrollStudent, dropStudent, courses, setCourses, addCourse, deleteCourse, teachers, updateTeacher, assignTeacher, releaseTeacher, errors, setErrors, displayErrors, loading, setLoading }}>
       {children}
     </UserContext.Provider>
   )

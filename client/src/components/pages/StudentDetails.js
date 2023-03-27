@@ -4,7 +4,7 @@ import { UserContext } from '../../context/user'
 import "../css/Details.css"
 const StudentDetails = () => {
 
-  const { courses, enrollStudent, dropStudent, setErrors, updateCourseEnrollment, updateCourseDrop, displayErrors } = useContext(UserContext)
+  const { courses, enrollStudent, dropStudent, setErrors, displayErrors } = useContext(UserContext)
 
   const [currentStudent, setCurrentStudent] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
@@ -23,6 +23,7 @@ const StudentDetails = () => {
   const handleCourseChange = e => {
     const courseId = e.target.value;
     const selectedCourse = courses.find(course => course.title === courseId);
+    console.log(selectedCourse.space_left)
     setSelectedCourse(selectedCourse);
   };
 
@@ -36,19 +37,16 @@ const StudentDetails = () => {
       student_id: currentStudent.id,
       course_id: selectedCourse.id
     })
-    updateCourseEnrollment(selectedCourse.id)
   }
-
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-  ))
 
   const handleDropCourse = (course, studentId) => {
     const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
-    dropStudent(enrollmentId, studentId)
-    updateCourseDrop(course.id)
+    dropStudent(enrollmentId, studentId, course.id)
   }
 
+  const courseOptions = courses.map((course) => (
+    <option key={course.id} value={course.title}>{course.title}: {course.start_time.slice(0, 5)}-{course.end_time.slice(0, 5)}</option>
+  ))
 
   if (loading) return <h1 className='loading'>Loading</h1>
 
