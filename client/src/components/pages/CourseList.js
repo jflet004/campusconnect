@@ -8,7 +8,7 @@ const CourseList = () => {
 
   const { currentUser, loggedIn, deleteCourse, courses } = useContext(UserContext)
   const navigate = useNavigate()
-  const [availableCourses, setAvailableCourses] = useState([])
+  // const [availableCourses, setAvailableCourses] = useState([])
   const [filters, setFilters] = useState({
     title: '',
     start_time: '',
@@ -18,12 +18,12 @@ const CourseList = () => {
     price: ''
   });
 
-  useEffect(() => {
-    fetch("/courses")
-      .then(r => r.json())
-      .then(data => setAvailableCourses(data))
-      .catch(error => alert(error))
-  }, [])
+  // useEffect(() => {
+  //   fetch("/courses")
+  //     .then(r => r.json())
+  //     .then(data => setAvailableCourses(data))
+  //     .catch(error => alert(error))
+  // }, [])
 
   const handleCourseDelete = (courseId) => {
     deleteCourse(courseId)
@@ -52,23 +52,22 @@ const CourseList = () => {
     return { status, color, enrollment };
   };
 
-  const coursesOffered = availableCourses.map(course => {
-    if (course.space_left > 0) {
+  const coursesOffered = courses.map(course => {
       const dayOfWeekStrings = course.days_of_week.map(dayOfWeek => {
         switch (dayOfWeek) {
-          case '1':
+          case '0':
             return 'Sunday'
-          case '2':
+          case '1':
             return 'Monday'
-          case '3':
+          case '2':
             return 'Tuesday'
-          case '4':
+          case '3':
             return 'Wednesday'
-          case '5':
+          case '4':
             return 'Thursday'
-          case '6':
+          case '5':
             return 'Friday'
-          case '7':
+          case '6':
             return 'Saturday'
           default:
             return ''
@@ -83,8 +82,6 @@ const CourseList = () => {
           <p style={{ fontSize: "14px", color: getCourseStatus(course).color }}>{getCourseStatus(course).status} {getCourseStatus(course).enrollment}</p>
         </div>
       )
-    }
-    return null;
   })
 
 

@@ -27,11 +27,11 @@ function UserProvider({ children }) {
         setCurrentUser(data)
         if (data.error) {
           setLoggedIn(false)
+          fetchCourses()
         } else {
           setLoggedIn(true)
           fetchStudents()
           fetchTeachers()
-          fetchCourses()
           fetchClassrooms()
           fetchEnrollments()
           fetchTeacherAssignments()
@@ -115,7 +115,7 @@ function UserProvider({ children }) {
   }
 
   const fetchTeacherAssignments = () => {
-    fetch("/teacher-assignments")
+    fetch("/teacher_assignments")
       .then(r => {
         if (r.ok) {
           r.json().then(teacherAssignments => setTeacherAssignments(teacherAssignments))
@@ -436,7 +436,7 @@ function UserProvider({ children }) {
     setCurrentUser({})
     setStudents([])
     setTeachers([])
-    setCourses([])
+    // setCourses([])
     setClassrooms([])
     setEnrollments([])
     setTeacherAssignments([])

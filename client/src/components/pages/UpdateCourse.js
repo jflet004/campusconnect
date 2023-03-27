@@ -14,6 +14,7 @@ const UpdateCourse = () => {
     start_time: "",
     end_time: "",
     price: "",
+    start_recur: "",
     capacity: "",
     location: ""
   })
@@ -60,10 +61,21 @@ const UpdateCourse = () => {
         />
         <br />
         <br />
+        <label>Date Start</label>
+        <br />
+        <input
+          type="date"
+          name="start_recur"
+          value={formData.start_recur}
+          onChange={handleChange}
+          className="details-select"
+        />
+        <br />
+        <br />
         <label>Start Time</label>
         <br />
         <input
-          type="datetime-local"
+          type="time"
           name="start_time"
           value={formData.start_time}
           onChange={handleChange}
@@ -74,19 +86,9 @@ const UpdateCourse = () => {
         <label>End Time</label>
         <br />
         <input
-          type="datetime-local"
+          type="time"
           name="end_time"
           value={formData.end_time}
-          onChange={handleChange}
-          className="details-select"
-        />
-        <br />
-        <label>End Time</label>
-        <br />
-        <input
-          type="date"
-          name="start_recur"
-          value={formData.start_recur}
           onChange={handleChange}
           className="details-select"
         />

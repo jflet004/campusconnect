@@ -7,7 +7,7 @@ class Course < ApplicationRecord
 
   validates :title, :start_time, :end_time, :price, :capacity, :days_of_week, :location, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
-  validates :start_recur, presence: true
+  # validates :start_recur, presence: true
   validate :start_time_before_end_time
   validate :capacity_non_negative
 
