@@ -7,6 +7,7 @@
   margin: 10px auto;
   max-width: 500px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: -30px;
 }
 
 .details-courses {
@@ -69,11 +70,7 @@ div.details-card span {
 .details-select {
   width: 75%;
   font-size: 14px;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .errors {

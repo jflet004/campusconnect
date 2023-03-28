@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { UserContext } from '../../context/user'
-import "../css/Details.css"
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { UserContext } from '../../context/user';
+import Select from 'react-select';
+import "../css/Details.css";
+
 const StudentDetails = () => {
 
-  const { courses, enrollStudent, dropStudent, setErrors, displayErrors } = useContext(UserContext)
+  const { courses, enrollStudent, dropStudent, setErrors, displayErrors } = useContext(UserContext);
 
-  const [currentStudent, setCurrentStudent] = useState([])
-  const [selectedCourse, setSelectedCourse] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [currentStudent, setCurrentStudent] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const params = useParams()
+  const params = useParams();
 
   useEffect(() => {
     fetch(`/students/${params.id}`)
@@ -20,39 +22,37 @@ const StudentDetails = () => {
       .finally(() => setLoading(false))
   }, [params.id])
 
-  const handleCourseChange = e => {
-    const courseId = e.target.value;
-    const selectedCourse = courses.find(course => course.title === courseId);
-    console.log(selectedCourse.space_left)
-    setSelectedCourse(selectedCourse);
+  const handleCourseChange = selectedOption => {
+    setSelectedCourse(selectedOption);
   };
 
   const handleEnrollmentSubmit = e => {
-    e.preventDefault()
+    e.preventDefault();
     if (!selectedCourse) {
-      setErrors(["Please select a course"])
-      return
+      setErrors(["Please select a course"]);
+      return;
     }
     enrollStudent({
       student_id: currentStudent.id,
-      course_id: selectedCourse.id
-    })
-  }
+      course_id: selectedCourse.value
+    });
+  };
 
   const handleDropCourse = (course, studentId) => {
     const enrollmentId = course.enrollments.find(enrollment => enrollment.student_id === studentId).id
     dropStudent(enrollmentId, studentId, course.id)
-  }
+  };
 
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.title}>{course.title}: {course.start_time.slice(0, 5)}-{course.end_time.slice(0, 5)}</option>
-  ))
+  const courseOptions = courses.map(course => ({
+    value: course.id,
+    label: `${course.title}: ${course.start_time.slice(0, 5)}-${course.end_time.slice(0, 5)}`
+  }));
 
-  if (loading) return <h1 className='loading'>Loading</h1>
+  if (loading) return <h1 className='loading'>Loading</h1>;
 
   return (
-    <div className='details-card' >
-      <h2 className='details-title' >{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
+    <div className='details-card'>
+      <h2 className='details-title'>{currentStudent.first_name}'s Profile <span style={{ fontSize: "15px" }}>(Student)</span></h2>
       <Link to={`/update-student/${params.id}`} className='details-link'>Edit</Link>
       <p><span>First Name:</span> {currentStudent.first_name}</p>
       <p><span>Last Name:</span> {currentStudent.last_name}</p>
@@ -65,27 +65,23 @@ const StudentDetails = () => {
       <p style={{ whiteSpace: 'pre-wrap' }}><span>Notes:<br /></span><em>{currentStudent.notes}</em></p>
       <Link to="/current-students" className='details-link'>back to Student List</Link>
       <form onSubmit={handleEnrollmentSubmit}>
-
         <br />
         <h1 className='details-title'>Enrollment</h1>
         <label>Courses</label>
         <br />
-        <select
+        <Select
           className='details-select'
           name="selectedCourse"
-          value={selectedCourse ? selectedCourse.title : ''}
+          value={selectedCourse}
           onChange={handleCourseChange}
-        >
-          <option value="">Select one</option>
-          {courseOptions}
-        </select>
+          options={courseOptions}
+          placeholder="Select a course..."
+        />
         <br />
         <input type="submit" value="Enroll Student" className='details-list' />
       </form>
-      <br />
       {displayErrors()}
     </div>
   )
 }
-
 export default StudentDetails

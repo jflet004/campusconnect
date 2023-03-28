@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../context/user'
+import Select from 'react-select'
 import "../css/Details.css"
 
 const TeacherDetails = () => {
 
-  const { releaseTeacher, assignTeacher, courses, displayErrors, setErrors, loading, setLoading } = useContext(UserContext)
+  const { releaseTeacher, assignTeacher, courses, displayErrors, setErrors } = useContext(UserContext)
 
   const [currentTeacher, setCurrentTeacher] = useState([])
   const [selectedCourse, setSelectedCourse] = useState(null)
+  const [loading, setLoading] = useState(true);
 
   const params = useParams()
 
@@ -20,10 +22,9 @@ const TeacherDetails = () => {
       .finally(() => setLoading(false))
   }, [params.id, setLoading])
 
-  const handleCourseChange = e => {
-    const courseId = e.target.value;
-    const selectedCourse = courses.find(course => course.title === courseId);
-    setSelectedCourse(selectedCourse);
+  const handleCourseChange = selectedOption => {
+    console.log(selectedOption)
+    setSelectedCourse(selectedOption);
   };
 
   const handleAssignmentSubmit = e => {
@@ -34,18 +35,19 @@ const TeacherDetails = () => {
     }
     assignTeacher({
       teacher_id: currentTeacher.id,
-      course_id: selectedCourse.id
+      course_id: selectedCourse.value
     })
   }
-
-  const courseOptions = courses.map((course) => (
-    <option key={course.id} value={course.title}>{course.title}: {course.start_time}-{course.end_time}</option>
-  ))
 
   const handleCourseRelease = (course, teacherId) => {
     const assignmentId = course.teacher_assignments.find(assignment => assignment.teacher_id === teacherId).id
     releaseTeacher(assignmentId, teacherId)
   }
+
+  const courseOptions = courses.map(course => ({
+    value: course.id,
+    label: `${course.title}: ${course.start_time.slice(0, 5)}-${course.end_time.slice(0, 5)}`
+  }));
 
   if (loading) return <h1 className='loading'>Loading</h1>
 
@@ -69,15 +71,14 @@ const TeacherDetails = () => {
         <h1 className='details-title'>Assign Course</h1>
         <label>Courses</label>
         <br />
-        <select
+        <Select
           className='details-select'
           name="selectedCourse"
-          value={selectedCourse ? selectedCourse.title : ''}
+          value={selectedCourse}
           onChange={handleCourseChange}
-        >
-          <option value="">Select one</option>
-          {courseOptions}
-        </select>
+          options={courseOptions}
+          placeholder="Select a course..."
+        />
         <br />
         <input type="submit" value="Assign Course" className='details-list' />
       </form>
