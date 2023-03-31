@@ -68,9 +68,9 @@ div.details-card span {
 }
 
 .details-select {
+  z-index: 4;
   width: 75%;
   font-size: 14px;
-  margin-top: 10px;
 }
 
 .errors {

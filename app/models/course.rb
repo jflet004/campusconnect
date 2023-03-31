@@ -7,9 +7,18 @@ class Course < ApplicationRecord
 
   validates :title, :start_time, :end_time, :price, :capacity, :days_of_week, :location, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
-  # validates :start_recur, presence: true
+  validates :start_recur, presence: true
   validate :start_time_before_end_time
   validate :capacity_non_negative
+  validate :time_and_location_unique
+
+  private
+
+  def time_and_location_unique
+    if Course.where(location: location, start_time: start_time, end_time: end_time).exists?
+      errors.add(:base, "A course with the same time and location already exists")
+    end
+  end
 
   def start_time_before_end_time
     if start_time.present? && end_time.present? && start_time >= end_time

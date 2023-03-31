@@ -469,11 +469,43 @@ function UserProvider({ children }) {
       ) : (errors ? <li>{errors}</li> : null)}
     </div>
   )
+  
+
+  const value = {
+    login,
+    signup,
+    logout,
+    loggedIn,
+    classrooms,
+    updateCourse,
+    currentUser,
+    setCurrentUser,
+    updateCurrentUserStudentList,
+    updateUser,
+    students,
+    updateStudent,
+    addStudent,
+    enrollStudent,
+    dropStudent,
+    courses,
+    setCourses,
+    addCourse,
+    deleteCourse,
+    teachers, 
+    updateTeacher,
+    assignTeacher,
+    releaseTeacher,
+    errors,
+    setErrors,
+    displayErrors,
+    loading,
+    setLoading,
+  }
 
   if (loading) return <h1 className='loading'>Loading</h1>
 
   return (
-    <UserContext.Provider value={{ login, signup, logout, loggedIn, classrooms, updateCourse, currentUser, setCurrentUser, updateCurrentUserStudentList, updateUser, students, updateStudent, addStudent, enrollStudent, dropStudent, courses, setCourses, addCourse, deleteCourse, teachers, updateTeacher, assignTeacher, releaseTeacher, errors, setErrors, displayErrors, loading, setLoading }}>
+    <UserContext.Provider value={value}>
       {children}
     </UserContext.Provider>
   )

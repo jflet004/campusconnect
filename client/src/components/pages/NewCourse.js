@@ -6,6 +6,7 @@ const NewCourse = () => {
 
   const { addCourse, displayErrors, classrooms } = useContext(UserContext)
 
+
   const [formData, setFormData] = useState({
     title: "",
     start_time: "",
@@ -103,7 +104,7 @@ const NewCourse = () => {
           {locationOptions}
         </select>
         <br />
-        <label>Rec Start</label>
+        <label>Date Start</label>
         <br />
         <input
           type="date"

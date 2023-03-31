@@ -9,6 +9,11 @@ Course.destroy_all
 puts "Deleted all courses"
 Teacher.destroy_all
 puts "Deleted all teachers"
+TeacherAssignment.destroy_all
+puts "Deleted all TeacherAssignments"
+Enrollment.destroy_all
+puts "Deleted all Enrollments"
+
 puts "Deleted previous data"
 
 puts "Seeding new data"
@@ -149,10 +154,17 @@ t29	=	Teacher.create(first_name: 'Wilder', last_name: 'Lopez', email: 'wilderlop
 
 puts "Creating courses"
 c1	=	Course.create(title: 'Art I', start_time: DateTime.new(2023,3,1,9,30), end_time: DateTime.new(2023,3,1,11,0), location: r20.name, price: 19, capacity: 10, start_recur: Date.new(2023,3,1), days_of_week: ["2","4"])
-c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0), end_time: DateTime.new(2023,3,1,10,0), location: r21.name, price: 19, capacity: 10, start_recur: Date.new(2023,3,1), days_of_week: ["2"])
-c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0), end_time: DateTime.new(2023,3,1,12,30), location: r20.name, price: 19, capacity: 10, start_recur: Date.new(2023,3,1), days_of_week: ["1"])
-c4	=	Course.create(title: 'Art for the Young', start_time: DateTime.new(2023,3,1,13,0), end_time: DateTime.new(2023,3,1,14,30), location: r20.name, price: 19, capacity: 10, start_recur: Date.new(2023,3,1), days_of_week: ["2","4"])
-c5	=	Course.create(title: 'Visual Art For Adults', start_time: DateTime.new(2023,3,1,18,0), end_time: DateTime.new(2023,3,1,19,0), location: r21.name, price: 19, capacity: 10, start_recur: Date.new(2023,3,1), days_of_week: ["3","4"])
+c2	=	Course.create(title: 'Art II', start_time: DateTime.new(2023,3,1,9,0), end_time: DateTime.new(2023,3,1,10,0), location: r21.name, price: 19, capacity: 1, start_recur: Date.new(2023,3,1), days_of_week: ["2"])
+c3	=	Course.create(title: 'Portfolio Development', start_time: DateTime.new(2023,3,1,11,0), end_time: DateTime.new(2023,3,1,12,30), location: r20.name, price: 19, capacity: 4, start_recur: Date.new(2023,3,1), days_of_week: ["1"])
+c4	=	Course.create(title: 'Clay Sculpting', start_time: DateTime.new(2023,3,1,13,0), end_time: DateTime.new(2023,3,1,14,30), location: r20.name, price: 19, capacity: 5, start_recur: Date.new(2023,3,1), days_of_week: ["2","4"])
+c5	=	Course.create(title: 'Art III', start_time: DateTime.new(2023,3,1,18,0), end_time: DateTime.new(2023,3,1,19,0), location: r21.name, price: 19, capacity: 2, start_recur: Date.new(2023,3,1), days_of_week: ["3","4"])
+
+puts "Creating Teacher Assignments"
+ta1 = TeacherAssignment.create(teacher_id: t11, course_id: c1)
+ta2 = TeacherAssignment.create(teacher_id: t3, course_id: c2)
+ta3 = TeacherAssignment.create(teacher_id: t10, course_id: c3)
+ta4 = TeacherAssignment.create(teacher_id: t1, course_id: c4)
+ta5 = TeacherAssignment.create(teacher_id: t20, course_id: c5)
 
 
 puts "Done seeding!"

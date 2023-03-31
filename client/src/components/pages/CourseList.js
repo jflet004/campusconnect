@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user';
 import courseIcon from '../../web-icons/courses.svg'
 import '../css/CourseList.css'
@@ -52,55 +52,44 @@ const CourseList = () => {
     return { status, color, enrollment };
   };
 
-  const coursesOffered = availableCourses.map(course => {
-    if (course.space_left > 0) {
-      const dayOfWeekStrings = course.days_of_week.map(dayOfWeek => {
-        switch (dayOfWeek) {
-          case '1':
-            return 'Sunday'
-          case '2':
-            return 'Monday'
-          case '3':
-            return 'Tuesday'
-          case '4':
-            return 'Wednesday'
-          case '5':
-            return 'Thursday'
-          case '6':
-            return 'Friday'
-          case '7':
-            return 'Saturday'
-          default:
-            return ''
-        }
-      })
-      const dayOfWeekString = dayOfWeekStrings.join(", ")
-      return (
+  const mapDayOfWeek = (dayOfWeek) => {
+    const DAY_OF_WEEK_MAP = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    return DAY_OF_WEEK_MAP[Number(dayOfWeek)]
+  }
+
+  const coursesOffered = (availableCourses.length === 0) ? (
+    <p style={{ fontWeight: "bold", textAlign: "center" }}>No current courses available. Check another day</p>
+  ) : (
+    availableCourses.map(course => {
+      return (course.space_left > 0) ? (
         <div key={course.id} className='details-courses'>
           <p style={{ fontWeight: "bold" }}>{course.title}</p>
-          <p style={{ fontSize: "14px" }}>{dayOfWeekString}</p>
+          <p style={{ fontSize: "14px" }}>{course.days_of_week.map(mapDayOfWeek).join(", ")}</p>
           <p style={{ fontSize: "14px" }}>{course.start_time.slice(0, 5)} - {course.end_time.slice(0, 5)}</p>
           <p style={{ fontSize: "14px", color: getCourseStatus(course).color }}>{getCourseStatus(course).status} {getCourseStatus(course).enrollment}</p>
         </div>
-      )
-    }
-    return null;
-  })
+      ) : null
+    })
+  )
 
 
-  const courseList = filteredCourses.map(course => (
-    <tr className='course-table-rows' key={course.id}>
-      <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='details-button'>🔎</button> : null} {course.title}</td>
-      <td>{course.start_time.slice(0, 5)}</td>
-      <td>{course.end_time.slice(0, 5)}</td>
-      <td>{course.location}</td>
-      <td style={{ color: getCourseStatus(course).color }}>
-        {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
-      </td>
-      <td>${course.price}</td>
-      {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
-    </tr>
-  ))
+  const courseList = (filteredCourses.length === 0) ? (
+    <p style={{ fontWeight: "bold", textAlign: "center" }}>No current courses available. <Link to="/new-course">Click here</Link> to create a new course</p>
+  ) : (
+    filteredCourses.map(course => (
+      <tr className='course-table-rows' key={course.id}>
+        <td>{currentUser.admin ? <button onClick={() => { navigate(`/current-course/${course.id}`) }} className='details-button'>🔎</button> : null} {course.title}</td>
+        <td>{course.start_time.slice(0, 5)}</td>
+        <td>{course.end_time.slice(0, 5)}</td>
+        <td>{course.location}</td>
+        <td style={{ color: getCourseStatus(course).color }}>
+          {getCourseStatus(course).status} {getCourseStatus(course).enrollment}
+        </td>
+        <td>${course.price}</td>
+        {currentUser.admin ? <td><button onClick={() => handleCourseDelete(course.id)} className='delete-course' >X</button> {course.first_title} {course.last_title}</td> : null}
+      </tr>
+    ))
+  )
 
 
   if (!loggedIn) {

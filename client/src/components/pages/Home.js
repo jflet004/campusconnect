@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/user'
 import '../css/LoginForm.css'
 
 const Home = () => {
-  const { currentUser, login, loggedIn } = useContext(UserContext)
+  const { currentUser, login, loggedIn, displayErrors } = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -14,7 +14,9 @@ const Home = () => {
     password: ""
   })
 
+
   const { email, password } = formData
+
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -114,6 +116,13 @@ const Home = () => {
               <br />
               <input type='submit' value='Login' />
               <br />
+              <div className='errors'>
+                {Array.isArray(errors) ? (
+                  <ul>
+                    {errors.map(error => <li key={error}>{error}</li>)}
+                  </ul>
+                ) : (errors ? <li>{errors}</li> : null)}
+              </div>
             </form>
           </div>
           <br />
@@ -133,13 +142,7 @@ const Home = () => {
           {userAgenda}
         </div>
       }
-      <div className='errors'>
-        {Array.isArray(errors) ? (
-          <ul>
-            {errors.map(error => <li key={error}>{error}</li>)}
-          </ul>
-        ) : (errors ? <li>{errors}</li> : null)}
-      </div>
+
     </div>
   )
 }

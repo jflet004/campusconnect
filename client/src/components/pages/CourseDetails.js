@@ -21,6 +21,14 @@ const CourseDetails = () => {
       .finally(() => setLoading(false))
   }, [params.id])
 
+  const DAYS_OF_WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+  const courseDaysOffered = () => {
+    const dayOfWeekStrings = course.days_of_week.map(dayOfWeek => DAYS_OF_WEEK[Number(dayOfWeek)])
+    return dayOfWeekStrings.join(", ")
+  }
+  
+
   if (loading) return <h1 className='loading'>Loading</h1>
   
   return (
@@ -31,7 +39,8 @@ const CourseDetails = () => {
         {currentUser.admin ? <Link to={`/update-course/${params.id}`} className='details-link'>Edit</Link> : null}</h1>
       <p><span>Start Time:</span> {course.start_time.slice(0, 5)}</p>
       <p><span>End Time:</span> {course.end_time.slice(0, 5)}</p>
-      <p><span>Recurring:</span> {course.start_recur}</p>
+      <p><span>Date Start:</span> {course.start_recur}</p>
+      <p><span>Days Offered:</span> {courseDaysOffered()}</p>
       <p><span>Location:</span> {course.location}</p>
       <p><span>Price:</span> ${course.price}</p>
       <p><span>Teacher:</span> {course.teachers_full_name} {course.teachers.last_name}</p>
